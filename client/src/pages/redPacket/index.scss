@@ -1,0 +1,96 @@
+@import "~taro-ui/dist/style/components/icon.scss";
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+  background: rgb(236, 236, 236);
+  // background: linear-gradient(#1D2045 30%, #1D2045, #692003);
+
+  .header-line {
+    font-size: 28px;
+    padding-left: 20px;
+    position: relative;
+    margin: 20px 0;
+
+    &::before {
+      content: "";
+      margin-right: 2px;
+      width: 8px;
+      position: absolute;
+      left: 5px;
+      top: 0;
+      bottom: 0;
+      background: linear-gradient(to bottom, rgb(250, 52, 3), #f7b603);
+    }
+  }
+
+  .red-packet-container {
+    background-color: #fff;
+    border: 1px solid transparent;
+
+    .red-packet-image {
+      height: 300px;
+      display: flex;
+      justify-content: center;
+      text-align: center;
+      image {
+        height: 100%;
+        width: 320px;
+      }
+    }
+
+    .red-packet-title {
+      color: #333;
+      font-size: 28px;
+      margin: 10px 20px;
+    }
+
+    .red-packet-price {
+      display: flex;
+      justify-content: space-between;
+      margin: 20px;
+      font-size: 22px;
+      color: #999;
+
+      .icon-yuanbao {
+        color: #F8D253;
+        font-size: 22px;
+      }
+    }
+  }
+  .good-detail {
+     background-color: #fff;
+     border: 1px solid transparent;
+     margin: 10px 0;
+     padding: 20px;
+     position: relative;
+     &-info {
+       font-size: 24px;
+       color: #999;
+       view {
+         margin: 5px 0;
+       }
+     }
+  }
+  .red-packet-button {
+    width: 100%;
+    position: fixed;
+    bottom: 20px;
+    height: 100px;
+    line-height: 100px;
+    text-align: center;
+    button {
+      font-size: 32px;
+      width:68vw;
+      height: 80px;
+      line-height: 80px;
+      border-radius: 38px;
+      color: #fff;
+      background: linear-gradient(to right, rgb(250, 213, 3), #e2740c);
+    }
+    .disable-btn {
+      background: #ccc;
+    }
+  }
+}

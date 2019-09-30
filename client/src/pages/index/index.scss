@@ -1,0 +1,289 @@
+@import '../../assets/font.wxss';
+@import "~taro-ui/dist/style/components/icon.scss";
+@import "~taro-ui/dist/style/components/modal.scss";
+
+.container {
+  width: 92vw;
+  height: 100vh;
+  padding: 0 4vw;
+  overflow: auto;
+  // background-image: url(http://cdn.geekbuluo.com/datibg.png);
+  // background-size: 100% 100%;
+  // background-repeat: no-repeat;
+  background: linear-gradient(#1D2045 30%, #1D2045, #692003);
+  .navigation {
+    margin-top: 90px;
+    color: #fff;
+    font-size: 40px;
+    text-align: center;
+  }
+  .header {
+    display: flex;
+    align-items: center;
+    margin-top: 30px;
+    justify-content: space-between;
+    .user-info {
+      margin-left: 30px;
+      display: flex;
+      .user-avatar {
+        border-radius: 50%;
+        width: 120px;
+        height: 120px;
+        margin-right: 30px;
+        display: block;
+        overflow: hidden;
+      }
+      .user-nickname {
+        width: 218px;
+        color: #fff;
+        border-bottom: 2px solid #484D6E;
+        padding-bottom: 20px;
+      }
+      .topic-info {
+        display: flex;
+        margin-top: 20px;
+        .topic-title {
+          color: #F8D253;
+          font-size: 28px;
+        }
+        .topic-switch {
+          height: 38px;
+          display: flex;
+          font-size: 26px;
+          margin-left: 12px;
+          padding: 0px 6px;
+          align-items: center;
+          background: #F8D253;
+          border-radius: 25px;
+        }
+      }
+    }
+    .user-balance {
+      color: #F8D253;
+      font-family: ACGN-PaoPaoGB;
+      line-height: 30px;
+      margin-right: 20px;
+      text-align: center;
+      .user-balance-bottom {
+        display: flex;
+        align-items: center;
+      }
+      .icon-yuanbao {
+        font-size: 30px;
+      }
+      &-value {
+        font-size: 32px;
+      }
+      &-withdraw {
+        font-size: 24px;
+        color: #ccc;
+      }
+    }
+  }
+  
+  .content {
+    margin-bottom: 135px;
+    .red-packet {
+      position: relative;
+      z-index: 10;
+      width: 60vw;
+      margin: 20px auto;
+      height: 570px;
+    }
+    .red-packet-bg,
+    .red-packet-body,
+    .red-packet-front,
+    .red-packet-btn {
+      position: absolute;
+      width: 100%;
+      bottom: 0;
+    }
+    .red-packet-bg {
+      z-index: 11;
+      bottom: 13px;
+    }
+    .red-packet-body {
+      z-index: 12;
+      width: 84%;
+      left: 8%;
+      border-radius: 10px;
+      top: 30px;
+      height: 300px;
+      background: #FCEEE7;
+      text-align: center;
+    }
+    .red-packet-open {
+      position: absolute;
+      z-index: 15;
+      height: 160px;
+      width: 160px;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+      line-height: 160px;
+      font-size: 80px;
+      margin-top: 80px;
+      display: inline-block;
+      color:#fff;
+      background-color: rgb(252, 208, 14);
+      border-radius: 50%;
+      text-align: center;
+    }
+    .red-packet-front {
+      z-index: 13;
+    }
+    .red-packet-countdown {
+      position: absolute;
+      z-index: 15;
+      font-size: 50px;
+      margin-top: 100px;
+      width: 100%;
+      text-align: center;
+      color: rgb(90, 55, 3);
+    }
+    .red-packet-btn {
+      z-index: 14;
+      bottom: 50px;
+      text-align: center;
+      .answer-_btn {
+        background: linear-gradient(to right, rgb(252, 206, 3), #cf9904);
+        color: rgb(90, 55, 3);
+        width: 80%;
+        border-radius: 50px;
+      }
+      .residue {
+        font-family: ACGN-PaoPaoGB;
+        margin: 20px auto;
+        color: #fff;
+        text {
+          font-size: 38px;
+          margin: 0 5px;
+        }
+      }
+    }
+    .red-packet-convert {
+      display: flex;
+      flex-wrap: wrap;
+      margin: 0 10px;
+      justify-content: space-between;
+    }
+  }
+  .header-line {
+    font-size: 28px;
+    color: #fff;
+    padding-left: 10px;
+    position: relative;
+    margin: 20px 0;
+    &::before {
+      content: "";
+      margin-right: 2px;
+      width: 4px;
+      position: absolute;
+      left: -10px;
+      top: 0;
+      bottom: 0;
+      background: linear-gradient(to bottom, rgb(250, 52, 3), #f7b603);
+    }
+  }
+  .nav {
+    display: flex;
+    width: 750px;
+    bottom: 0;
+    color: #fff;
+    left: 0;
+    position: fixed;
+    background-color: #241F44;
+    border-radius: 6px 6px 0 0;
+    z-index: 9;
+    &-item {
+      width: 240px;
+      height: 130px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      font-size: 28px;
+      &:active {
+        font-size: 26px;
+        image {
+          width: 60px;
+          height: 60px;
+        }
+      }
+      view {
+        display: inline;
+      }
+      image {
+        width: 70px;
+        height: 70px;
+      }
+    }
+  }
+  .first-screen {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    // background-image: url(http://cdn.geekbuluo.com/kaimen.png);
+    background-repeat: no-repeat;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1000;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.651);
+
+    image {
+      width: 600px;
+      height: 674px;
+      margin: 20vh auto;
+    }
+
+    button {
+      width: 600px;
+      height: 600px;
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0;
+      top: 20%;
+      left: 0;
+      right: 0;
+      margin: auto;
+    }
+  }
+  .atmodal-content {
+    position: relative;
+    z-index: 1004;
+    height: 800px;
+    text-align: center;
+    background: transparent;
+    &-label {
+      color: rgb(221, 172, 12);
+      text-align: center;
+      width: 500px;
+      height: 450px;
+      background-image: url(http://cdn.geekbuluo.com/25e6e2982285693c4b91b015c6adb573-min.png);
+      background-size: 100% 100%;
+    }
+    .icon-yuanbao {
+      font-size: 40px;
+    }
+    .modal-close {
+      margin-top: 150px;
+      .icon-guanbi {
+        font-size: 50px;
+        color: rgb(221, 172, 12);
+      }
+    }
+  }
+
+  .at-modal__container {
+    background-color: transparent;
+  }
+
+  .at-modal__overlay {
+    background-color: rgba(0, 0, 0, 0.76);
+  }
+}
+
+

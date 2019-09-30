@@ -1,0 +1,36 @@
+@import "~taro-ui/dist/style/components/icon.scss";
+
+.container {
+  width: 92vw;
+  height: 100vh;
+  padding: 0 4vw;
+  overflow: auto;
+  background: linear-gradient(#1D2045 30%, #1D2045, #692003);
+  
+  .header-line {
+    font-size: 28px;
+    color: #fff;
+    padding-left: 10px;
+    position: relative;
+    margin: 20px 0;
+
+    &::before {
+      content: "";
+      margin-right: 2px;
+      width: 8px;
+      position: absolute;
+      left: -10px;
+      top: 0;
+      bottom: 0;
+      background: linear-gradient(to bottom, rgb(250, 52, 3), #f7b603);
+    }
+  }
+  .block {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    q-block {
+      margin: 20px 0;
+    }
+  }
+}

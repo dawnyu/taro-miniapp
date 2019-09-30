@@ -1,0 +1,63 @@
+.red-packet-container {
+  width: 42vw;
+  background-color: #fff;
+  border-radius: 20px;
+  border: 1px solid transparent;
+  margin: 10px 0;
+  text-align: center;
+  .red-packet-image {
+    width: 175rpx;
+    height: 230rpx;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    background: url(http://cdn.geekbuluo.com/hongbao.png);
+    background-size: 100% 100%;
+    border-radius: 10px;
+    margin-top: 30px;
+    .red-packet-type,
+    .red-packet-value {
+      text-align: center;
+      color: #F8D253;
+      font-size: 28px;
+    }
+    .red-packet-type {
+      margin-top: 30px;
+    }
+    .red-packet-value {
+      margin-top: 10px;
+      font-size: 36px;
+    }
+  }
+  .red-packet-title {
+    text-align: center;
+    color: #333;
+    font-size: 28px;
+    margin: 10px 20px;
+  }
+
+  .red-packet-price {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 20px;
+    font-size: 22px;
+    color: #999;
+    .icon-yuanbao {
+      color: #F8D253;
+      font-size: 22px;
+    }
+  }
+
+  .red-packet-button {
+    font-size: 28px;
+    width: 38vw;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 25px;
+    margin: 10px auto;
+    color: #fff;
+    background: linear-gradient(to right, rgb(250, 213, 3), #e2740c);
+  }
+}
