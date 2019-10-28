@@ -3,14 +3,23 @@
 	"cloudfunctionRoot": "cloud/functions/",
 	"projectname": "datiapp",
 	"description": "",
-	"appid": "wx34330636e7a94342",
+	"appid": "wxb270ef366648e115",
 	"setting": {
 		"urlCheck": false,
 		"es6": false,
 		"postcss": false,
 		"minified": false,
 		"newFeature": true,
-		"autoAudits": false
+		"coverView": true,
+		"autoAudits": false,
+		"checkInvalidKey": true,
+		"checkSiteMap": true,
+		"uploadWithSourceMap": true,
+		"babelSetting": {
+			"ignore": [],
+			"disablePlugins": [],
+			"outputPath": ""
+		}
 	},
 	"compileType": "miniprogram",
 	"simulatorType": "wechat",

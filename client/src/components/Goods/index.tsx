@@ -17,8 +17,7 @@ function Goods() {
       </View>
       <View className='good-price'>
         <Text>库存 8件</Text>
-        <Text> {good.value}
-        <Text className='iconfont icon-yuanbao' /></Text>
+        <Text> {good.value}答题币</Text>
         
       </View>
       <View className='good-button'>立即兑换</View>

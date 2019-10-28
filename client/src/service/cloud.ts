@@ -1,7 +1,4 @@
-import Taro from '@tarojs/taro'
 import request from './base'
-
-const base = 'http://localhost:3005'
 
 /**
  * 获取用户详情
@@ -9,7 +6,7 @@ const base = 'http://localhost:3005'
  */
 export const getUser = (): Promise<any> => 
   request.post({
-    url: `${base}/gk/dt/getUser`,
+    action: 'getUser',
     data: {},
   })
 
@@ -19,7 +16,7 @@ export const getUser = (): Promise<any> =>
 */
 export const login = (data): Promise<any> =>
   request.post({
-    url: `${base}/gk/dt/login`,
+    action: 'login',
     data,
   })
 
@@ -29,17 +26,17 @@ export const login = (data): Promise<any> =>
  */
 export const update = (data): Promise<any> =>
   request.post({
-    url: `${base}/gk/dt/update`,
+    action: 'update',
     data,
   })
 
 /**
- * 获取红包列表
+ * 获取权益列表
  */
 
-export const redPacket = (): Promise<any> =>
+export const getGoods = (): Promise<any> =>
   request.post({
-    url: `${base}/gk/dt/redPacket`,
+    action: 'redPacket',
     data: {},
   })
 
@@ -49,7 +46,7 @@ export const redPacket = (): Promise<any> =>
  */
 export const trade = (data): Promise<any> =>
   request.post({
-    url: `${base}/gk/dt/trade`,
+    action: 'trade',
     data,
   })
 
@@ -58,23 +55,26 @@ export const trade = (data): Promise<any> =>
  */
 export const getOrderList = (data): Promise<any> =>
   request.post({
-    url: `${base}/gk/dt/getOrderList`,
+    action: 'getOrderList',
     data,
   })
+
 
 /**
  * 获取兑换记录
  */
-export function geTexchangeList(data) {
-  return Taro.cloud.callFunction({ name: 'exchangeList', data })
-}
+export const geTexchangeList = (data): Promise<any> =>
+  request.post({
+    action: 'exchangeList',
+    data,
+  })
 
 /**
  * 获取题目
  */
 export const getQs = (data): Promise<any> =>
   request.post({
-    url: `${base}/gk/dt/getQs`,
+    action: 'getQs',
     data,
   })
 
@@ -83,7 +83,7 @@ export const getQs = (data): Promise<any> =>
  */
 export const answer = (data): Promise<any> =>
   request.post({
-    url: `${base}/gk/dt/answer`,
+    action: 'answer',
     data,
   })
 
@@ -93,7 +93,7 @@ export const answer = (data): Promise<any> =>
  */
 export const suggest = (data): Promise<any> =>
   request.post({
-    url: `${base}/gk/dt/suggest`,
+    action: 'suggest',
     data,
   })
 
@@ -103,7 +103,7 @@ export const suggest = (data): Promise<any> =>
 
 export const rank = (data): Promise<any> =>
   request.post({
-    url: `${base}/gk/dt/rank`,
+    action: 'rank',
     data,
   })
 
@@ -112,6 +112,42 @@ export const rank = (data): Promise<any> =>
 */
 export const systemTime = (): Promise<any> =>
   request.post({
-    url: `${base}/gk/dt/systemTime`,
+    action: 'systemTime',
     data: {},
+  })
+
+/**
+* 获得好友列表
+*/
+export const getFriends = (data): Promise<any> =>
+  request.post({
+    action: 'getFriends',
+    data,
+  })
+
+/**
+* 获得签到详情
+*/
+export const getSign = (): Promise<any> =>
+  request.post({
+    action: 'getSign',
+    data: null,
+  })
+
+/**
+* 签到
+*/
+export const sign = (data): Promise<any> =>
+  request.post({
+    action: 'sign',
+    data,
+  })
+
+/**
+* 签到
+*/
+export const getWithdraw = (): Promise<any> =>
+  request.post({
+    action: 'getWithdraw',
+    data: null,
   })

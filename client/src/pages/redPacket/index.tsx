@@ -19,11 +19,11 @@ function RedPacket() {
       await trade({ redPacketId: details.id, type: details.type * 1 })
       Taro.showToast({
         title: '兑换成功',
-        icon: 'success'
+        icon: 'none'
       })
     } catch (e) {
       Taro.showToast({
-        title: '兑换失败',
+        title: e.message,
         icon: 'none',
       })
     }

@@ -1,4 +1,4 @@
-import Taro, { useContext, useState, useDidShow } from '@tarojs/taro'
+import Taro, { useContext, useState, useDidShow, useShareAppMessage } from '@tarojs/taro'
 import { View, Text, Image } from '@tarojs/components'
 import { observer } from '@tarojs/mobx'
 import { AtModal } from 'taro-ui'
@@ -19,6 +19,13 @@ function Index() {
     options: [],
     answer: '',
   })
+  useShareAppMessage(() => {
+    return {
+      title: '好友发红包啦，快来答题分红包吧！',
+      path: `/pages/index/index?superior=${userInfo.openid}`,
+      imageUrl: 'http://cdn.geekbuluo.com/share_image%20%281%29.jpg'
+    }
+  })
 
   const rightOption = {
     image: 'http://cdn.geekbuluo.com/daduile.png',
@@ -38,7 +45,14 @@ function Index() {
       if (qtype === 0) {
         if (data.length === 0) {
           Taro.showToast({
-            title: '暂时未加载到题目'
+            title: '暂时未加载到题目',
+          })
+          setTopic({
+            id: '',
+            type: 0,
+            title: [],
+            options: [],
+            answer: '',
           })
         } else {
           setTopic({
@@ -52,7 +66,7 @@ function Index() {
   const answerHanle = async(val) => {
     let random = 0
     if (userInfo.answersheet >= 0) {
-      random = Math.ceil(Math.random() * 0.1 * 1000)
+      random = Math.ceil(Math.random() * 5) + 1
     }
     setAward(random)
     setVisible(true)
@@ -137,7 +151,7 @@ function Index() {
 }
 
 Index.config = {
-  navigationBarTitleText: '答题赢元宝'
+  navigationBarTitleText: '答题'
 }
 
 export default observer(Index)

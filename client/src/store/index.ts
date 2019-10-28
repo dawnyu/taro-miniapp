@@ -2,7 +2,7 @@ import Taro, { createContext } from '@tarojs/taro'
 import { observable, action, decorate, runInAction } from 'mobx'
 import {
   update,
-  redPacket,
+  getGoods,
   trade,
   login,
   answer,
@@ -21,7 +21,7 @@ class Index {
     continuousLogin: 0,
   }
   qtype = 0 // 题库类型
-  redPacket = []
+  goods = []
 
   async getUser() {
     try {
@@ -47,11 +47,11 @@ class Index {
   }
 
   async trade(payload) {
-    const { status } = await trade(payload)
+    const { status, message } = await trade(payload)
     if (status === 0) {
       await this.getUser()
     } else {
-      throw new Error('交易失败')
+      throw new Error(message)
     }
   }
 
@@ -99,10 +99,10 @@ class Index {
     this.qtype = qtype
   }
 
-  async getRedPackets() {
-    const { data } = await redPacket()
+  async getGoods() {
+    const { data } = await getGoods()
     runInAction(() => {
-      this.redPacket = data || []
+      this.goods = data || []
     })
   }
 }
@@ -114,8 +114,8 @@ decorate(Index, {
   login: action.bound,
   qtype: observable,
   setQType: action.bound,
-  redPacket: observable,
-  getRedPackets: action.bound,
+  goods: observable,
+  getGoods: action.bound,
   trade: action.bound,
   answer: action.bound,
 })

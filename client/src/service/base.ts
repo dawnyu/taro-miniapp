@@ -1,5 +1,6 @@
 import Taro from '@tarojs/taro'
-
+// const base = 'https://api.geekbuluo.com'
+const url = 'http://localhost:3005/gk/dtApi'
 class Request {
   header = {
     'content-type': 'application/json'
@@ -23,29 +24,10 @@ class Request {
     
   }
 
-  get({url, data}) {
+  async post({action, data}) {
     data = {
       platform: Taro.getEnv(),
-      ...data,
-      ...this.getOpenid()
-    }
-    return new Promise((resolve) => {
-      Taro.request({
-        url,
-        data,
-        method: 'GET',
-        header: this.header
-      }).then(res => {
-        if (res.statusCode === 200 || res.statusCode === 201) {
-          resolve(res.data)
-        }
-      })
-    })
-  }
-
-  async post({url, data}) {
-    data = {
-      platform: Taro.getEnv(),
+      action,
       ...data,
       ... await this.getOpenid()
     }

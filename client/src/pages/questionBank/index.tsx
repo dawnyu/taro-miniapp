@@ -20,11 +20,11 @@ function Index() {
     //   name: '诗词题库',
     //   type: 1,
     // },
-    // {
-    //   image: 'http://cdn.geekbuluo.com/jiakao-min.png',
-    //   name: '驾考题库',
-    //   type: 2,
-    // }
+    {
+      image: 'http://cdn.geekbuluo.com/jiakao-min.png',
+      name: '驾考题库',
+      type: 2,
+    }
   ]
   const selected = (type = 0): any => {
     setQType(type)

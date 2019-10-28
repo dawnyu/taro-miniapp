@@ -95,6 +95,18 @@
     promise-polyfill "^7.1.2"
     regenerator-runtime "^0.11.1"
 
+"@tarojs/components@1.3.13":
+  version "1.3.13"
+  resolved "https://registry.npm.taobao.org/@tarojs/components/download/@tarojs/components-1.3.13.tgz#1c25d5656b6a6c6ed16c3e75f192bc0067fec5b8"
+  integrity sha1-HCXVZWtqbG7RbD518ZK8AGf+xbg=
+  dependencies:
+    better-scroll "^1.14.1"
+    classnames "^2.2.5"
+    omit.js "^1.0.0"
+    resolve-pathname "^3.0.0"
+    swiper "^4.4.2"
+    weui "^1.1.2"
+
 "@tarojs/components@1.3.19":
   version "1.3.19"
   resolved "https://registry.npm.taobao.org/@tarojs/components/download/@tarojs/components-1.3.19.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40tarojs%2Fcomponents%2Fdownload%2F%40tarojs%2Fcomponents-1.3.19.tgz#e222b68c3b1079fd8ee5d93190b1efaedc296303"
@@ -133,6 +145,13 @@
   integrity sha1-RpB1zgVVuvCh03ZYARgDZ5/sPJ4=
   dependencies:
     csso "^3.5.0"
+
+"@tarojs/plugin-less@^1.3.20":
+  version "1.3.20"
+  resolved "https://registry.npm.taobao.org/@tarojs/plugin-less/download/@tarojs/plugin-less-1.3.20.tgz#bb57501d42aa6758ca782862c02150a79b5ae0d0"
+  integrity sha1-u1dQHUKqZ1jKeChiwCFQp5ta4NA=
+  dependencies:
+    less "^3.0.4"
 
 "@tarojs/plugin-sass@1.3.19":
   version "1.3.19"
@@ -212,6 +231,23 @@
     lodash "^4.17.10"
     prop-types "^15.6.1"
 
+"@tarojs/taro-weapp@^1.3.13":
+  version "1.3.20"
+  resolved "https://registry.npm.taobao.org/@tarojs/taro-weapp/download/@tarojs/taro-weapp-1.3.20.tgz#26d43563bb21b04fd4564b2eb654c3426f009c11"
+  integrity sha1-JtQ1Y7shsE/UVksutlTDQm8AnBE=
+  dependencies:
+    "@tarojs/taro" "1.3.20"
+    "@tarojs/utils" "1.3.20"
+    lodash "^4.17.10"
+    prop-types "^15.6.1"
+
+"@tarojs/taro@1.3.13":
+  version "1.3.13"
+  resolved "https://registry.npm.taobao.org/@tarojs/taro/download/@tarojs/taro-1.3.13.tgz#55875ab2c71cf19eb2b16dd237c43d61749c6d31"
+  integrity sha1-VYdasscc8Z6ysW3SN8Q9YXScbTE=
+  dependencies:
+    "@tarojs/utils" "1.3.13"
+
 "@tarojs/taro@1.3.19":
   version "1.3.19"
   resolved "https://registry.npm.taobao.org/@tarojs/taro/download/@tarojs/taro-1.3.19.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40tarojs%2Ftaro%2Fdownload%2F%40tarojs%2Ftaro-1.3.19.tgz#d82adf68553cc52afdc3229be64fcd9cbe4a98db"
@@ -219,10 +255,27 @@
   dependencies:
     "@tarojs/utils" "1.3.19"
 
+"@tarojs/taro@1.3.20":
+  version "1.3.20"
+  resolved "https://registry.npm.taobao.org/@tarojs/taro/download/@tarojs/taro-1.3.20.tgz#7db4e697b7c3b1ef18bdc9a5a9df0f057587dd33"
+  integrity sha1-fbTml7fDse8Yvcmlqd8PBXWH3TM=
+  dependencies:
+    "@tarojs/utils" "1.3.20"
+
+"@tarojs/utils@1.3.13":
+  version "1.3.13"
+  resolved "https://registry.npm.taobao.org/@tarojs/utils/download/@tarojs/utils-1.3.13.tgz#bf14cf332c01820b81dc216eac6d16a47c391836"
+  integrity sha1-vxTPMywBgguB3CFurG0WpHw5GDY=
+
 "@tarojs/utils@1.3.19":
   version "1.3.19"
   resolved "https://registry.npm.taobao.org/@tarojs/utils/download/@tarojs/utils-1.3.19.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40tarojs%2Futils%2Fdownload%2F%40tarojs%2Futils-1.3.19.tgz#7726ec7baca29f6f372c2ad3ee3372e72fe90c7d"
   integrity sha1-dybse6yin283LCrT7jNy5y/pDH0=
+
+"@tarojs/utils@1.3.20":
+  version "1.3.20"
+  resolved "https://registry.npm.taobao.org/@tarojs/utils/download/@tarojs/utils-1.3.20.tgz#9c8d245818ef10653b78687e412641c855e6b7f0"
+  integrity sha1-nI0kWBjvEGU7eGh+QSZByFXmt/A=
 
 "@tarojs/webpack-runner@1.3.19":
   version "1.3.19"
@@ -2035,7 +2088,7 @@ clone@^1.0.2:
   resolved "https://registry.npm.taobao.org/clone/download/clone-1.0.4.tgz#da309cc263df15994c688ca902179ca3c7cd7c7e"
   integrity sha1-2jCcwmPfFZlMaIypAheco8fNfH4=
 
-clone@^2.1.1:
+clone@^2.1.1, clone@^2.1.2:
   version "2.1.2"
   resolved "https://registry.npm.taobao.org/clone/download/clone-2.1.2.tgz#1b7f4b9f591f1e8f83670401600345a02887435f"
   integrity sha1-G39Ln1kfHo+DZwQBYANFoCiHQ18=
@@ -4547,6 +4600,22 @@ less@3.0.4:
   version "3.0.4"
   resolved "https://registry.npm.taobao.org/less/download/less-3.0.4.tgz#d27dcedbac96031c9e7b76f1da1e4b7d83760814"
   integrity sha1-0n3O26yWAxyee3bx2h5LfYN2CBQ=
+  optionalDependencies:
+    errno "^0.1.1"
+    graceful-fs "^4.1.2"
+    image-size "~0.5.0"
+    mime "^1.4.1"
+    mkdirp "^0.5.0"
+    promise "^7.1.1"
+    request "^2.83.0"
+    source-map "~0.6.0"
+
+less@^3.0.4:
+  version "3.10.3"
+  resolved "https://registry.npm.taobao.org/less/download/less-3.10.3.tgz#417a0975d5eeecc52cff4bcfa3c09d35781e6792"
+  integrity sha1-QXoJddXu7MUs/0vPo8CdNXgeZ5I=
+  dependencies:
+    clone "^2.1.2"
   optionalDependencies:
     errno "^0.1.1"
     graceful-fs "^4.1.2"
@@ -7307,6 +7376,15 @@ tar@^4:
     mkdirp "^0.5.0"
     safe-buffer "^5.1.2"
     yallist "^3.0.3"
+
+taro-calendar-customizable@^1.2.7:
+  version "1.2.7"
+  resolved "https://registry.npm.taobao.org/taro-calendar-customizable/download/taro-calendar-customizable-1.2.7.tgz#df701dcc2b524284d997e5b62ccde5d621ada638"
+  integrity sha1-33AdzCtSQoTZl+W2LM3l1iGtpjg=
+  dependencies:
+    "@tarojs/components" "1.3.13"
+    "@tarojs/taro" "1.3.13"
+    "@tarojs/taro-weapp" "^1.3.13"
 
 taro-ui@^2.2.2:
   version "2.2.2"

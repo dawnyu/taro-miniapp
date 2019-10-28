@@ -7,12 +7,25 @@ import './index.scss'
 function Index() {
   const [value, setValue] = useState()
   const submit = async() => {
+    if (value && value.length < 5) {
+      Taro.showToast({
+        title: '要详细点哦~',
+        icon: 'none',
+        duration: 2000,
+      })
+      return
+    }
     const { status } = await suggest({ data: value })
     if (status === 0) {
-      await Taro.showToast({
+      await new Promise(r => {
+        Taro.showToast({
           title: '提交成功',
           icon: 'success',
-          duration: 3000,
+          duration: 2000,
+          success: () => {
+            setTimeout(r, 2000)
+          }
+        })
       })
       Taro.redirectTo({
         url: '/pages/index/index'
@@ -36,7 +49,8 @@ function Index() {
         />
       </View>
       <AtButton
-        type='primary'
+        type='secondary'
+        disabled={!value}
         onClick={submit}
       >提交</AtButton>
     </View>

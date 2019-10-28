@@ -24,8 +24,7 @@ function RedPacket({ data }) {
       </View>
       <View className='red-packet-price'>
         <Text>库存 {data.inventory}件</Text>
-        <Text> {data.price}
-          <Text className='iconfont icon-yuanbao' /></Text>
+        <Text> {data.price}答题币</Text>
       </View>
       <View className='red-packet-button'>去兑换</View>
     </View>

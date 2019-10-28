@@ -23,21 +23,24 @@ class App extends Component {
   config: Config = {
     pages: [
       'pages/index/index',
-      'pages/signin/index',
       'pages/questionBank/index',
       'pages/answer/index',
       'pages/redPacket/index',
-      'pages/my/index',
-      'pages/my/aboutus/index',
-      'pages/my/suggest/index',
       'pages/rank/index',
+      'pages/mission/index',
+      'pages/my/index',
+      'pages/my/withdraw/index',
+      'pages/my/suggest/index',
+      'pages/my/award/index',
+      'pages/my/friends/index',
+      
     ],
     permission: {
     },
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#1D2045',
-      navigationBarTitleText: '答题赢红包',
+      navigationBarTitleText: '全民答题',
       navigationBarTextStyle: 'white',
     },
     cloud: true

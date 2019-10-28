@@ -3,92 +3,149 @@
 @import "~taro-ui/dist/style/components/modal.scss";
 
 .container {
-  width: 92vw;
   height: 100vh;
-  padding: 0 4vw;
   overflow: auto;
-  // background-image: url(http://cdn.geekbuluo.com/datibg.png);
-  // background-size: 100% 100%;
-  // background-repeat: no-repeat;
-  background: linear-gradient(#1D2045 30%, #1D2045, #692003);
-  .navigation {
-    margin-top: 90px;
-    color: #fff;
-    font-size: 40px;
-    text-align: center;
-  }
+  background: linear-gradient(#1D2045 30%, #1D2045, #2C2B40);
   .header {
     display: flex;
     align-items: center;
-    margin-top: 30px;
     justify-content: space-between;
-    .user-info {
-      margin-left: 30px;
+    margin-top: 20px;
+    .topic-info {
       display: flex;
-      .user-avatar {
-        border-radius: 50%;
-        width: 120px;
-        height: 120px;
-        margin-right: 30px;
-        display: block;
-        overflow: hidden;
+      margin-right: 20px;
+      .topic-title {
+        color: #F8D253;
+        font-size: 28px;
       }
-      .user-nickname {
-        width: 218px;
-        color: #fff;
-        border-bottom: 2px solid #484D6E;
-        padding-bottom: 20px;
-      }
-      .topic-info {
+      .topic-switch {
+        height: 38px;
+        line-height: 38px;
         display: flex;
-        margin-top: 20px;
-        .topic-title {
-          color: #F8D253;
-          font-size: 28px;
-        }
-        .topic-switch {
-          height: 38px;
-          display: flex;
-          font-size: 26px;
-          margin-left: 12px;
-          padding: 0px 6px;
-          align-items: center;
-          background: #F8D253;
-          border-radius: 25px;
-        }
+        font-size: 26px;
+        margin-left: 12px;
+        padding: 0px 6px;
+        align-items: center;
+        background: #F8D253;
+        border-radius: 25px;
       }
     }
     .user-balance {
-      color: #F8D253;
-      font-family: ACGN-PaoPaoGB;
-      line-height: 30px;
-      margin-right: 20px;
+      color: rgb(248, 6, 6);
+      line-height: 50px;
+      height: 50px;
+      width: 200px;
+      display: flex;
+      border-top-right-radius: 30px;
+      border-bottom-right-radius: 30px;
       text-align: center;
-      .user-balance-bottom {
-        display: flex;
-        align-items: center;
-      }
-      .icon-yuanbao {
-        font-size: 30px;
-      }
-      &-value {
-        font-size: 32px;
-      }
-      &-withdraw {
-        font-size: 24px;
-        color: #ccc;
+      font-size: 24px;
+      background: #F8D253;
+      .userAvatarUrl {
+        width: 40px;
+        height: 40px;
+        margin-top: 5px;
+        margin-right: 10px;
+        display: block;
+        border-radius: 50%;
+        overflow: hidden;
       }
     }
   }
   
   .content {
+    width: 94vw;
+    padding: 0 3vw;
     margin-bottom: 135px;
+    margin-top: 30px;
     .red-packet {
       position: relative;
       z-index: 10;
-      width: 60vw;
-      margin: 20px auto;
-      height: 570px;
+      width: 92vw;
+      margin: 0 auto;
+      height: 560px;
+    }
+    .floaticon {
+      position: relative;
+      z-index: 20;
+      .rank {
+        width: 66px;
+        height: 66px;
+        position: absolute;
+        left: 70px;
+        top: 165px;
+        animation: 'red-p-ani'2s linear infinite;
+      }
+
+      .rank-text {
+        position: absolute;
+        left: 70px;
+        top: 230px;
+        font-size: 22px;
+        color: rgb(248, 73, 4);
+      }
+       .friend {
+         width: 66px;
+         height: 66px;
+         position: absolute;
+         left: 50px;
+         top: 40px;
+         animation: 'red-p-ani'2s linear infinite;
+       }
+
+       .friend-text {
+         position: absolute;
+         left: 50px;
+         top: 105px;
+         font-size: 22px;
+         color: rgb(248, 73, 4);
+       }
+       .open-red {
+         width: 55px;
+         height: 66px;
+         position: absolute;
+         right: 60px;
+         top: 160px;
+       }
+
+       .open-red-animate {
+         animation: 'red-p-ani'2s linear infinite;
+       }
+
+       .open-red-text,
+       .red-packet-countdown {
+         position: absolute;
+         right: 60px;
+         top: 230px;
+         font-size: 22px;
+         color: rgb(248, 73, 4);
+       }
+
+       .red-packet-countdown {
+         right: 45px;
+       }
+       }
+
+       @keyframes red-p-ani {
+         0% {
+           transform: rotate(0deg) scale(1);
+         }
+
+         25% {
+           transform: rotate(10deg) scale(1.1);
+         }
+
+         50% {
+           transform: rotate(0deg) scale(1);
+         }
+
+         75% {
+           transform: rotate(-10deg) scale(1.1);
+         }
+
+         100% {
+           transform: rotate(0deg) scale(1);
+         }
     }
     .red-packet-bg,
     .red-packet-body,
@@ -100,65 +157,43 @@
     }
     .red-packet-bg {
       z-index: 11;
-      bottom: 13px;
+      height: 380px;
+     
     }
     .red-packet-body {
       z-index: 12;
-      width: 84%;
-      left: 8%;
+      width: 92%;
+      left: 4%;
       border-radius: 10px;
       top: 30px;
-      height: 300px;
+      height: 360px;
       background: #FCEEE7;
       text-align: center;
-    }
-    .red-packet-open {
-      position: absolute;
-      z-index: 15;
-      height: 160px;
-      width: 160px;
-      left: 0;
-      right: 0;
-      margin: 0 auto;
-      line-height: 160px;
-      font-size: 80px;
-      margin-top: 80px;
-      display: inline-block;
-      color:#fff;
-      background-color: rgb(252, 208, 14);
-      border-radius: 50%;
-      text-align: center;
+      background-image: url(http://cdn.geekbuluo.com/bg-min.png);
+      background-size: 300px 170px;
+      background-repeat: no-repeat;
+      background-position: 170px 90px;
+     .residue {
+       margin: 10px auto;
+       color: rgb(252, 7, 7);
+       text {
+         font-size: 38px;
+         margin: 0 5px;
+       }
+     }
     }
     .red-packet-front {
       z-index: 13;
-    }
-    .red-packet-countdown {
-      position: absolute;
-      z-index: 15;
-      font-size: 50px;
-      margin-top: 100px;
-      width: 100%;
-      text-align: center;
-      color: rgb(90, 55, 3);
+      height: 364px;
     }
     .red-packet-btn {
       z-index: 14;
       bottom: 50px;
       text-align: center;
       .answer-_btn {
-        background: linear-gradient(to right, rgb(252, 206, 3), #cf9904);
-        color: rgb(90, 55, 3);
-        width: 80%;
+        width: 360px;
+        height: 100px;
         border-radius: 50px;
-      }
-      .residue {
-        font-family: ACGN-PaoPaoGB;
-        margin: 20px auto;
-        color: #fff;
-        text {
-          font-size: 38px;
-          margin: 0 5px;
-        }
       }
     }
     .red-packet-convert {
@@ -258,12 +293,27 @@
     text-align: center;
     background: transparent;
     &-label {
-      color: rgb(221, 172, 12);
+      color: rgb(253, 195, 5);
       text-align: center;
       width: 500px;
       height: 450px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       background-image: url(http://cdn.geekbuluo.com/25e6e2982285693c4b91b015c6adb573-min.png);
       background-size: 100% 100%;
+      padding-left: 10px;
+      &-text {
+        font-size: 32px;
+        text {
+          font-size: 45px;
+          font-weight: bold;
+          margin: 0 5px;
+        }
+        .icon-yuanbao {
+          font-size: 48px!important;
+        }
+      }
     }
     .icon-yuanbao {
       font-size: 40px;
@@ -275,6 +325,12 @@
         color: rgb(221, 172, 12);
       }
     }
+  }
+
+  .at-icon-close {
+    color: rgba(165, 164, 164, 0.541);
+    font-size: 50px;
+    margin-top: 80px;
   }
 
   .at-modal__container {

@@ -2,12 +2,11 @@ import Taro, { useContext } from '@tarojs/taro'
 import { View, OpenData, Image } from '@tarojs/components'
 import { observer } from '@tarojs/mobx'
 import store from '@/store/index'
+import { QuestionEnum } from '@/enum'
 import './index.scss'
 
 function Index() {
-  const { userInfo } = useContext(store) as any
-
-  console.log(userInfo)
+  const { qtype } = useContext(store) as any
 
   return (
     <View className='container'>
@@ -22,20 +21,36 @@ function Index() {
         <View className='user-nickname'>
           <OpenData type='userNickName' />
         </View>
-        <View className='user-qtype'>正在使用：[成语题库]</View>
+        <View className='user-qtype'>正在使用：[{QuestionEnum[qtype]}]</View>
       </View>
       <View className='body'>
-        <View className='item'>
+        <View
+          className='item'
+          onClick={() => Taro.navigateTo({ url: '/pages/my/withdraw/index' })}
+        >
           <View className='left'>
-            <Image src='http://cdn.geekbuluo.com/tilkujilu-min.png' />
-            <View>元宝记录</View>
+            <Image src='http://cdn.geekbuluo.com/datizhuanqian.png' />
+            <View>权益记录</View>
           </View>
           <View className='at-icon at-icon-play'></View>
         </View>
-        <View className='item'>
+        <View
+          className='item'
+          onClick={() => Taro.navigateTo({ url: '/pages/my/award/index' })}
+        >
           <View className='left'>
-           <Image src='http://cdn.geekbuluo.com/yuanbaojilu-min.png' />
-            <View>兑换记录</View>
+            <Image src='http://cdn.geekbuluo.com/yuanbaojilu-min.png' />
+            <View>操作记录</View>
+          </View>
+          <View className='at-icon at-icon-play'></View>
+        </View>
+        <View
+          className='item'
+          onClick={() => Taro.navigateTo({ url: '/pages/my/friends/index' })}
+        >
+          <View className='left'>
+            <Image src='http://cdn.geekbuluo.com/yuanbaojilu-min.png' />
+            <View>我的好友</View>
           </View>
           <View className='at-icon at-icon-play'></View>
         </View>
@@ -46,16 +61,6 @@ function Index() {
           <View className='left'>
            <Image src='http://cdn.geekbuluo.com/yijianxiang-min.png' />
             <View>意见反馈</View>
-          </View>
-          <View className='at-icon at-icon-play'></View>
-        </View>
-        <View
-          className='item'
-          onClick={() => Taro.navigateTo({ url: '/pages/my/aboutus/index' })}
-        >
-          <View className='left'>
-            <Image src='http://cdn.geekbuluo.com/guanyuwomen-min.png' />
-            <View>关于</View>
           </View>
           <View className='at-icon at-icon-play'></View>
         </View>

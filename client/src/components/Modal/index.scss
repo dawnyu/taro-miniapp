@@ -1,0 +1,44 @@
+@import "~taro-ui/dist/style/components/modal.scss";
+
+  .atmodal-content {
+    position: relative;
+    z-index: 1004;
+    height: 800px;
+    text-align: center;
+    background: transparent;
+
+    &-label {
+      color: rgb(253, 195, 5);
+      text-align: center;
+      width: 500px;
+      height: 450px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-image: url(http://cdn.geekbuluo.com/25e6e2982285693c4b91b015c6adb573-min.png);
+      background-size: 100% 100%;
+
+      &-text {
+        font-size: 38px;
+        font-weight: bold;
+
+        // font-family: ACGN-PaoPaoGB;
+        .icon-yuanbao {
+          font-size: 48px !important;
+        }
+      }
+    }
+
+    .icon-yuanbao {
+      font-size: 40px;
+    }
+
+    .modal-close {
+      margin-top: 150px;
+
+      .icon-guanbi {
+        font-size: 50px;
+        color: rgb(221, 172, 12);
+      }
+    }
+  }

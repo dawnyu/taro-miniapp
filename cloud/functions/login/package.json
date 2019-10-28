@@ -9,7 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "dayjs": "^1.8.16",
     "wx-server-sdk": "latest"
   }
 }
