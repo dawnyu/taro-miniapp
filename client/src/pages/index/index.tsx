@@ -70,7 +70,6 @@ function Index() {
   }, [countDown])
 
   const openRedEnvelopeHandle = async (click) => {
-    console.log(112, click)
     const {data: current} = await systemTime()
     const lastTime = Taro.getStorageSync('countDownTime')
     if (click) {
@@ -111,15 +110,6 @@ function Index() {
           <View className='userAvatarUrl'><OpenData type='userAvatarUrl'/></View>
           <Text className='user-balance-value'>{userInfo.balance}</Text>答题币
         </View>
-        <View className='topic-info'>
-          <Text className='topic-title'>{QuestionEnum[qtype]}</Text>
-          <View
-            onClick={() => Taro.navigateTo({ url: '/pages/questionBank/index' })}
-            className='topic-switch'
-          >
-            切换<Text className='at-icon at-icon-chevron-right' />
-          </View>
-        </View>
       </View>
       <View className='content'>
         <View className='red-packet'>
@@ -128,24 +118,34 @@ function Index() {
             src={hongbao1}
           />
           <View className='red-packet-body'>
-            <View className='residue'>剩余答题卡<Text>{userInfo.answersheet}</Text>张</View>
+            <View className='residue'>当前答题卡<Text>{userInfo.answersheet}</Text></View>
           </View>
           <Image
             className='red-packet-bg'
             src={hongbao2}
           />
           <View className='red-packet-btn'>
-            {/* <Button
-              onClick={() => Taro.navigateTo({url: '/pages/answer/index'})}
-            >
-               </Button> */}
             <Image
               className='answer-_btn'
               onClick={() => Taro.navigateTo({ url: '/pages/answer/index' })}
               src='http://cdn.geekbuluo.com/button-min.png' />
-
+            <View className='topic-info'>
+              <Text className='topic-title'>{QuestionEnum[qtype]}</Text>
+              <View
+                onClick={() => Taro.navigateTo({ url: '/pages/questionBank/index' })}
+                className='topic-switch'
+              >
+                切换<Text className='at-icon at-icon-chevron-right' />
+              </View>
+            </View>
           </View>
+         
           <View className='floaticon'>
+            <Image
+              className='sign'
+              onClick={() => Taro.navigateTo({ url: '/pages/mission/index' })}
+              src='http://cdn.geekbuluo.com/qiandao1-min.png' />
+
             <Image
               className={countDown > 0 ? 'open-red' : 'open-red open-red-animate'}
               onClick={() => openRedEnvelopeHandle(countDown === 0)}
@@ -177,13 +177,6 @@ function Index() {
         
       </View>
       <View className='nav'>
-        {/* <View
-          onClick={() => Taro.navigateTo({ url: '/pages/rank/index'})}
-          className='nav-item'
-        >
-          <Image src={hongbaomin} />
-          <View>排行榜</View>
-        </View> */}
         <View
           onClick={() => Taro.navigateTo({ url: '/pages/mission/index' })}
           className='nav-item'
@@ -192,7 +185,7 @@ function Index() {
           <View>签到</View>
         </View>
         <View
-          onClick={() => Taro.navigateTo({ url: '/pages/mission/index' })}
+          onClick={() => Taro.navigateTo({ url: '/pages/friends/index' })}
           className='nav-item'
         >
           <Image src='http://cdn.geekbuluo.com/1bf360a2147943ed1bb863e4f607979a-min.png' />
@@ -243,6 +236,7 @@ function Index() {
 }
 Index.config = {
   disableScroll: true,
+  navigationBarBackgroundColor: '#feab01'
 }
 
 export default observer(Index)

@@ -5,7 +5,11 @@
   height: 100vh;
   padding: 0 4vw;
   overflow: auto;
-  background: linear-gradient(#1D2045 30%, #1D2045, #2C2B40);
+  // background: linear-gradient(#1D2045 30%, #1D2045, #2C2B40);
+  background-image: url(http://cdn.geekbuluo.com/qiandao/bg.png);
+  background-size: 750px auto;
+  background-position-y: -98px;
+  background-repeat: no-repeat;
   .header {
     font-size: 30px;
     height: 80px;
@@ -19,36 +23,47 @@
     box-shadow: 4px 4px 10px rgb(11, 51, 2);
   }
   .body {
+    background: #fff;
+    border-radius: 10px 10px 0 0;
+    overflow: hidden;
+
     .record-item {
-      height: 120px;
       margin-bottom: 10px;
-      padding: 0 20px;
+      height: 80px;
+      line-height: 80px;
       font-size: 28px;
-      color: #1D2045;
-      background: #fff;
-      border-radius: 5px;
+      padding: 0 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      box-shadow: 0px 1px 10px -5px #999;
+
       .left {
-        view:nth-child(2) {
-          font-size: 32px;
-        }
+        color: #666;
+        width: 220px;
+        flex-shrink: 0;
       }
+
+      .center {
+        color: #999;
+      }
+
       .right {
-        font-size: 30px;
-        .over {
+        .in {
           color: rgb(13, 168, 8);
         }
-        .check {
-          color: rgb(250, 3, 3);
+
+        .out {
+          color: rgb(238, 8, 8);
         }
       }
     }
-  }
 
-  .icon-yuanbao {
-    font-size: 40px;
+    .bottom {
+      color: #999;
+      font-size: 26px;
+      margin: 20px 0;
+      text-align: center;
+    }
   }
-
 }

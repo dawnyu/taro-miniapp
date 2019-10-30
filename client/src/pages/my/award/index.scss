@@ -5,51 +5,56 @@
   height: 100vh;
   padding: 0 4vw;
   overflow: auto;
-  background: linear-gradient(#1D2045 30%, #1D2045, #2C2B40);
+  // background: linear-gradient(#1D2045 30%, #1D2045, #2C2B40);
+  background-image: url(http://cdn.geekbuluo.com/qiandao/bg.png);
+  background-size: 750px auto;
+  background-position-y: -98px;
+  background-repeat: no-repeat;
+
   .header {
     width: 100%;
     display: flex;
     align-items: center;
-    height: 100px;
+    height: 80px;
     color: #fff;
-    text {
-      color: #F8D253;
-    }
     .balance {
       margin: 0 10px;
     }
   }
-  .icon-yuanbao {
-    font-size: 40px;
-  }
 
   .body {
+    background: #fff;
+    border-radius: 10px 10px 0 0;
+    overflow: hidden;
+    .day-title {
+      height: 55px;
+      line-height: 55px;
+      width: 200px;
+      margin: 20px 0;
+      background-color: #F8D253;
+      color: white;
+      border-radius: 0 27px 27px 0;
+
+    }
     .record-item {
-      height: 120px;
       margin-bottom: 10px;
-      padding: 0 20px;
+      height: 80px;
+      line-height: 80px;
       font-size: 28px;
-      color: #1D2045;
-      background: #fff;
-      border-radius: 5px;
+      padding: 0 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      box-shadow: 0px 1px 10px -5px #999;
       .left {
-        view:nth-child(2) {
-          font-size: 32px;
-        }
+        color: #666;
+        width: 250px;
+        flex-shrink: 0;
+      }
+      .center {
+        color: #999;
       }
       .right {
-        font-size: 39px;
-        .icon-yuanbao {
-          color: #F8D253;
-          margin-left: 6px;
-        }
-        .unit {
-          font-size: 28px;
-          margin-left: 4px;
-        }
         .in {
           color: rgb(13, 168, 8);
         }
@@ -59,10 +64,12 @@
         }
       }
     }
+    .bottom {
+      color: #999;
+      font-size: 26px;
+      margin: 20px 0;
+      text-align: center;
+    }
   }
  
-  .icon-yuanbao {
-    font-size: 40px;
-  }
-
 }

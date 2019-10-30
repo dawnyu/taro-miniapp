@@ -14,7 +14,7 @@ function Index() {
       }
       return {
         title: '一起来答题吧',
-        path: `/pages/index/index?id=${userInfo.openid}`,
+        path: `/pages/index/index?superior=${userInfo.openid}`,
         imageUrl: 'http://cdn.geekbuluo.com/share_image%20%281%29.jpg'
       }
     }
@@ -45,22 +45,25 @@ function Index() {
           </View>
           <View className='right'>
             <View>
-                <Text className='iconfont icon-yuanbao' />{item.balance}
+                {item.balance}答题币
             </View>
             </View>
         </View>)}
         {list && list.length === 0 &&
         <View className='nofriends'>
           <View> 还没有好友哦~ </View>
-          <Button openType='share'>添加好友</Button>
         </View>}
+        <Button
+          className='share'
+          openType='share'>添加好友得3-10张答题卡</Button>
       </View>
     </View>
   )
 }
 
 Index.config = {
-  navigationBarTitleText: '好友列表'
+  navigationBarTitleText: '好友列表',
+  navigationBarBackgroundColor: '#feab01'
 }
 
 export default observer(Index)

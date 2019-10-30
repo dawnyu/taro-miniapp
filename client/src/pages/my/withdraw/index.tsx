@@ -27,12 +27,12 @@ function Index() {
   
    return (
     <View className='container'>
-       {records && records.length && 
+       {/* {records && records.length && 
         <View
           onClick={setClipboardData}
           className='header'>
           <Text>添加客服微信审核</Text>
-       </View>}
+       </View>} */}
       <View className='body'>
         {
           records && records.map(item =>
@@ -40,9 +40,9 @@ function Index() {
             className='record-item'
             key={item.id}>
             <View className='left'>
-              <View>{item.tradeTime}</View>
               <View>{TradeEnum[item.type * 1]}</View>
             </View>
+            <View className='center'>{item.tradeTime}</View>
             <View className='right'>
                 <Text className={item.check === 0 ? 'check' : 'over'}>{['待审核', '已到账'][item.check]}</Text>
             </View>
@@ -54,7 +54,8 @@ function Index() {
 }
 
 Index.config = {
-  navigationBarTitleText: '兑换记录'
+  navigationBarTitleText: '兑换记录',
+  navigationBarBackgroundColor: '#feab01'
 }
 
 export default Index

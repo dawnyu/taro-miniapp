@@ -22,18 +22,19 @@ class App extends Component {
    */
   config: Config = {
     pages: [
+      'pages/my/withdraw/index',
       'pages/index/index',
       'pages/questionBank/index',
       'pages/answer/index',
       'pages/redPacket/index',
       'pages/rank/index',
       'pages/mission/index',
+      'pages/friends/index',
       'pages/my/index',
-      'pages/my/withdraw/index',
+      // 'pages/my/withdraw/index',
       'pages/my/suggest/index',
       'pages/my/award/index',
-      'pages/my/friends/index',
-      
+      'pages/my/account/index',
     ],
     permission: {
     },
@@ -46,10 +47,19 @@ class App extends Component {
     cloud: true
   }
 
-  componentDidMount () {
+  async componentDidMount() {
+    const query: any = this.$router.params.query
+    if (query && query.superior) {
+      Taro.setStorage({
+        key: 'superior',
+        data: query.superior,
+      })
+    }
     if (process.env.TARO_ENV === 'weapp') {
       Taro.cloud.init()
     }
+    const { authSetting } = await Taro.getSetting()
+    Taro.setStorageSync('isAuth', authSetting['scope.userInfo'])
   }
 
   componentDidShow () {}

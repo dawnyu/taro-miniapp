@@ -151,7 +151,8 @@ function Index() {
 }
 
 Index.config = {
-  navigationBarTitleText: '答题'
+  navigationBarTitleText: '答题',
+  navigationBarBackgroundColor: '#feab01'
 }
 
 export default observer(Index)

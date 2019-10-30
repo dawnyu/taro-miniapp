@@ -3,42 +3,42 @@
   .atmodal-content {
     position: relative;
     z-index: 1004;
-    height: 800px;
-    text-align: center;
-    background: transparent;
-
-    &-label {
-      color: rgb(253, 195, 5);
+    height: 680px;
+    background-image: url(http://cdn.geekbuluo.com/modal3-min.png);
+    background-size: 100% 600px;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    .title {
+      color: #614AE3;
       text-align: center;
-      width: 500px;
-      height: 450px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-image: url(http://cdn.geekbuluo.com/25e6e2982285693c4b91b015c6adb573-min.png);
-      background-size: 100% 100%;
-
-      &-text {
-        font-size: 38px;
-        font-weight: bold;
-
-        // font-family: ACGN-PaoPaoGB;
-        .icon-yuanbao {
-          font-size: 48px !important;
+      margin-top:40px;
+      font-size: 42px;
+    }
+    .body {
+      color: #333;
+      margin: 60px 20px 20px 40px;
+      font-size: 28px;
+      .item {
+        margin: 30px 0;
+        text {
+          width: 40px;
+          height: 40px;
+          text-align: center;
+          color: #fff;
+          margin-right: 10px;
+          display: inline-block;
+          background-color: #ffc003;
+          border-radius: 50%;
         }
       }
     }
-
-    .icon-yuanbao {
-      font-size: 40px;
-    }
-
-    .modal-close {
-      margin-top: 150px;
-
-      .icon-guanbi {
-        font-size: 50px;
-        color: rgb(221, 172, 12);
-      }
-    }
+  }
+  .close {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    color: rgb(223, 222, 222);
+    font-size: 28px;
   }

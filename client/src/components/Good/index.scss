@@ -31,6 +31,19 @@
       font-size: 36px;
     }
   }
+  .good-image {
+    width: 175rpx;
+    height: 230rpx;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    background: url(http://cdn.geekbuluo.com/100huafei.png);
+    background-size: 100% 100%;
+    border-radius: 10px;
+    margin-top: 30px;
+  }
   .red-packet-title {
     text-align: center;
     color: #333;
@@ -52,7 +65,7 @@
 
   .red-packet-button {
     font-size: 28px;
-    width: 38vw;
+    width: 26vw;
     height: 50px;
     line-height: 50px;
     border-radius: 25px;

@@ -48,7 +48,8 @@ function Index() {
 }
 
 Index.config = {
-  navigationBarTitleText: '选择题库'
+  navigationBarTitleText: '选择题库',
+  navigationBarBackgroundColor: '#feab01'
 }
 
 export default observer(Index)

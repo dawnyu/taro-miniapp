@@ -151,3 +151,12 @@ export const getWithdraw = (): Promise<any> =>
     action: 'getWithdraw',
     data: null,
   })
+
+/**
+* 获取头像
+*/
+export const getUserAvatar = (): Promise<any> =>
+  request.post({
+    action: 'getUserAvatar',
+    data: null,
+  })

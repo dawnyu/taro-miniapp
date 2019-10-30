@@ -1,13 +1,19 @@
-import Taro, { useContext } from '@tarojs/taro'
-import { View, OpenData, Image } from '@tarojs/components'
+import Taro, { useContext, useDidShow, useState } from '@tarojs/taro'
+import { View, OpenData, Image, Text } from '@tarojs/components'
 import { observer } from '@tarojs/mobx'
 import store from '@/store/index'
 import { QuestionEnum } from '@/enum'
+import { getSign } from '@/service/cloud'
 import './index.scss'
 
 function Index() {
-  const { qtype } = useContext(store) as any
-
+  const { qtype, userInfo } = useContext(store) as any
+  const [sign, setSign] = useState()
+  useDidShow(() => {
+    getSign().then(res => {
+      setSign({ ...res.data })
+    })
+  })
   return (
     <View className='container'>
       <View className='header'>
@@ -22,56 +28,65 @@ function Index() {
           <OpenData type='userNickName' />
         </View>
         <View className='user-qtype'>正在使用：[{QuestionEnum[qtype]}]</View>
+        <View className='banner'>
+          <View className='item'>
+            <Text>{userInfo.balance || 0}</Text>
+            <Text>答题币</Text>
+          </View>
+          <View className='item'>
+            <Text>{userInfo.answersheet || 0}</Text>
+            <Text>答题卡</Text>
+          </View>
+          <View className='item'>
+            <Text>{sign.sum || 0}</Text>
+            <Text>连续签到</Text>
+          </View>
+          <View className='item'>
+            <Text>{sign.total || 0}</Text>
+            <Text>累计签到</Text>
+          </View>
+        </View>
       </View>
       <View className='body'>
         <View
           className='item'
-          onClick={() => Taro.navigateTo({ url: '/pages/my/withdraw/index' })}
-        >
-          <View className='left'>
-            <Image src='http://cdn.geekbuluo.com/datizhuanqian.png' />
-            <View>权益记录</View>
-          </View>
-          <View className='at-icon at-icon-play'></View>
+          onClick={() => Taro.navigateTo({ url: '/pages/my/withdraw/index' })}>
+          <Image className='image' src='http://cdn.geekbuluo.com/huodong.png'/>
+          <Text>兑换记录</Text>
         </View>
         <View
           className='item'
-          onClick={() => Taro.navigateTo({ url: '/pages/my/award/index' })}
-        >
-          <View className='left'>
-            <Image src='http://cdn.geekbuluo.com/yuanbaojilu-min.png' />
-            <View>操作记录</View>
-          </View>
-          <View className='at-icon at-icon-play'></View>
+          onClick={() => Taro.navigateTo({ url: '/pages/my/award/index' })}>
+          <Image className='image' src='http://cdn.geekbuluo.com/jifen.png' />
+          <Text>收支记录</Text>
+        </View>
+        <View
+          className='item'>
+          <Image
+            className='image'
+          src='http://cdn.geekbuluo.com/zhanghao.png'
+            onClick={() => Taro.navigateTo({ url: '/pages/my/account/index' })}
+            />
+          <Text>收款设置</Text>
         </View>
         <View
           className='item'
-          onClick={() => Taro.navigateTo({ url: '/pages/my/friends/index' })}
-        >
-          <View className='left'>
-            <Image src='http://cdn.geekbuluo.com/yuanbaojilu-min.png' />
-            <View>我的好友</View>
-          </View>
-          <View className='at-icon at-icon-play'></View>
+          onClick={() => Taro.navigateTo({ url: '/pages/my/suggest/index' })}>
+          <Image className='image' src='http://cdn.geekbuluo.com/yijianjianyi.png' />
+          <Text>意见反馈</Text>
         </View>
-        <View
-          className='item'
-          onClick={() => Taro.navigateTo({ url: '/pages/my/suggest/index' })}
-        >
-          <View className='left'>
-           <Image src='http://cdn.geekbuluo.com/yijianxiang-min.png' />
-            <View>意见反馈</View>
-          </View>
-          <View className='at-icon at-icon-play'></View>
+        <View className='item'>
+          <Image className='image' src='http://cdn.geekbuluo.com/qrcode.png' />
+          <Text>我的海报</Text>
         </View>
       </View>
-      
     </View>
   )
 }
 
 Index.config = {
-  navigationBarTitleText: '我的'
+  navigationBarTitleText: '我的',
+  navigationBarBackgroundColor: '#feab01'
 }
 
 export default observer(Index)

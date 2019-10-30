@@ -15,10 +15,12 @@ function RedPacket({ data }) {
       onClick={() => toRedPacketDetail()}
       className='red-packet-container'
     >
-      <View className='red-packet-image'>
-        <View className='red-packet-type'>现金红包</View>
-        <View className='red-packet-value'>{data.value}元</View>
-      </View>
+      {(data.type === 3 || data.type === 4 || data.type === 6) &&
+        <View className='red-packet-image'>
+          <View className='red-packet-type'>现金红包</View>
+          <View className='red-packet-value'>{data.value}元</View>
+        </View>}
+      {data.type === 5 && <View className='good-image'></View>}
       <View className='red-packet-title'>
         {data.title}
       </View>

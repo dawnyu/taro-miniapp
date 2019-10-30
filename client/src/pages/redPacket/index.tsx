@@ -32,7 +32,8 @@ function RedPacket() {
     <View className='container'>
       <View className='red-packet-container'>
         <View className='red-packet-image'>
-          <Image src='http://cdn.geekbuluo.com/xiangqinghongbao.png' />
+          {/* <Image src='http://cdn.geekbuluo.com/xiangqinghongbao.png' /> */}
+          <Image src='http://cdn.geekbuluo.com/100huafei.png' />
         </View>
         <View className='red-packet-title'>{details.title}</View>
         <View className='red-packet-price'>
@@ -60,5 +61,8 @@ function RedPacket() {
 }
 RedPacket.options = {
   addGlobalClass: true
+}
+RedPacket.config = {
+  navigationBarBackgroundColor: '#F3AD3D',
 }
 export default observer(RedPacket);

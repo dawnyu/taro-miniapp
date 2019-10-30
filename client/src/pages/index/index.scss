@@ -5,31 +5,16 @@
 .container {
   height: 100vh;
   overflow: auto;
-  background: linear-gradient(#1D2045 30%, #1D2045, #2C2B40);
+  // background: linear-gradient(#1D2045 30%, #1D2045, #2C2B40);
+  background: url(http://cdn.geekbuluo.com/qiandao/bg.png);
+  background-size: 750px auto;
+  background-position-y: -98px;
+  background-repeat: no-repeat;
   .header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-top: 20px;
-    .topic-info {
-      display: flex;
-      margin-right: 20px;
-      .topic-title {
-        color: #F8D253;
-        font-size: 28px;
-      }
-      .topic-switch {
-        height: 38px;
-        line-height: 38px;
-        display: flex;
-        font-size: 26px;
-        margin-left: 12px;
-        padding: 0px 6px;
-        align-items: center;
-        background: #F8D253;
-        border-radius: 25px;
-      }
-    }
     .user-balance {
       color: rgb(248, 6, 6);
       line-height: 50px;
@@ -54,8 +39,8 @@
   }
   
   .content {
-    width: 94vw;
-    padding: 0 3vw;
+    width: 100vw;
+    // padding: 0 3vw;
     margin-bottom: 135px;
     margin-top: 30px;
     .red-packet {
@@ -68,6 +53,14 @@
     .floaticon {
       position: relative;
       z-index: 20;
+      .sign {
+         width: 88px;
+         height: 66px;
+         position: absolute;
+         right: 50px;
+         top: 40px;
+         animation: 'red-p-ani'2s linear infinite;
+      }
       .rank {
         width: 66px;
         height: 66px;
@@ -104,7 +97,7 @@
          width: 55px;
          height: 66px;
          position: absolute;
-         right: 60px;
+         right: 70px;
          top: 160px;
        }
 
@@ -115,14 +108,14 @@
        .open-red-text,
        .red-packet-countdown {
          position: absolute;
-         right: 60px;
+         right: 70px;
          top: 230px;
          font-size: 22px;
          color: rgb(248, 73, 4);
        }
 
        .red-packet-countdown {
-         right: 45px;
+         right: 55px;
        }
        }
 
@@ -165,20 +158,21 @@
       width: 92%;
       left: 4%;
       border-radius: 10px;
-      top: 30px;
+      top: 10px;
       height: 360px;
-      background: #FCEEE7;
+      background-color: rgb(252, 238, 231);
       text-align: center;
-      background-image: url(http://cdn.geekbuluo.com/bg-min.png);
+      background-image: url(http://cdn.geekbuluo.com/yiqihai-min.png);
       background-size: 300px 170px;
       background-repeat: no-repeat;
-      background-position: 170px 90px;
+      background-position: 170px 100px;
      .residue {
-       margin: 10px auto;
-       color: rgb(252, 7, 7);
+       margin: 20px auto;
+       color: #1D2045;
        text {
          font-size: 38px;
          margin: 0 5px;
+         color:red
        }
      }
     }
@@ -188,25 +182,75 @@
     }
     .red-packet-btn {
       z-index: 14;
-      bottom: 50px;
+      bottom: 20px;
       text-align: center;
       .answer-_btn {
         width: 360px;
         height: 100px;
         border-radius: 50px;
+        animation: 'nswer-_btn-ani' 1s linear infinite;
+      }
+      @keyframes nswer-_btn-ani {
+        0% {
+          transform: rotate(3deg);
+        }
+        15% {
+          transform: rotate(0deg);
+        }
+        30% {
+          transform: rotate(-3deg);
+        }
+        45% {
+          transform: rotate(0deg);
+        }
+        60% {
+           transform: rotate(3deg);
+        }
+
+        75% {
+          transform: rotate(0deg) scale(1.05);
+        }
+
+        100% {
+          transform: rotate(0deg) scale(1);
+        }
+      }
+    }
+    .topic-info {
+      display: flex;
+      justify-content: center;
+      margin-top: 15px;
+      .topic-title {
+        color: #F8D253;
+        font-size: 28px;
+      }
+
+      .topic-switch {
+        height: 38px;
+        line-height: 38px;
+        display: flex;
+        font-size: 26px;
+        margin-left: 12px;
+        padding: 0px 6px;
+        align-items: center;
+        background: #F8D253;
+        border-radius: 25px;
       }
     }
     .red-packet-convert {
       display: flex;
       flex-wrap: wrap;
-      margin: 0 10px;
+      padding: 0 20px;
       justify-content: space-between;
+      background: #fff;
     }
   }
   .header-line {
     font-size: 28px;
-    color: #fff;
+    // color: #fff;
     padding-left: 10px;
+    font-weight: bold;
+    color: #333;
     position: relative;
     margin: 20px 0;
     &::before {
@@ -224,11 +268,13 @@
     display: flex;
     width: 750px;
     bottom: 0;
-    color: #fff;
+    // color: #fff;
     left: 0;
     position: fixed;
-    background-color: #241F44;
+    // background-color: #241F44;
+    background-color: #fff;
     border-radius: 6px 6px 0 0;
+    box-shadow: 0px -1px 10px -4px #ccc;
     z-index: 9;
     &-item {
       width: 240px;
@@ -260,7 +306,6 @@
     left: 0;
     top: 0;
     right: 0;
-    // background-image: url(http://cdn.geekbuluo.com/kaimen.png);
     background-repeat: no-repeat;
     width: 100vw;
     height: 100vh;

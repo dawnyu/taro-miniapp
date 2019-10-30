@@ -5,7 +5,11 @@
   height: 100vh;
   padding: 0 4vw;
   overflow: auto;
-  background: linear-gradient(#1D2045 30%, #1D2045, #2C2B40);
+  // background: linear-gradient(#1D2045 30%, #1D2045, #2C2B40);
+  background-image: url(http://cdn.geekbuluo.com/qiandao/bg.png);
+  background-size: 750px auto;
+  background-position-y: -98px;
+  background-repeat: no-repeat;
   .header {
     width: 100%;
     display: flex;
@@ -75,15 +79,16 @@
       color: #fff;
       margin-top: 30vh;
       text-align: center;
-      button {
-        margin-top: 30px;
-        width: 180px;
-        font-size: 28px;
-        color: #2C2B40;
-        background: linear-gradient(to right, rgb(252, 206, 3), #cf9904);
-        height: 50px;
-        line-height: 50px;
-      }
+    }
+    .share {
+      margin-top: 30px;
+      width: 180px;
+      font-size: 28px;
+      border-color: transparent;
+      color: white;
+      background: linear-gradient(to right, rgb(123, 152, 250), #3946f1);
+      height: 50px;
+      line-height: 50px;
     }
   }
  
