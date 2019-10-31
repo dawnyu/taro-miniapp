@@ -22,7 +22,6 @@ class App extends Component {
    */
   config: Config = {
     pages: [
-      'pages/my/withdraw/index',
       'pages/index/index',
       'pages/questionBank/index',
       'pages/answer/index',
@@ -31,7 +30,7 @@ class App extends Component {
       'pages/mission/index',
       'pages/friends/index',
       'pages/my/index',
-      // 'pages/my/withdraw/index',
+      'pages/my/withdraw/index',
       'pages/my/suggest/index',
       'pages/my/award/index',
       'pages/my/account/index',

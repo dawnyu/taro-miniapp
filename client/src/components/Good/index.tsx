@@ -7,7 +7,7 @@ function RedPacket({ data }) {
     Taro.navigateTo({
       url: `/pages/redPacket/index?id=${data.id}&type=${data.type}
       &goodDetails=${data.goodDetails}&price=${data.price}
-      &value=${data.value}&title=${data.title}&inventory=${data.inventory}`
+      &value=${data.value}&title=${data.title}&inventory=${data.inventory}&image=${data.image}`
     })
   }
   return (

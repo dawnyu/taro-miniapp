@@ -2,7 +2,6 @@ import Taro, { useContext } from '@tarojs/taro'
 import { View} from '@tarojs/components'
 import { observer } from '@tarojs/mobx'
 import store from '@/store/index'
-// import { QuestionEnum } from '@/enum'
 import QBlock from '@/components/QBlock/index'
 import './index.scss'
 

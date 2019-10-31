@@ -8,6 +8,7 @@ function RedPacket() {
   const { userInfo, trade } = useContext(store) as any
   const router = useRouter()
   const [details, setDetails] = useState()
+  console.log(33, router.params)
   useDidShow(() => {
     setDetails({
       ...router.params,
@@ -32,14 +33,12 @@ function RedPacket() {
     <View className='container'>
       <View className='red-packet-container'>
         <View className='red-packet-image'>
-          {/* <Image src='http://cdn.geekbuluo.com/xiangqinghongbao.png' /> */}
-          <Image src='http://cdn.geekbuluo.com/100huafei.png' />
+          <Image src={details.image} />
         </View>
         <View className='red-packet-title'>{details.title}</View>
         <View className='red-packet-price'>
           <View>
-            <Text className='iconfont icon-yuanbao' />
-            <Text>{details.price}</Text>
+            <Text>{details.price}答题币</Text>
           </View>
           <Text>剩余{details.inventory}个</Text>
         </View>

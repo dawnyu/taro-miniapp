@@ -9,7 +9,8 @@ function Index() {
 
   useDidShow(async () => {
     const res: any = await getWithdraw()
-    setRecords(res.data)
+    const list = [...res.data, ...res.data, ...res.data, ...res.data]
+    setRecords([...list, ...list, ...list, ...list, ...list])
   })
   const setClipboardData = () => {
     Taro.showModal({
@@ -27,12 +28,11 @@ function Index() {
   
    return (
     <View className='container'>
-       {/* {records && records.length && 
-        <View
-          onClick={setClipboardData}
-          className='header'>
-          <Text>添加客服微信审核</Text>
-       </View>} */}
+      <View className='header'>
+        <Text>商品名称</Text>
+        <Text>兑换时间</Text>
+        <Text>审核状态</Text>
+      </View>
       <View className='body'>
         {
           records && records.map(item =>
@@ -48,6 +48,7 @@ function Index() {
             </View>
           </View>)
         }
+        <View className='bottom'>——我是有底线的——</View>
       </View>
     </View>
   )
