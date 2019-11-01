@@ -2,18 +2,22 @@ import Taro, { useRouter, useDidShow, useState, useContext } from '@tarojs/taro'
 import store from '@/store/index'
 import { observer } from '@tarojs/mobx'
 import { View, Text, Image, Button } from '@tarojs/components'
+import storage from '@/storage'
 import './index.scss'
 
 function RedPacket() {
   const { userInfo, trade } = useContext(store) as any
   const router = useRouter()
   const [details, setDetails] = useState()
-  console.log(33, router.params)
+  const [buttonText, setButtonText] = useState('')
   useDidShow(() => {
+    const goods = storage.get('goods')
+    const good = goods.find(item => item.id === +router.params.id)
     setDetails({
-      ...router.params,
-      goodDetails: router.params.goodDetails && router.params.goodDetails.split('<br>')
+      ...good,
+      goodDetails: good.goodDetails && good.goodDetails.split('<br>')
     })
+    setButtonText(`${good.price}答题币${good.withdraw > 0 ? `+${good.withdraw}兑换卡` : ''}`)
   })
   const conversion = async () => {
     try {
@@ -34,12 +38,17 @@ function RedPacket() {
       <View className='red-packet-container'>
         <View className='red-packet-image'>
           <Image src={details.image} />
+          {
+            (details.type === 3 || details.type === 4 || details.type === 6) &&
+            <View className='float'>
+              <View className='type'>现金红包</View>
+              <View className='value'>{details.value}元</View>
+            </View>
+          }
         </View>
         <View className='red-packet-title'>{details.title}</View>
         <View className='red-packet-price'>
-          <View>
-            <Text>{details.price}答题币</Text>
-          </View>
+          <View>{details.price}答题币 {details.withdraw > 0 ? <Text>消耗{details.withdraw}答题卡</Text> : null} </View>
           <Text>剩余{details.inventory}个</Text>
         </View>
       </View>
@@ -51,9 +60,8 @@ function RedPacket() {
         </View>
       </View>
       <View className='red-packet-button'>
-        {userInfo.newuser && details.type * 1 === 3 && <Button onClick={() => conversion()}>去兑换</Button>}
         {!userInfo.newuser && details.type * 1 === 3 && <Button className='disable-btn'>新用户才能兑换</Button>}
-        {(details.type * 1 === 4 || details.type * 1 === 5 || details.type * 1 === 6) && <Button onClick={() => conversion()}>去兑换</Button>}
+        {!(!userInfo.newuser && details.type * 1 === 3) && <Button onClick={() => conversion()}>{buttonText}</Button>}}
       </View>
     </View>
   )

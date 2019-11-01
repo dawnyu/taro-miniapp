@@ -6,40 +6,61 @@ import { observer } from '@tarojs/mobx'
 import store from '@/store/index'
 import Good from '@/components/Good'
 import { QuestionEnum, TradeEnum } from '@/enum'
+import { getUserinfo } from '@/utils'
+import moment from 'moment'
 import hongbao1 from '@/assets/images/hongbao1.png'
 import hongbao2 from '@/assets/images/hongbao2.png'
 import feidie from '@/assets/images/feidie-min.png'
 import qiandao from '@/assets/images/qiandao.png'
-import { systemTime } from '@/service/cloud'
+import { systemTime, openRedEnvelope, getConfig } from '@/service/cloud'
 import './index.scss'
 
 function Index() {
   const {
     userInfo,
-    login,
     getUser,
     qtype,
     goods,
     getGoods,
     trade,
+    login,
   } = useContext(store) as any
   useShareAppMessage(() => {
     return {
       title: '这个题好难啊，你能帮帮我吗？',
       path: `/pages/index/index?superior=${userInfo.openid}`,
-      imageUrl: 'http://cdn.geekbuluo.com/share_image%20%281%29.jpg'
+      imageUrl: 'http://cdn.geekbuluo.com/20191101012651-min.jpg'
     }
   })
 
   const [showOpenRedEnvelopeModal, setShowOpenRedEnvelopeModal] = useState(false)
   const [firstScreen, setFirstScreen] = useState(false)
-  const [openRedEnvelope, setOpenRedEnvelope] = useState(0)
-
+  const [award, setAward] = useState(0)
   const [countDown, setCountDown] = useState(0)
   const [countDownText, setCountDownText] = useState('')
   const COUNTDOWN =2 * 60 * 60
 
-  const router:any = useRouter()
+  useDidShow(async () => {
+    const user = await getUser()
+    const config = await getConfig()
+    const isAuth = Taro.getStorageSync('isAuth')
+    if (!user.data) {
+      //如果用户不存在
+      login({ superior: Taro.getStorageSync('superior') }) //创建临时用户，只有openid
+    }
+    const isNewUser = config.data.open === 0 && !isAuth && !user.userid
+    if (isNewUser) {
+      const firsthb = await Taro.getStorageSync('firsthb')
+      if (firsthb && !moment(firsthb).isSame(new Date(), 'day')) {
+        setFirstScreen(true)
+        Taro.setStorage({ key: 'firsthb', data: '' })
+      } else if (!firsthb) {
+        setFirstScreen(true)
+      }
+    }
+    getGoods()
+    openRedEnvelopeHandle(false)
+  })
 
   useEffect(() => {
     function full(val) {
@@ -79,28 +100,35 @@ function Index() {
         data: current
       })
       const redPack = Math.floor(1 + Math.random() * 5)
-      setOpenRedEnvelope(+redPack)
+      setAward(+redPack)
       setShowOpenRedEnvelopeModal(true)
       trade({ id: userInfo._id, type: TradeEnum.定时红包, value: redPack })
     } else if (lastTime && current - lastTime < COUNTDOWN * 1000) {
       setCountDown(COUNTDOWN - Math.floor((current - lastTime) / 1000))
     }
   }
-
-  useDidShow(async () => {
-    const user = await getUser()
-    setFirstScreen(!user.id)
-    getGoods()
-    openRedEnvelopeHandle(false)
-  })
-
-  const getUserinfo = async({ detail }) => {
-    const redPack = Math.floor(1 + Math.random() * 0.2 * 100)
+  const closeFirstScreen = () => {
     setFirstScreen(false)
-    setOpenRedEnvelope(+redPack)
-    setShowOpenRedEnvelopeModal(true)
-    await login({ ...detail.userInfo })
-    trade({ id: userInfo._id, superior: router.superior, type: TradeEnum.开门红包, value: redPack })
+    Taro.setStorageSync('firsthb', moment().format('YYYY-MM-DD HH:mm:ss'))
+  }
+
+  //关闭红包授权
+  const closeOpenHandle = (userinfo) => {
+    getUserinfo(userinfo, async () => {
+      const { data, message, status } = await openRedEnvelope()
+      if (status === 0) {
+        setAward(data)
+        setFirstScreen(false)
+        setShowOpenRedEnvelopeModal(true)
+        getUser()
+      } else {
+        Taro.showToast({
+          title: message,
+          icon: 'none'
+        })
+      }
+
+    })
   }
 
   return (
@@ -159,11 +187,14 @@ function Index() {
               src='http://cdn.geekbuluo.com/paihangbang-min.png'/>
             <Text className='rank-text'>排行榜</Text>
 
-            <Image
-              className='friend'
-              onClick={() => Taro.navigateTo({ url: '/pages/rank/index' })}
-              src='http://cdn.geekbuluo.com/1bf360a2147943ed1bb863e4f607979a-min.png' />
-            <Text className='friend-text'>赚答题卡</Text>
+            <Button
+              className='share'
+              openType='share'>
+              <Image
+                className='friend'
+                src='http://cdn.geekbuluo.com/1bf360a2147943ed1bb863e4f607979a-min.png' />
+              </Button>
+            <Text className='friend-text'>赚答题币</Text>
           </View>
         </View>
         {goods && goods.length > 0 &&  <View className='header-line'>0元免费换</View>}
@@ -204,13 +235,17 @@ function Index() {
         <View
           className='first-screen'
         >
-          <Image src='http://cdn.geekbuluo.com/kaimen.png' />
+          <Text className='text'>幸运奖励</Text>
+          <Text className='text1'>最高获得20答题币</Text>
           <Button
             openType='getUserInfo'
-            onGetUserInfo={getUserinfo}
+            onGetUserInfo={closeOpenHandle}
             type='primary'
             lang='zh_CN'
           />
+          <View
+            className='close-first-screen'
+            onClick={() => closeFirstScreen()}>点击关闭</View>
         </View>
      }
      {
@@ -222,7 +257,7 @@ function Index() {
           <View className='atmodal-content'>
             <View className='atmodal-content-label'>
               <View className='atmodal-content-label-text'>
-                  恭喜您获得<Text>{openRedEnvelope}</Text>答题币
+                  恭喜您获得<Text>{award}</Text>答题币
               </View>
             </View>
             <View

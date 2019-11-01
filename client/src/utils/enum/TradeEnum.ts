@@ -11,6 +11,6 @@ export enum TradeEnum {
   '大转盘消耗' = 9,
   '看视频收入' = 10,
   '邀请好友奖励' = 11,
-  '好友收入分成' = 12,
+  '好友收入提成' = 12,
 }
 export default TradeEnum

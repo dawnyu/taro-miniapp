@@ -82,7 +82,7 @@ async function Index() {
       visible: true,
       title: '签到规则',
       text: ['每天只能签到一次',
-            '签到会随机获得答题币和答题卡',
+            '连续签到就有机会获得答题币和答题卡',
             '连续签到7天瓜分100000答题币',
             '如发现作弊，清空答题币和答题卡'],
       close: () => {
@@ -108,7 +108,7 @@ async function Index() {
             <Text>0天</Text>
             <Text>1天</Text>
             <Text>2天
-              <Text className='tip-pop'>20积分</Text>
+              <Text className='tip-pop'>20答题币</Text>
             </Text>
             <Text>3天</Text>
             <Text>4天</Text>

@@ -13,9 +13,9 @@ function Index() {
       if (res.from === 'button') {
       }
       return {
-        title: '一起来答题吧',
+        title: '来跟我一起答题呀>.<',
         path: `/pages/index/index?superior=${userInfo.openid}`,
-        imageUrl: 'http://cdn.geekbuluo.com/share_image%20%281%29.jpg'
+        imageUrl: 'http://cdn.geekbuluo.com/20191101012651-min.jpg'
       }
     }
   })
@@ -28,6 +28,9 @@ function Index() {
   })
   return (
     <View className='container'>
+      <Button
+        className='share'
+        openType='share'>推荐好友得答题币和兑换卡</Button>
       <View className='header-line'>
         <Text>好友昵称</Text>
         <Text>带来收益</Text>
@@ -45,7 +48,7 @@ function Index() {
           </View>
           <View className='right'>
             <View>
-                {item.balance}答题币
+                {item.superiorEarnings || 0}答题币
             </View>
             </View>
         </View>)}
@@ -53,9 +56,6 @@ function Index() {
         <View className='nofriends'>
           <View> 还没有好友哦~ </View>
         </View>}
-        <Button
-          className='share'
-          openType='share'>添加好友得3-10张答题卡</Button>
       </View>
     </View>
   )

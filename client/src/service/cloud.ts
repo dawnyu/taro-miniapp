@@ -160,3 +160,23 @@ export const getUserAvatar = (): Promise<any> =>
     action: 'getUserAvatar',
     data: null,
   })
+
+/**
+* 开红吧
+*/
+export const openRedEnvelope = (): Promise<any> =>
+  request.post({
+    action: 'openRedEnvelope',
+    data: null,
+  })
+
+/**
+* 获取配置
+*/
+export const getConfig = (): Promise<any> =>
+  request.post({
+    action: 'getConfig',
+    data: null,
+  })
+
+

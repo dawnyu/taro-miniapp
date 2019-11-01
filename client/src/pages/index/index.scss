@@ -49,6 +49,32 @@
       margin: 0 auto;
       height: 560px;
     }
+    .friend {
+      width: 76px;
+      height: 76px;
+      animation: 'red-p-ani'2s linear infinite;
+    }
+
+    .friend-text {
+      position: absolute;
+      left: 50px;
+      top: 115px;
+      font-size: 22px;
+      color: rgb(248, 73, 4);
+    }
+    .share {
+       position: absolute;
+       left: 30px;
+       top: 40px;
+       width: 120px;
+       background: transparent;
+       border: none;
+       height: 120px;
+       &::after {
+         content: "";
+         border: none;
+       }
+    }
     .floaticon {
       position: relative;
       z-index: 20;
@@ -76,23 +102,7 @@
         font-size: 22px;
         color: rgb(248, 73, 4);
       }
-       .friend {
-         width: 66px;
-         height: 66px;
-         position: absolute;
-         left: 50px;
-         top: 40px;
-         animation: 'red-p-ani'2s linear infinite;
-       }
-
-       .friend-text {
-         position: absolute;
-         left: 50px;
-         top: 105px;
-         font-size: 22px;
-         color: rgb(248, 73, 4);
-       }
-       .open-red {
+      .open-red {
          width: 55px;
          height: 66px;
          position: absolute;
@@ -305,22 +315,42 @@
     left: 0;
     top: 0;
     right: 0;
+    background-image: url(http://cdn.geekbuluo.com/kaimen.png);
+    background-size: 650px 740px;
     background-repeat: no-repeat;
+    background-position: 50% 30%;
     width: 100vw;
     height: 100vh;
-    z-index: 1000;
-    text-align: center;
+    z-index: 9999;
     background-color: rgba(0, 0, 0, 0.651);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-    image {
-      width: 600px;
-      height: 674px;
-      margin: 20vh auto;
+    .close-first-screen {
+      position: absolute;
+      top: 70vh;
+      font-size: 28px;
+      color: rgb(179, 178, 178);
+    }
+
+    .text {
+      color: #f7b603;
+      position: absolute;
+      top: 20vh;
+      font-size: 48px;
+    }
+
+    .text1 {
+      color: #f7b603;
+      position: absolute;
+      top: 52vh;
+      font-size: 32px;
     }
 
     button {
-      width: 600px;
-      height: 600px;
+      width: 400px;
+      height: 500px;
       position: absolute;
       border-radius: 50%;
       opacity: 0;

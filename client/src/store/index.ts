@@ -1,5 +1,6 @@
 import Taro, { createContext } from '@tarojs/taro'
 import { observable, action, decorate, runInAction } from 'mobx'
+import storage from '@/storage'
 import {
   update,
   getGoods,
@@ -31,7 +32,7 @@ class Index {
           this.userInfo = { ...res.data }
         }
       })
-      return this.userInfo
+    return this.userInfo
     } catch (error) {
       throw new Error(error.message)
     }
@@ -87,6 +88,7 @@ class Index {
       await this.getUser()
       Taro.hideLoading()
     } else {
+      Taro.hideLoading()
       throw new Error('更新失败')
     }
   }
@@ -100,10 +102,16 @@ class Index {
   }
 
   async getGoods() {
-    const { data } = await getGoods()
-    runInAction(() => {
-      this.goods = data || []
-    })
+    const localGoods = storage.get('goods')
+    if (localGoods) {
+      this.goods = localGoods
+    } else {
+      const { data } = await getGoods()
+      runInAction(() => {
+        this.goods = data || []
+      })
+      storage.set('goods', data, 60 * 24)
+    }
   }
 }
 

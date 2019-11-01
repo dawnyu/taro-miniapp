@@ -10,6 +10,38 @@
   background-size: 750px auto;
   background-position-y: -98px;
   background-repeat: no-repeat;
+  .share {
+    margin-top: 30px;
+    width: 580px;
+    font-size: 28px;
+    border-color: transparent;
+    color: white;
+    background: linear-gradient(to right, rgb(250, 91, 91), #f81c15);
+    height: 80px;
+    line-height: 80px;
+    animation: 'share-ani'1s linear infinite;
+  }
+  @keyframes share-ani {
+    0% {
+      transform: rotate(0deg) scale(1);
+    }
+
+    25% {
+      transform: rotate(.5deg) scale(1.03);
+    }
+
+    50% {
+      transform: rotate(0deg) scale(1);
+    }
+
+    75% {
+      transform: rotate(-.5deg) scale(1.03);
+    }
+
+    100% {
+      transform: rotate(0deg) scale(1);
+    }
+  }
   .header {
     width: 100%;
     display: flex;
@@ -41,13 +73,16 @@
     }
   }
   .body {
+    height: 82vh;
+    border-radius: 10px;
+    overflow: auto;
     .record-item {
       height: 140px;
       margin-bottom: 20px;
       padding: 0 20px;
       border-radius: 10px;
-      background-color: rgb(78, 75, 37);
-      color: #F9FCF6;
+      background-color: #F9FCF6;
+      // color: #F9FCF6;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -79,16 +114,6 @@
       color: #fff;
       margin-top: 30vh;
       text-align: center;
-    }
-    .share {
-      margin-top: 30px;
-      width: 180px;
-      font-size: 28px;
-      border-color: transparent;
-      color: white;
-      background: linear-gradient(to right, rgb(123, 152, 250), #3946f1);
-      height: 50px;
-      line-height: 50px;
     }
   }
  

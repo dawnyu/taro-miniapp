@@ -23,7 +23,7 @@ function Index() {
     return {
       title: '好友发红包啦，快来答题分红包吧！',
       path: `/pages/index/index?superior=${userInfo.openid}`,
-      imageUrl: 'http://cdn.geekbuluo.com/share_image%20%281%29.jpg'
+      imageUrl: 'http://cdn.geekbuluo.com/20191101012651-min.jpg'
     }
   })
 
@@ -66,7 +66,7 @@ function Index() {
   const answerHanle = async(val) => {
     let random = 0
     if (userInfo.answersheet >= 0) {
-      random = Math.ceil(Math.random() * 5) + 1
+      random = Math.round(Math.random() * 3) + 1
     }
     setAward(random)
     setVisible(true)
@@ -133,8 +133,7 @@ function Index() {
                 </View>
                 : 
                 <View>获得
-                <Text className='atmodal-content-label-value'>{award}</Text>
-                  <Text className='iconfont icon-yuanbao' />
+                <Text className='atmodal-content-label-value'>{award}</Text>答题币
                 </View>
               }
               <View

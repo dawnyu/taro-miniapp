@@ -5,9 +5,7 @@ import './index.scss';
 function RedPacket({ data }) {
   const toRedPacketDetail = () => {
     Taro.navigateTo({
-      url: `/pages/redPacket/index?id=${data.id}&type=${data.type}
-      &goodDetails=${data.goodDetails}&price=${data.price}
-      &value=${data.value}&title=${data.title}&inventory=${data.inventory}&image=${data.image}`
+      url: `/pages/redPacket/index?id=${data.id}`
     })
   }
   return (

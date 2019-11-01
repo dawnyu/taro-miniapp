@@ -38,6 +38,10 @@ function Index() {
             <Text>答题卡</Text>
           </View>
           <View className='item'>
+            <Text>{userInfo.withdraw || 0}</Text>
+            <Text>兑换卡</Text>
+          </View>
+          <View className='item'>
             <Text>{sign.sum || 0}</Text>
             <Text>连续签到</Text>
           </View>

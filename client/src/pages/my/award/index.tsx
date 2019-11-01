@@ -1,5 +1,5 @@
-import Taro, { useState, useContext, useDidShow } from '@tarojs/taro'
-import { View, Text } from '@tarojs/components'
+import Taro, { useState, useContext, useDidShow, useShareAppMessage } from '@tarojs/taro'
+import { View, Text, Button } from '@tarojs/components'
 import moment from 'moment'
 import { geTexchangeList } from '@/service/cloud'
 import { TradeEnum } from '@/enum'
@@ -9,7 +9,17 @@ import './index.scss'
 function Index() {
   const { userInfo } = useContext(store) as any
   const [records, setRecords] = useState()
-
+  useShareAppMessage(res => {
+    {
+      if (res.from === 'button') {
+      }
+      return {
+        title: '来跟我一起答题呀>.<',
+        path: `/pages/index/index?superior=${userInfo.openid}`,
+        imageUrl: 'http://cdn.geekbuluo.com/20191101012651-min.jpg'
+      }
+    }
+  })
   useDidShow(async() => {
     try {
       Taro.showLoading()
@@ -43,6 +53,9 @@ function Index() {
         <View>
           答题币：<Text className='balance'>{userInfo.balance}</Text></View>
       </View>
+      <Button
+        className='share'
+        openType='share'>推荐好友得答题币和兑换卡</Button>
       <View className='body'>
         {
           records && records.map(item =>

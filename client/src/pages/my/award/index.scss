@@ -10,7 +10,38 @@
   background-size: 750px auto;
   background-position-y: -98px;
   background-repeat: no-repeat;
+  .share {
+    width: 580px;
+    font-size: 28px;
+    border-color: transparent;
+    color: white;
+    background: linear-gradient(to right, rgb(250, 91, 91), #f81c15);
+    height: 80px;
+    line-height: 80px;
+    animation: 'share-ani'1s linear infinite;
+  }
 
+  @keyframes share-ani {
+    0% {
+      transform: rotate(0deg) scale(1);
+    }
+
+    25% {
+      transform: rotate(.5deg) scale(1.03);
+    }
+
+    50% {
+      transform: rotate(0deg) scale(1);
+    }
+
+    75% {
+      transform: rotate(-.5deg) scale(1.03);
+    }
+
+    100% {
+      transform: rotate(0deg) scale(1);
+    }
+  }
   .header {
     width: 100%;
     display: flex;
@@ -25,7 +56,8 @@
   .body {
     background: #fff;
     border-radius: 10px 10px 0 0;
-    overflow: hidden;
+    overflow: auto;
+    height: 84vh;
     .day-title {
       height: 55px;
       line-height: 55px;

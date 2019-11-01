@@ -35,6 +35,22 @@
       justify-content: center;
       align-items: center;
       text-align: center;
+      .float {
+        position: absolute;
+        .type,
+        .value {
+          text-align: center;
+          color: #F8D253;
+          font-size: 28px;
+        }
+        .type {
+          margin-top: 30px;
+        }
+        .value {
+          margin-top: 10px;
+          font-size: 36px;
+        }
+      }
       image {
         height: 260px;
         width: 194px;

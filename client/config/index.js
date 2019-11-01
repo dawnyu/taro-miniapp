@@ -41,6 +41,7 @@ const config = {
   alias: {
     '@': resolve('src'),
     '@/utils': resolve('src/utils/index.ts'),
+    '@/storage': resolve('src/utils/storage.ts'),
     '@/enum': resolve('src/utils/enum/index.ts'),
     '@/types': resolve('src/types/index.ts'),
     '@/constant': resolve('src/utils/constant.ts'),
