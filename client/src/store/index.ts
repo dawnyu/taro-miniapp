@@ -110,7 +110,9 @@ class Index {
       runInAction(() => {
         this.goods = data || []
       })
-      storage.set('goods', data, 60 * 24)
+      if (data && data.length > 0) {
+        storage.set('goods', data, 60 * 24)
+      }
     }
   }
 }

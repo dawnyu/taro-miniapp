@@ -26,6 +26,7 @@
     "paths": {
       "@/components/*": ["./client/src/components/*"],
       "@/utils": ["./client/src/utils/index.ts"],
+      "@/storage": ["./client/src/utils/storage.ts"],
       "@/sdk": ["./client/src/utils/sdk.ts"],
       "@/enum": ["/client/src/utils/enum/index.ts"],
       "@/constant": ["./client/src/utils/constant.ts"],
