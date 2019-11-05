@@ -8,6 +8,7 @@ import {
   login,
   answer,
   getUser,
+  getConfig,
 } from '../service/cloud'
 
 class Index {
@@ -23,6 +24,7 @@ class Index {
   }
   qtype = 0 // 题库类型
   goods = []
+  config = {}
 
   async getUser() {
     try {
@@ -92,7 +94,22 @@ class Index {
       throw new Error('更新失败')
     }
   }
-
+  
+  async getConfig() {
+    const config = storage.get('config')
+    if (config) {
+      this.config = config
+    } else {
+      const { data } = await getConfig()
+      runInAction(() => {
+        this.config = data || {}
+      })
+      if (data) {
+        storage.set('config', data, 60)
+      }
+    }
+    return this.config
+  }
   /**
    * 设置题类型
    * @param question
@@ -119,10 +136,12 @@ class Index {
 
 decorate(Index, {
   userInfo: observable,
+  config: observable,
   getUser: action.bound,
   update: action.bound,
   login: action.bound,
   qtype: observable,
+  getConfig: action.bound,
   setQType: action.bound,
   goods: observable,
   getGoods: action.bound,

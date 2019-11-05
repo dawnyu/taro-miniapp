@@ -6,7 +6,7 @@ import storage from '@/storage'
 import './index.scss'
 
 function RedPacket() {
-  const { userInfo, trade } = useContext(store) as any
+  const { userInfo, trade, config } = useContext(store) as any
   const router = useRouter()
   const [details, setDetails] = useState()
   const [buttonText, setButtonText] = useState('')
@@ -17,7 +17,7 @@ function RedPacket() {
       ...good,
       goodDetails: good.goodDetails && good.goodDetails.split('<br>')
     })
-    setButtonText(`${good.price}答题币${good.withdraw > 0 ? `+${good.withdraw}兑换卡` : ''}`)
+    setButtonText(`${good.price}${config.unit}${good.withdraw > 0 ? `+${good.withdraw}兑换卡` : ''}`)
   })
   const conversion = async () => {
     try {
@@ -48,7 +48,7 @@ function RedPacket() {
         </View>
         <View className='red-packet-title'>{details.title}</View>
         <View className='red-packet-price'>
-          <View>{details.price}答题币 {details.withdraw > 0 ? <Text>消耗{details.withdraw}答题卡</Text> : null} </View>
+          <View>{details.price}{config.unit} {details.withdraw > 0 ? <Text>消耗{details.withdraw}答题卡</Text> : null} </View>
           <Text>剩余{details.inventory}个</Text>
         </View>
       </View>

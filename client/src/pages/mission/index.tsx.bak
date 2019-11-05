@@ -56,7 +56,7 @@ async function Index() {
       setModal({
         show: true,
         title: '签到成功',
-        text: `获取${data}答题币`
+        text: `获取${data}积分`
       })
       const {status, data: sign} = await getSign()
       if (status === 0) {

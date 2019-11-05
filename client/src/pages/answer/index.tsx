@@ -7,7 +7,7 @@ import { getQs } from '@/service/cloud'
 import './index.scss'
 
 function Index() {
-  const { qtype, answer, userInfo} = useContext(store) as any
+  const { qtype, answer, userInfo, config} = useContext(store) as any
   const [visible, setVisible] = useState(false)
   const [right, setRight] = useState(false)
   const [award, setAward] = useState(0)
@@ -133,7 +133,7 @@ function Index() {
                 </View>
                 : 
                 <View>获得
-                <Text className='atmodal-content-label-value'>{award}</Text>答题币
+                <Text className='atmodal-content-label-value'>{award}</Text>{config.unit}
                 </View>
               }
               <View

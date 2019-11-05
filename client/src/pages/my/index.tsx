@@ -7,7 +7,7 @@ import { getSign } from '@/service/cloud'
 import './index.scss'
 
 function Index() {
-  const { qtype, userInfo } = useContext(store) as any
+  const { qtype, userInfo, config } = useContext(store) as any
   const [sign, setSign] = useState()
   useDidShow(() => {
     getSign().then(res => {
@@ -31,16 +31,17 @@ function Index() {
         <View className='banner'>
           <View className='item'>
             <Text>{userInfo.balance || 0}</Text>
-            <Text>答题币</Text>
+            <Text>{config.unit}</Text>
           </View>
           <View className='item'>
             <Text>{userInfo.answersheet || 0}</Text>
             <Text>答题卡</Text>
           </View>
+          {config.check === 1 && 
           <View className='item'>
             <Text>{userInfo.withdraw || 0}</Text>
             <Text>兑换卡</Text>
-          </View>
+          </View>}
           <View className='item'>
             <Text>{sign.sum || 0}</Text>
             <Text>连续签到</Text>
@@ -71,7 +72,7 @@ function Index() {
           src='http://cdn.geekbuluo.com/zhanghao.png'
             onClick={() => Taro.navigateTo({ url: '/pages/my/account/index' })}
             />
-          <Text>收款设置</Text>
+          <Text>账号设置</Text>
         </View>
         <View
           className='item'

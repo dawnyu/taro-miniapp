@@ -7,7 +7,7 @@ import store from '@/store/index'
 import './index.scss'
 
 function Index() {
-  const { userInfo } = useContext(store) as any
+  const { userInfo, config } = useContext(store) as any
   const [records, setRecords] = useState()
   useShareAppMessage(res => {
     {
@@ -51,11 +51,11 @@ function Index() {
     <View className='container'>
       <View className='header'>
         <View>
-          答题币：<Text className='balance'>{userInfo.balance}</Text></View>
+          {config.unit}：<Text className='balance'>{userInfo.balance}</Text></View>
       </View>
       <Button
         className='share'
-        openType='share'>推荐好友得答题币和兑换卡</Button>
+        openType='share'>推荐好友得{config.unit}和兑换卡</Button>
       <View className='body'>
         {
           records && records.map(item =>

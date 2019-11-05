@@ -6,7 +6,7 @@ import { getFriends } from '@/service/cloud'
 import './index.scss'
 
 function Index() {
-  const { userInfo } = useContext(store) as any
+  const { userInfo, config } = useContext(store) as any
   const [list, setList] = useState()
   useShareAppMessage(res => {
     {
@@ -30,7 +30,7 @@ function Index() {
     <View className='container'>
       <Button
         className='share'
-        openType='share'>推荐好友得答题币和兑换卡</Button>
+        openType='share'>推荐好友得{config.unit}和兑换卡</Button>
       <View className='header-line'>
         <Text>好友昵称</Text>
         <Text>带来收益</Text>
@@ -48,7 +48,7 @@ function Index() {
           </View>
           <View className='right'>
             <View>
-                {item.superiorEarnings || 0}答题币
+                {item.superiorEarnings || 0}{config.unit}
             </View>
             </View>
         </View>)}

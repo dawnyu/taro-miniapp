@@ -12,19 +12,6 @@ function Index() {
     const list = [...res.data, ...res.data, ...res.data, ...res.data]
     setRecords([...list, ...list, ...list, ...list, ...list])
   })
-  const setClipboardData = () => {
-    Taro.showModal({
-      title: '温馨提示',
-      content: '微信号复制成功，请添加客服微信，审核您的兑换订单',
-      confirmText: '我知道了',
-      confirmColor: 'red',
-    })
-    Taro.setClipboardData({
-      data: 'dawning_yu',
-    }).then(() => {
-      Taro.hideToast()
-    })
-  }
   
    return (
     <View className='container'>

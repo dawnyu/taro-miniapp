@@ -15,7 +15,7 @@ import { getSign, sign, getUserAvatar } from '@/service/cloud'
 import './index.scss'
 
 async function Index() {
-  const { userInfo } = useContext(store) as any
+  const { userInfo, config } = useContext(store) as any
   const [current, setCurrent] = useState(0)
   const [total, setTotal] = useState()
   const [avtars, setAvtars] = useState()
@@ -61,7 +61,7 @@ async function Index() {
         setModal({
           show: true,
           title: '签到成功',
-          text: `奖励答题币x${data.value}   ` + (data.answersheet > 0 ? `答题卡x${data.answersheet}` : '')
+          text: `奖励${config.unit}x${data.value}   ` + (data.answersheet > 0 ? `答题卡x${data.answersheet}` : '')
         })
         const { status, data: sign } = await getSign()
         if (status === 0) {
@@ -98,7 +98,7 @@ async function Index() {
         天签到
       </View>
       <View className='tip'>
-        <Text className='text'>连续签到七天 即可瓜分<Text className='em'>100000</Text>答题币</Text>
+        <Text className='text'>连续签到七天 即可瓜分<Text className='em'>100000</Text>{config.unit}</Text>
       </View>
       <View className='box'>
         <View className='title'>已连续签到<Text className='em'>{current}</Text>天</View>
@@ -108,7 +108,7 @@ async function Index() {
             <Text>0天</Text>
             <Text>1天</Text>
             <Text>2天
-              <Text className='tip-pop'>20答题币</Text>
+              <Text className='tip-pop'>20{config.unit}</Text>
             </Text>
             <Text>3天</Text>
             <Text>4天</Text>

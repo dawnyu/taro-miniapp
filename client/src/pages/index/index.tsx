@@ -1,5 +1,5 @@
 import Taro, { useContext, useDidShow,
-  useState, useEffect, useRouter, useShareAppMessage } from '@tarojs/taro'
+  useState, useEffect, useShareAppMessage } from '@tarojs/taro'
 import { View, Text, Image, Button, OpenData } from '@tarojs/components'
 import { AtModal } from 'taro-ui'
 import { observer } from '@tarojs/mobx'
@@ -12,7 +12,7 @@ import hongbao1 from '@/assets/images/hongbao1.png'
 import hongbao2 from '@/assets/images/hongbao2.png'
 import feidie from '@/assets/images/feidie-min.png'
 import qiandao from '@/assets/images/qiandao.png'
-import { systemTime, openRedEnvelope, getConfig } from '@/service/cloud'
+import { systemTime, openRedEnvelope } from '@/service/cloud'
 import './index.scss'
 
 function Index() {
@@ -24,6 +24,8 @@ function Index() {
     getGoods,
     trade,
     login,
+    getConfig,
+    config,
   } = useContext(store) as any
   useShareAppMessage(() => {
     return {
@@ -48,7 +50,7 @@ function Index() {
       //如果用户不存在
       login({ superior: Taro.getStorageSync('superior') }) //创建临时用户，只有openid
     }
-    const isNewUser = config.data.open === 0 && !isAuth && !user.userid
+    const isNewUser = config.open === 0 && !isAuth && !user.userid
     if (isNewUser) {
       const firsthb = await Taro.getStorageSync('firsthb')
       if (firsthb && !moment(firsthb).isSame(new Date(), 'day')) {
@@ -136,7 +138,7 @@ function Index() {
       <View className='header'>
         <View className='user-balance'>
           <View className='userAvatarUrl'><OpenData type='userAvatarUrl'/></View>
-          <Text className='user-balance-value'>{userInfo.balance}</Text>答题币
+          <Text className='user-balance-value'>{userInfo.balance}</Text>{config.unit}
         </View>
       </View>
       <View className='content'>
@@ -146,7 +148,7 @@ function Index() {
             src={hongbao1}
           />
           <View className='red-packet-body'>
-            <View className='residue'>当前答题卡<Text>{userInfo.answersheet}</Text></View>
+            <View className='residue'>当前答题卡<Text>{userInfo.answersheet}</Text>张</View>
           </View>
           <Image
             className='red-packet-bg'
@@ -168,37 +170,39 @@ function Index() {
             </View>
           </View>
          
-          <View className='floaticon'>
-            <Image
-              className='sign'
-              onClick={() => Taro.navigateTo({ url: '/pages/mission/index' })}
-              src='http://cdn.geekbuluo.com/qiandao1-min.png' />
-
-            <Image
-              className={countDown > 0 ? 'open-red' : 'open-red open-red-animate'}
-              onClick={() => openRedEnvelopeHandle(countDown === 0)}
-              src='http://cdn.geekbuluo.com/smallhongbao-min.png'/>
-            {!countDownText && <Text className='open-red-text'>开红包</Text>}
-            {countDownText && <View className='red-packet-countdown'> {countDownText} </View>}
-
-            <Image
-              className='rank'
-              onClick={() => Taro.navigateTo({ url: '/pages/rank/index' })}
-              src='http://cdn.geekbuluo.com/paihangbang-min.png'/>
-            <Text className='rank-text'>排行榜</Text>
-
-            <Button
-              className='share'
-              openType='share'>
+         {
+            config.check === 1 && <View className='floaticon'>
               <Image
-                className='friend'
-                src='http://cdn.geekbuluo.com/1bf360a2147943ed1bb863e4f607979a-min.png' />
+                className='sign'
+                onClick={() => Taro.navigateTo({ url: '/pages/mission/index' })}
+                src='http://cdn.geekbuluo.com/qiandao1-min.png' />
+
+              <Image
+                className={countDown > 0 ? 'open-red' : 'open-red open-red-animate'}
+                onClick={() => openRedEnvelopeHandle(countDown === 0)}
+                src='http://cdn.geekbuluo.com/smallhongbao-min.png' />
+              {!countDownText && <Text className='open-red-text'>不要拆</Text>}
+              {countDownText && <View className='red-packet-countdown'> {countDownText} </View>}
+
+              <Image
+                className='rank'
+                onClick={() => Taro.navigateTo({ url: '/pages/rank/index' })}
+                src='http://cdn.geekbuluo.com/paihangbang-min.png' />
+              <Text className='rank-text'>排行榜</Text>
+
+              <Button
+                className='share'
+                openType='share'>
+                <Image
+                  className='friend'
+                  src='http://cdn.geekbuluo.com/1bf360a2147943ed1bb863e4f607979a-min.png' />
               </Button>
-            <Text className='friend-text'>赚答题币</Text>
-          </View>
+              <Text className='friend-text'>赚{config.unit}</Text>
+            </View>
+         }
         </View>
-        {goods && goods.length > 0 &&  <View className='header-line'>0元免费换</View>}
-          {<View className='red-packet-convert'>
+        {config.good === 1 &&  <View className='header-line'>0元免费换</View>}
+        {config.good === 1 &&  <View className='red-packet-convert'>
             {
               goods.map(item =>
               <Good key={item.id} data={item} />)
@@ -207,36 +211,36 @@ function Index() {
         }
         
       </View>
-      <View className='nav'>
-        <View
-          onClick={() => Taro.navigateTo({ url: '/pages/mission/index' })}
-          className='nav-item'
-        >
-          <Image src={qiandao} />
-          <View>签到</View>
+        <View className='nav'>
+          <View
+            onClick={() => Taro.navigateTo({ url: '/pages/mission/index' })}
+            className='nav-item'
+          >
+            <Image src={qiandao} />
+            <View>签到</View>
+          </View>
+          <View
+            onClick={() => Taro.navigateTo({ url: '/pages/friends/index' })}
+            className='nav-item'
+          >
+            <Image src='http://cdn.geekbuluo.com/1bf360a2147943ed1bb863e4f607979a-min.png' />
+            <View>好友</View>
+          </View>
+          <View
+            onClick={() => Taro.navigateTo({ url: '/pages/my/index' })}
+            className='nav-item'
+          >
+            <Image src={feidie} />
+            <View>我的</View>
+          </View>
         </View>
-        <View
-          onClick={() => Taro.navigateTo({ url: '/pages/friends/index' })}
-          className='nav-item'
-        >
-          <Image src='http://cdn.geekbuluo.com/1bf360a2147943ed1bb863e4f607979a-min.png' />
-          <View>好友</View>
-        </View>
-        <View
-          onClick={() => Taro.navigateTo({ url: '/pages/my/index' })}
-          className='nav-item'
-        >
-          <Image src={feidie} />
-          <View>我的</View>
-        </View>
-      </View>
      {
         firstScreen && 
         <View
           className='first-screen'
         >
           <Text className='text'>幸运奖励</Text>
-          <Text className='text1'>最高获得20答题币</Text>
+          <Text className='text1'>最高获得20{config.unit}</Text>
           <Button
             openType='getUserInfo'
             onGetUserInfo={closeOpenHandle}
@@ -257,7 +261,7 @@ function Index() {
           <View className='atmodal-content'>
             <View className='atmodal-content-label'>
               <View className='atmodal-content-label-text'>
-                  恭喜您获得<Text>{award}</Text>答题币
+                  恭喜您获得<Text>{award}</Text>{config.unit}
               </View>
             </View>
             <View
