@@ -53,9 +53,11 @@ function Index() {
         <View>
           {config.unit}：<Text className='balance'>{userInfo.balance}</Text></View>
       </View>
-      <Button
-        className='share'
-        openType='share'>推荐好友得{config.unit}和兑换卡</Button>
+      {config.check &&
+        <Button
+          className='share'
+          openType='share'>推荐好友得{config.unit}和兑换卡</Button>
+     }
       <View className='body'>
         {
           records && records.map(item =>

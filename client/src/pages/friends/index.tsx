@@ -28,12 +28,16 @@ function Index() {
   })
   return (
     <View className='container'>
-      <Button
-        className='share'
-        openType='share'>推荐好友得{config.unit}和兑换卡</Button>
+      {
+        config.check === 1 && <Button
+          className='share'
+          openType='share'>推荐好友得{config.unit}和兑换卡</Button>
+      }
       <View className='header-line'>
         <Text>好友昵称</Text>
-        <Text>带来收益</Text>
+        {
+          config.check === 1 && <Text>带来收益</Text>
+        }
       </View>
       <View className='body'>
         {list && list.length > 0 && list.map((item, index) => 
