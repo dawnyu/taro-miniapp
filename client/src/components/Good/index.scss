@@ -44,6 +44,10 @@
     border-radius: 10px;
     margin-top: 30px;
   }
+  .kind-image {
+    width: 175rpx;
+    height: 230rpx;
+  }
   .red-packet-title {
     text-align: center;
     color: #333;
@@ -71,6 +75,6 @@
     border-radius: 25px;
     margin: 10px auto;
     color: #fff;
-    background: linear-gradient(to right, rgb(250, 213, 3), #e2740c);
+    background: linear-gradient(to right, rgb(248, 221, 100), #fa8211);
   }
 }

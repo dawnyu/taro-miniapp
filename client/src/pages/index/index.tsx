@@ -181,7 +181,7 @@ function Index() {
                 className={countDown > 0 ? 'open-red' : 'open-red open-red-animate'}
                 onClick={() => openRedEnvelopeHandle(countDown === 0)}
                 src='http://cdn.geekbuluo.com/smallhongbao-min.png' />
-              {!countDownText && <Text className='open-red-text'>不要拆</Text>}
+              {!countDownText && <Text className='open-red-text'>拆我呀</Text>}
               {countDownText && <View className='red-packet-countdown'> {countDownText} </View>}
 
               <Image

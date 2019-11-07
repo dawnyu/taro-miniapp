@@ -61,6 +61,12 @@
       color: #333;
       font-size: 28px;
       margin: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      text:nth-child(2) {
+        font-size: 22px;
+        color: #999;
+      }
     }
 
     .red-packet-price {
@@ -69,11 +75,6 @@
       margin: 20px;
       font-size: 22px;
       color: #999;
-
-      .icon-yuanbao {
-        color: #F8D253;
-        font-size: 22px;
-      }
     }
   }
   .good-detail {

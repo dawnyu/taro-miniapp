@@ -39,7 +39,7 @@ function Index() {
           </View>
           {config.check === 1 && 
           <View className='item'>
-            <Text>{userInfo.withdraw || 0}</Text>
+            <Text>{userInfo.withdrawTime || 0}</Text>
             <Text>兑换卡</Text>
           </View>}
           <View className='item'>

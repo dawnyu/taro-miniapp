@@ -30,6 +30,7 @@ function RedPacket() {
       Taro.showToast({
         title: e.message,
         icon: 'none',
+        duration: 3000,
       })
     }
   }
@@ -46,11 +47,10 @@ function RedPacket() {
             </View>
           }
         </View>
-        <View className='red-packet-title'>{details.title}</View>
-        <View className='red-packet-price'>
+        <View className='red-packet-title'><Text>{details.title}</Text><Text>剩余{details.inventory}个</Text></View>
+        {/* <View className='red-packet-price'>
           <View>{details.price}{config.unit} {details.withdraw > 0 ? <Text>消耗{details.withdraw}答题卡</Text> : null} </View>
-          <Text>剩余{details.inventory}个</Text>
-        </View>
+        </View> */}
       </View>
       <View className='good-detail'>
         <View className='header-line'>兑换详情</View>

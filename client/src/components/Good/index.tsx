@@ -1,5 +1,5 @@
 import Taro from '@tarojs/taro'
-import { View, Text } from '@tarojs/components';
+import { View, Text, Image } from '@tarojs/components';
 import './index.scss';
 
 function RedPacket({ data }) {
@@ -19,6 +19,7 @@ function RedPacket({ data }) {
           <View className='red-packet-value'>{data.value}元</View>
         </View>}
       {data.type === 5 && <View className='good-image'></View>}
+      {data.type === 13 && <Image className='kind-image' src={data.image}/>}
       <View className='red-packet-title'>
         {data.title}
       </View>
@@ -26,7 +27,7 @@ function RedPacket({ data }) {
         <Text>库存 {data.inventory}件</Text>
         <Text> {data.price}答题币</Text>
       </View>
-      <View className='red-packet-button'>去兑换</View>
+      <View className='red-packet-button'>0元兑换</View>
     </View>
   )
 }

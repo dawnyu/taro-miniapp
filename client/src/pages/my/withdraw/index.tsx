@@ -9,8 +9,8 @@ function Index() {
 
   useDidShow(async () => {
     const res: any = await getWithdraw()
-    const list = [...res.data, ...res.data, ...res.data, ...res.data]
-    setRecords([...list, ...list, ...list, ...list, ...list])
+    const list = [...res.data]
+    setRecords([...list])
   })
   
    return (
@@ -35,7 +35,13 @@ function Index() {
             </View>
           </View>)
         }
-        <View className='bottom'>——我是有底线的——</View>
+        {
+          records && records.length > 10 && <View className='bottom'>——我是有底线的——</View>
+        }
+        {
+          (!records || records && records.length === 0) && <View className='bottom'>暂无记录</View>
+        }
+       
       </View>
     </View>
   )

@@ -105,7 +105,7 @@ class Index {
         this.config = data || {}
       })
       if (data) {
-        storage.set('config', data, 60)
+        storage.set('config', data, 1)
       }
     }
     return this.config

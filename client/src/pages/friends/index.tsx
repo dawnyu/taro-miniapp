@@ -22,21 +22,26 @@ function Index() {
   
   useDidShow(async () => {
     Taro.showLoading()
-    const { data } = await getFriends({ openid: userInfo })
+    try {
+      const { data } = await getFriends({ openid: userInfo })
+      setList([...data])
+      Taro.hideLoading()
+    } catch (error) {
+      Taro.hideLoading()
+    }
     Taro.hideLoading()
-    setList([...data])
   })
   return (
     <View className='container'>
       {
-        config.check === 1 && <Button
+        <Button
           className='share'
-          openType='share'>推荐好友得{config.unit}和兑换卡</Button>
+          openType='share'>{config.check === 1 ? `推荐好友得${config.unit}和兑换卡` : '添加好友'}</Button>
       }
       <View className='header-line'>
         <Text>好友昵称</Text>
         {
-          config.check === 1 && <Text>带来收益</Text>
+          config.check === 1 && <Text>提成</Text>
         }
       </View>
       <View className='body'>
@@ -56,7 +61,7 @@ function Index() {
             </View>
             </View>
         </View>)}
-        {list && list.length === 0 &&
+        {(!list || list && list.length === 0) &&
         <View className='nofriends'>
           <View> 还没有好友哦~ </View>
         </View>}

@@ -51,9 +51,9 @@ function Index() {
     <View className='container'>
       <View className='header'>
         <View>
-          {config.unit}：<Text className='balance'>{userInfo.balance}</Text></View>
+          {config.unit || '积分'}：<Text className='balance'>{userInfo.balance}</Text></View>
       </View>
-      {config.check &&
+      {config.check === 1 &&
         <Button
           className='share'
           openType='share'>推荐好友得{config.unit}和兑换卡</Button>
@@ -79,7 +79,14 @@ function Index() {
           </View>
           )
         }
-        <View className='bottom'>——我是有底线的——</View>
+        {
+          records && records.length > 1 && <View className='bottom'>——我是有底线的——</View>
+        }
+
+        {
+          (!records || records && records.length === 0) && <View className='bottom'>暂无记录</View>
+        }
+        
       </View>
     </View>
   )

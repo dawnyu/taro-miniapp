@@ -6,24 +6,12 @@ import './index.scss'
 
 function Index() {
   const { userInfo, update, config } = useContext(store) as any
-  const [placeholder, setPlaceholder] = useState('接收红包微信账号')
-  const onChange = (val) => {
-    setPlaceholder(`接收红包${val.currentTarget.value}账号`)
-  }
 
   const formSubmit = async(e) => {
-    const { phone, acount, type } = e.detail.value
-    if (type === '') {
-      Taro.showToast({
-        title: '请选择收款方式',
-        icon: 'none',
-        duration: 2000
-      })
-      return
-    }
+    const { phone, acount } = e.detail.value
     if (acount === '') {
       Taro.showToast({
-        title: `${type}账号不能为空`,
+        title: `微信号不能为空`,
         icon: 'none',
         duration: 2000
       })
@@ -36,23 +24,23 @@ function Index() {
     try {
     await update({
       id: userInfo.id,
-      wechat: type === '微信' ? acount : '',
-      alipay: type === '支付宝' ? acount : '',
+      wechat: acount,
       phone,
     })
-    await Taro.showToast({
+    Taro.showToast({
       title: '保存成功',
       icon: 'none',
-      duration: 2000
+      duration: 2000,
+    }).then(() => {
+      setTimeout(() => Taro.navigateBack({ delta: 1 }), 2000)
     })
-    Taro.hideLoading()
-    Taro.navigateBack({ delta: 1 })
     } catch (error) {
-      Taro.hideLoading()
       Taro.showToast({
         title: error,
         icon: 'none',
         duration: 2000
+      }).then(() => {
+        setTimeout(() => Taro.navigateBack({ delta: 1 }), 2000)
       })
     }
   }
@@ -85,26 +73,22 @@ function Index() {
             <View className='label'>
               收款方式
         </View>
-            <RadioGroup
-              onChange={onChange}
-              name='type'>
-              <Radio
-                value='微信'
-                disabled={userInfo.wechat || userInfo.alipay}
-                checked={userInfo.wechat}>
-                <View className='radio'>
-                  <Image className='image' src='http://cdn.geekbuluo.com/%E5%BE%AE%E4%BF%A1.png' />
-                </View>
-              </Radio>
-              <Radio
+            <Radio
+              value='微信'
+              disabled={true}
+              checked={true}>
+              <View className='radio'>
+                <Image className='image' src='http://cdn.geekbuluo.com/%E5%BE%AE%E4%BF%A1.png' />
+              </View>
+            </Radio>
+              {/* <Radio
                 value='支付宝'
                 checked={userInfo.alipay}
-                disabled={userInfo.wechat || userInfo.alipay}>
+                disabled={userInfo.wechat}>
                 <View className='radio'>
                   <Image className='image' src='http://cdn.geekbuluo.com/%E6%94%AF%E4%BB%98%E5%AE%9D.png' />
                 </View>
-              </Radio>
-            </RadioGroup>
+              </Radio> */}
           </View>
           <View className='item'>
             <View className='label'>
@@ -114,10 +98,10 @@ function Index() {
               <Input
                 type='text'
                 name='acount'
-                disabled={userInfo.wechat || userInfo.alipay}
-                value={userInfo.wechat || userInfo.alipay}
+                disabled={userInfo.wechat}
+                value={userInfo.wechat}
                 placeholderClass='placeholderClass'
-                placeholder={placeholder}
+                placeholder='接收红包微信账号'
                 maxLength={100} />
             </View>
           </View>
@@ -137,10 +121,10 @@ function Index() {
           </View>
           <View className='header-line'>重要说明</View>
           <View className='tip'>
-            <View>1、用户积分兑换现金红包必须先设置收红包账号.</View>
-            <View>2、填写微信号或支付宝号必须已实名.</View>
+            <View>1、用户积分兑换现金红包必须先设置收红包微信账号.</View>
+            <View>2、填写微信号必须已实名.</View>
             <View>3、用户兑换话费充值卡必须填写需要充值的手机号码.</View>
-            <View>4、微信号或者支付宝账号设置后不能修改，如需修改联系客服.</View>
+            <View>4、微信号账号设置后不能修改，如需修改联系客服.</View>
           </View>
           <Button
             className='btn'
