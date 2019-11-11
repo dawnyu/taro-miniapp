@@ -5,10 +5,11 @@
   height: 100vh;
   padding: 0 4vw;
   overflow: auto;
-  background-image: url(http://cdn.geekbuluo.com/qiandao/bg.png);
+  background-image: url(https://cdn.geekbuluo.com/qiandao/bg.png);
   background-color: rgb(250, 250, 249);
   background-size: 750px 400px;
   background-repeat: no-repeat;
+  -webkit-overflow-scrolling: touch;
   .header {
     width: 100%;
     display: flex;

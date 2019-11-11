@@ -10,17 +10,17 @@ function Index() {
 
   const qList = [
     {
-      image: 'http://cdn.geekbuluo.com/chengyu-min.png',
+      image: 'https://cdn.geekbuluo.com/chengyu-min.png',
       name: '成语题库',
       type: 0,
     },
     // {
-    //   image: 'http://cdn.geekbuluo.com/gushici-min.png',
+    //   image: 'https://cdn.geekbuluo.com/gushici-min.png',
     //   name: '诗词题库',
     //   type: 1,
     // },
     {
-      image: 'http://cdn.geekbuluo.com/jiakao-min.png',
+      image: 'https://cdn.geekbuluo.com/jiakao-min.png',
       name: '驾考题库',
       type: 2,
     }

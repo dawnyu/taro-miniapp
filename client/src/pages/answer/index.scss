@@ -1,4 +1,3 @@
-@import "~taro-ui/dist/style/components/icon.scss";
 @import "~taro-ui/dist/style/components/modal.scss";
 
 .container {
@@ -6,22 +5,20 @@
   height: 100vh;
   padding: 0 4vw;
   overflow: auto;
-  // background: linear-gradient(#1D2045 30%, #1D2045, #2C2B40);
-  background-image: url(http://cdn.geekbuluo.com/qiandao/bg.png);
+  background-image: url(https://cdn.geekbuluo.com/qiandao/bg.png);
   background-size: 750px auto;
   background-position-y: -98px;
   background-repeat: no-repeat;
-
-
-  .topic {
-    width: 80vw;
-    margin: 50px auto;
-    height: 200px;
-    background: #fff;
-    border-radius: 10px;
-    padding: 20px;
-    color: rgb(221, 172, 12);
-  }
+  -webkit-overflow-scrolling: touch;
+   .topic {
+     width: 80vw;
+     margin: 50px auto;
+     height: 200px;
+     background: #fff;
+     border-radius: 10px;
+     padding: 20px;
+     color: rgb(221, 172, 12);
+   }
   .idiom-title {
     font-size: 70px;
     height: 100%;
@@ -42,45 +39,50 @@
       border: 4px solid white;
     }
   }
-  .atmodal-content {
-    position: relative;
-    z-index: 1004;
-    height: 800px;
-    background: transparent;
-    &-label {
-      color: rgb(221, 172, 12);
+  .btn-group {
+    height: 200px;
+    display: flex;
+    margin-top: 50px;
+    justify-content: space-around;
+    view, button {
+      width: 300px;
+      height: 100px;
+      line-height: 100px;
       text-align: center;
-      view:nth-child(1) {
-        font-size: 48px;
+      font-family: kuhei;
+      color: #fff;
+      font-weight: bolder;
+      font-size: 36px;
+      animation: 'share-ani'1s linear infinite;
+      background-size: 100% 100%;
+      background-color: transparent;
+    }
+    button {
+      background-image: url(https://cdn.geekbuluo.com/button/button1.png);
+    }
+    view {
+      background-image: url(https://cdn.geekbuluo.com/button4.png);
+    }
+  }
+    @keyframes share-ani {
+      0% {
+        transform: rotate(0deg) scale(1);
       }
-      &-value {
-        color: red;
-        margin: 0 20px;
-        font-weight: bold;
-        font-size: 50px;
+
+      25% {
+        transform: rotate(.5deg) scale(1.03);
+      }
+
+      50% {
+        transform: rotate(0deg) scale(1);
+      }
+
+      75% {
+        transform: rotate(-.5deg) scale(1.03);
+      }
+
+      100% {
+        transform: rotate(0deg) scale(1);
       }
     }
-    image {
-      width: 100%;
-      height: 250px;
-
-    }
-  }
-  .icon-yuanbao {
-    font-size: 40px;
-  }
-  .modal-close {
-    margin-top: 150px;
-    .icon-guanbi {
-      font-size: 50px;
-      color: rgb(221, 172, 12);
-    }
-  }
-
-}
-.at-modal__container {
-  background-color: transparent;
-}
-.at-modal__overlay {
-  background-color: rgba(0, 0, 0, 0.76);
 }

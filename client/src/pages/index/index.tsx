@@ -31,7 +31,7 @@ function Index() {
     return {
       title: '这个题好难啊，你能帮帮我吗？',
       path: `/pages/index/index?superior=${userInfo.openid}`,
-      imageUrl: 'http://cdn.geekbuluo.com/20191101012651-min.jpg'
+      imageUrl: 'https://cdn.geekbuluo.com/20191101012651-min.jpg'
     }
   })
 
@@ -43,8 +43,9 @@ function Index() {
   const COUNTDOWN =2 * 60 * 60
 
   useDidShow(async () => {
-    const user = await getUser()
+    getGoods()
     const config = await getConfig()
+    const user = await getUser()
     const isAuth = Taro.getStorageSync('isAuth')
     if (!user.data) {
       //如果用户不存在
@@ -60,7 +61,6 @@ function Index() {
         setFirstScreen(true)
       }
     }
-    getGoods()
     openRedEnvelopeHandle(false)
   })
 
@@ -145,6 +145,7 @@ function Index() {
         <View className='red-packet'>
           <Image
             className='red-packet-front'
+            mode='scaleToFill'
             src={hongbao1}
           />
           <View className='red-packet-body'>
@@ -152,42 +153,43 @@ function Index() {
           </View>
           <Image
             className='red-packet-bg'
+            mode='scaleToFill'
             src={hongbao2}
           />
           <View className='red-packet-btn'>
             <Image
               className='answer-_btn'
               onClick={() => Taro.navigateTo({ url: '/pages/answer/index' })}
-              src='http://cdn.geekbuluo.com/button-min.png' />
+              src='https://cdn.geekbuluo.com/button-min.png' />
             <View className='topic-info'>
               <Text className='topic-title'>{QuestionEnum[qtype]}</Text>
               <View
                 onClick={() => Taro.navigateTo({ url: '/pages/questionBank/index' })}
                 className='topic-switch'
               >
-                切换<Text className='at-icon at-icon-chevron-right' />
+                切换<Text className='iconfont icon-arrow-right' />
               </View>
             </View>
           </View>
          
          {
-            config.check === 1 && <View className='floaticon'>
+            config.check1 === 1 && <View className='floaticon'>
               <Image
                 className='sign'
                 onClick={() => Taro.navigateTo({ url: '/pages/mission/index' })}
-                src='http://cdn.geekbuluo.com/qiandao1-min.png' />
+                src='https://cdn.geekbuluo.com/qiandao1-min.png' />
 
               <Image
                 className={countDown > 0 ? 'open-red' : 'open-red open-red-animate'}
                 onClick={() => openRedEnvelopeHandle(countDown === 0)}
-                src='http://cdn.geekbuluo.com/smallhongbao-min.png' />
+                src='https://cdn.geekbuluo.com/smallhongbao-min.png' />
               {!countDownText && <Text className='open-red-text'>拆我呀</Text>}
               {countDownText && <View className='red-packet-countdown'> {countDownText} </View>}
 
               <Image
                 className='rank'
                 onClick={() => Taro.navigateTo({ url: '/pages/rank/index' })}
-                src='http://cdn.geekbuluo.com/paihangbang-min.png' />
+                src='https://cdn.geekbuluo.com/paihangbang-min.png' />
               <Text className='rank-text'>排行榜</Text>
 
               <Button
@@ -195,14 +197,14 @@ function Index() {
                 openType='share'>
                 <Image
                   className='friend'
-                  src='http://cdn.geekbuluo.com/1bf360a2147943ed1bb863e4f607979a-min.png' />
+                  src='https://cdn.geekbuluo.com/1bf360a2147943ed1bb863e4f607979a-min.png' />
               </Button>
-              <Text className='friend-text'>赚{config.unit}</Text>
+              <Text className='friend-text'>攒兑换卡</Text>
             </View>
          }
         </View>
-        {config.good === 1 &&  <View className='header-line'>0元免费换</View>}
-        {config.good === 1 &&  <View className='red-packet-convert'>
+        {config.check1 === 1 &&  <View className='header-line'>0元免费换</View>}
+        {config.check1 === 1 &&  <View className='red-packet-convert'>
             {
               goods.map(item =>
               <Good key={item.id} data={item} />)
@@ -215,6 +217,7 @@ function Index() {
           <View
             onClick={() => Taro.navigateTo({ url: '/pages/mission/index' })}
             className='nav-item'
+            hover-class='nav-item-hover'
           >
             <Image src={qiandao} />
             <View>签到</View>
@@ -222,13 +225,15 @@ function Index() {
           <View
             onClick={() => Taro.navigateTo({ url: '/pages/friends/index' })}
             className='nav-item'
+            hover-class='nav-item-hover'
           >
-            <Image src='http://cdn.geekbuluo.com/1bf360a2147943ed1bb863e4f607979a-min.png' />
+            <Image src='https://cdn.geekbuluo.com/1bf360a2147943ed1bb863e4f607979a-min.png' />
             <View>好友</View>
           </View>
           <View
             onClick={() => Taro.navigateTo({ url: '/pages/my/index' })}
             className='nav-item'
+            hover-class='nav-item-hover'
           >
             <Image src={feidie} />
             <View>我的</View>
@@ -266,7 +271,7 @@ function Index() {
             </View>
             <View
               onClick={() => setShowOpenRedEnvelopeModal(false)}
-              className='at-icon at-icon-close'/>
+              className='modal-close'>点击关闭</View>
           </View>}
       </AtModal>
      }

@@ -6,6 +6,7 @@
   background-color: rgb(250, 250, 249);
   background-size: 750px 400px;
   background-repeat: no-repeat;
+  -webkit-overflow-scrolling: touch;
   .item {
     height: 80px;
     line-height: 80px;
@@ -48,6 +49,9 @@
  }
  .placeholderClass {
    font-size: 26px;
+ }
+ .input {
+   font-size: 28px;
  }
    .header-line {
      font-size: 28px;

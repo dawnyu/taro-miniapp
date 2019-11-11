@@ -38,7 +38,9 @@ function Index() {
               index===2 ? 'num3' : ''}>{index + 1}</View>
           </View>
           <View className='center'>
-              <Image className='image' src={item.avatarUrl} />
+              <Image className='image'
+                mode='scaleToFill'
+                src={item.avatarUrl} />
               <View className='nickname'>{item.nickName}</View>
           </View>
           <View className='right'>{item.balance}</View>

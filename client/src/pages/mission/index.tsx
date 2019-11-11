@@ -5,7 +5,7 @@ import Taro, {
   useShareAppMessage
 } from '@tarojs/taro'
 import { View, Image, Text, Button } from '@tarojs/components'
-import Modal from '@/components/Modal'
+import MyModal from '@/components/Modal'
 import { AtModal } from 'taro-ui'
 // import Calendar from '@/components/Calendar'
 import { observer } from '@tarojs/mobx'
@@ -31,7 +31,7 @@ async function Index() {
     return {
       title: '这个题好难啊，你能帮帮我吗？',
       path: `/pages/index/index?superior=${userInfo.openid}`,
-      imageUrl: 'http://cdn.geekbuluo.com/share_image%20%281%29.jpg'
+      imageUrl: 'https://cdn.geekbuluo.com/share_image%20%281%29.jpg'
     }
   })
 
@@ -141,7 +141,7 @@ async function Index() {
         <View
           className='sign-rule'
           onClick={showSignRule}
-          >签到规则<View className='at-icon at-icon-chevron-right'/></View>
+          >签到规则<Text className='iconfont icon-arrow-right'/></View>
       </View>
       <AtModal
         isOpened={modal.show}
@@ -159,10 +159,10 @@ async function Index() {
             </View>
             <View
               onClick={() => setModal({ show: false, text: '', title: '' })}
-              className='at-icon at-icon-close' />
+              className='modal-close' >点击关闭</View>
           </View>}
       </AtModal>
-      <Modal options={modalOption}/>
+      <MyModal options={modalOption}/>
     </View>
   )
 }

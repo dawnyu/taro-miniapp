@@ -1,15 +1,29 @@
-@import "~taro-ui/dist/style/components/icon.scss";
-
 .container {
-  width: 92vw;
+  width: 100vw;
   height: 100vh;
-  padding: 0 4vw;
-  overflow: auto;
-  // background: linear-gradient(#1D2045 30%, #1D2045, #2C2B40);
-  background-image: url(http://cdn.geekbuluo.com/qiandao/bg.png);
+  background-image: url(https://cdn.geekbuluo.com/qiandao/bg.png);
   background-size: 750px auto;
   background-position-y: -98px;
   background-repeat: no-repeat;
+  overflow: hidden;
+  .friend-banner {
+    width: 100vw;
+    height: 20vh;
+  }
+  .friend-tip {
+    position: absolute;
+    left: 30px;
+    top: 156px;
+    font-size: 24px;
+    font-style: oblique;
+    font-weight: bolder;
+    color:red;
+    height: 40px;
+    line-height: 40px;
+    padding: 2px 15px;
+    border-radius: 25px;
+    background-color: yellow;
+  }
   .share {
     margin-top: 30px;
     width: 580px;
@@ -21,108 +35,121 @@
     line-height: 80px;
     animation: 'share-ani'1s linear infinite;
   }
-  @keyframes share-ani {
-    0% {
-      transform: rotate(0deg) scale(1);
+  .content {
+    width: 92vw;
+    margin: 0 4vw;
+    height: 80vh;
+    overflow: hidden;
+    @keyframes share-ani {
+      0% {
+        transform: rotate(0deg) scale(1);
+      }
+
+      25% {
+        transform: rotate(.5deg) scale(1.03);
+      }
+
+      50% {
+        transform: rotate(0deg) scale(1);
+      }
+
+      75% {
+        transform: rotate(-.5deg) scale(1.03);
+      }
+
+      100% {
+        transform: rotate(0deg) scale(1);
+      }
     }
 
-    25% {
-      transform: rotate(.5deg) scale(1.03);
+    .header {
+      width: 100%;
+      display: flex;
+      position: relative;
+      height: 400px;
+      background-image: url(https://cdn.geekbuluo.com/jiangzuo-min.png);
+      background-size: 95% 90%;
+      background-repeat: no-repeat;
+      background-position: center;
+      margin-top: 184px;
     }
 
-    50% {
-      transform: rotate(0deg) scale(1);
-    }
-
-    75% {
-      transform: rotate(-.5deg) scale(1.03);
-    }
-
-    100% {
-      transform: rotate(0deg) scale(1);
-    }
-  }
-  .header {
-    width: 100%;
-    display: flex;
-    position: relative;
-    height: 400px;
-    background-image: url(http://cdn.geekbuluo.com/jiangzuo-min.png);
-    background-size: 95% 90%;
-    background-repeat: no-repeat;
-    background-position: center;
-    margin-top: 184px;
-  }
-  .header-line {
-    font-size: 28px;
-    color: #fff;
-    padding-left: 10px;
-    position: relative;
-    margin: 20px 0;
-    display: flex;
-    justify-content: space-between;
-    &::before {
-      content: "";
-      margin-right: 2px;
-      width: 8px;
-      position: absolute;
-      left: -10px;
-      top: 0;
-      bottom: 0;
-      background: linear-gradient(to bottom, rgb(250, 52, 3), #f7b603);
-    }
-  }
-  .body {
-    height: 82vh;
-    border-radius: 10px;
-    overflow: auto;
-    .record-item {
-      height: 140px;
-      margin-bottom: 20px;
-      padding: 0 20px;
-      border-radius: 10px;
-      background-color: #F9FCF6;
-      // color: #F9FCF6;
+    .header-line {
+      font-size: 28px;
+      color: #fff;
+      padding-left: 10px;
+      position: relative;
+      margin: 20px 0;
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      .left {
-        display: flex;
-        width: 400px;
-        align-items: center;
-        view:nth-child(1) {
-          margin: 0 10px;
-          font-size: 36px;
-        }
-        view:nth-child(3) {
-          width: 260px;
-          flex-shrink: 0;
-          overflow: hidden;
-          white-space: nowrap;
-          text-overflow: ellipsis;
-        }
-        image {
-          width: 90px;
-          height: 90px;
-          margin: 0 20px;
-          flex-shrink: 0;
-          border-radius: 50%;
-        }
-      }
-      .right {
-        color: red;
-      }
-    }
-    .nofriends {
-      color: #fff;
-      margin-top: 30vh;
-      text-align: center;
-    }
-  }
- 
-  .icon-yuanbao {
-    font-size: 30px;
-    color: #F8D253;
-  }
 
+      &::before {
+        content: "";
+        margin-right: 2px;
+        width: 8px;
+        position: absolute;
+        left: -10px;
+        top: 0;
+        bottom: 0;
+        background: linear-gradient(to bottom, rgb(250, 52, 3), #f7b603);
+      }
+    }
+
+    .body {
+      height: 82vh;
+      border-radius: 10px;
+      overflow: auto;
+      -webkit-overflow-scrolling: touch;
+
+      .record-item {
+        height: 140px;
+        margin-bottom: 20px;
+        padding: 0 20px;
+        border-radius: 10px;
+        background-color: #F9FCF6;
+        // color: #F9FCF6;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .left {
+          display: flex;
+          width: 400px;
+          align-items: center;
+
+          view:nth-child(1) {
+            margin: 0 10px;
+            font-size: 36px;
+          }
+
+          view:nth-child(3) {
+            width: 260px;
+            flex-shrink: 0;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+          }
+
+          image {
+            width: 90px;
+            height: 90px;
+            margin: 0 20px;
+            flex-shrink: 0;
+            border-radius: 50%;
+          }
+        }
+
+        .right {
+          color: red;
+        }
+      }
+
+      .nofriends {
+        color: #fff;
+        margin-top: 30vh;
+        text-align: center;
+      }
+    }
+
+  }
 }

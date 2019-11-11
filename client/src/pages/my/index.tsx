@@ -19,7 +19,7 @@ function Index() {
       <View className='header'>
         <Image
           className='crown'
-          src='http://cdn.geekbuluo.com/huangguan-min.png'
+          src='https://cdn.geekbuluo.com/huangguan-min.png'
         />
         <View className='user-avatar'>
           <OpenData type='userAvatarUrl' />
@@ -37,7 +37,7 @@ function Index() {
             <Text>{userInfo.answersheet || 0}</Text>
             <Text>答题卡</Text>
           </View>
-          {config.check === 1 && 
+          {config.check1 === 1 && 
           <View className='item'>
             <Text>{userInfo.withdrawTime || 0}</Text>
             <Text>兑换卡</Text>
@@ -56,20 +56,20 @@ function Index() {
         <View
           className='item'
           onClick={() => Taro.navigateTo({ url: '/pages/my/withdraw/index' })}>
-          <Image className='image' src='http://cdn.geekbuluo.com/huodong.png'/>
+          <Image className='image' src='https://cdn.geekbuluo.com/huodong.png'/>
           <Text>兑换记录</Text>
         </View>
         <View
           className='item'
           onClick={() => Taro.navigateTo({ url: '/pages/my/award/index' })}>
-          <Image className='image' src='http://cdn.geekbuluo.com/jifen.png' />
+          <Image className='image' src='https://cdn.geekbuluo.com/jifen.png' />
           <Text>收支记录</Text>
         </View>
         <View
           className='item'>
           <Image
             className='image'
-          src='http://cdn.geekbuluo.com/zhanghao.png'
+          src='https://cdn.geekbuluo.com/zhanghao.png'
             onClick={() => Taro.navigateTo({ url: '/pages/my/account/index' })}
             />
           <Text>账号设置</Text>
@@ -77,13 +77,13 @@ function Index() {
         <View
           className='item'
           onClick={() => Taro.navigateTo({ url: '/pages/my/suggest/index' })}>
-          <Image className='image' src='http://cdn.geekbuluo.com/yijianjianyi.png' />
+          <Image className='image' src='https://cdn.geekbuluo.com/yijianjianyi.png' />
           <Text>意见反馈</Text>
         </View>
-        <View className='item'>
-          <Image className='image' src='http://cdn.geekbuluo.com/qrcode.png' />
+        {/* <View className='item'>
+          <Image className='image' src='https://cdn.geekbuluo.com/qrcode.png' />
           <Text>我的海报</Text>
-        </View>
+        </View> */}
       </View>
     </View>
   )

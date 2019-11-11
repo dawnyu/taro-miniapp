@@ -12,9 +12,19 @@ function Index() {
     const list = [...res.data]
     setRecords([...list])
   })
+
+  const check = () => {
+    Taro.navigateTo({
+      url: '/pages/my/check/index'
+    })
+  }
   
    return (
     <View className='container'>
+      <View
+        className='top-tip'
+        onClick={check}
+      ><Text>审核规则</Text></View>
       <View className='header'>
         <Text>商品名称</Text>
         <Text>兑换时间</Text>
@@ -27,11 +37,11 @@ function Index() {
             className='record-item'
             key={item.id}>
             <View className='left'>
-              <View>{TradeEnum[item.type * 1]}</View>
+              <View>{item.goodName || TradeEnum[item.type * 1]}</View>
             </View>
             <View className='center'>{item.tradeTime}</View>
             <View className='right'>
-                <Text className={item.check === 0 ? 'check' : 'over'}>{['待审核', '已到账'][item.check]}</Text>
+                <Text className={item.check === 0 ? 'check' : 'over'}>{['审核中', '已到账'][item.check]}</Text>
             </View>
           </View>)
         }

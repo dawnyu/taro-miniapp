@@ -1,4 +1,5 @@
 import Taro, { Component, Config } from '@tarojs/taro'
+import './utils/ald-stat'
 import '@tarojs/async-await'
 import Index from './pages/index'
 import './assets/iconfont/iconfont.scss'
@@ -11,7 +12,7 @@ import './app.scss'
 //   require('nerv-devtools')
 // }
 
-class App extends Component {
+class _App extends Component {
 
   /**
    * 指定config的类型声明为: Taro.Config
@@ -29,6 +30,7 @@ class App extends Component {
       'pages/rank/index',
       'pages/mission/index',
       'pages/friends/index',
+      'pages/my/check/index',
       'pages/my/index',
       'pages/my/withdraw/index',
       'pages/my/suggest/index',
@@ -76,4 +78,4 @@ class App extends Component {
   }
 }
 
-Taro.render(<App />, document.getElementById('app'))
+Taro.render(<_App />, document.getElementById('app'))

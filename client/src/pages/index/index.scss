@@ -1,14 +1,13 @@
-@import "~taro-ui/dist/style/components/icon.scss";
 @import "~taro-ui/dist/style/components/modal.scss";
 
 .container {
   height: 100vh;
   overflow: auto;
-  // background: linear-gradient(#1D2045 30%, #1D2045, #2C2B40);
-  background: url(http://cdn.geekbuluo.com/qiandao/bg.png);
+  background: url(https://cdn.geekbuluo.com/qiandao/bg.png);
   background-size: 750px auto;
   background-position-y: -98px;
   background-repeat: no-repeat;
+  -webkit-overflow-scrolling: touch;
   .header {
     display: flex;
     align-items: center;
@@ -171,7 +170,7 @@
       height: 360px;
       background-color: rgb(252, 238, 231);
       text-align: center;
-      background-image: url(http://cdn.geekbuluo.com/yiqihai-min.png);
+      background-image: url(https://cdn.geekbuluo.com/yiqihai-min.png);
       background-size: 300px 170px;
       background-repeat: no-repeat;
       background-position: 170px 100px;
@@ -245,12 +244,15 @@
         background: #F8D253;
         border-radius: 25px;
       }
+      .icon-arrow-right {
+        font-size: 36px;
+      }
     }
     .red-packet-convert {
       display: flex;
       flex-wrap: wrap;
       padding: 0 20px;
-      justify-content: space-between;
+      justify-content: space-around;
       background: #fff;
     }
   }
@@ -294,7 +296,7 @@
       align-items: center;
       text-align: center;
       font-size: 28px;
-      &:active {
+      &-hover {
         font-size: 26px;
         image {
           width: 60px;
@@ -315,7 +317,7 @@
     left: 0;
     top: 0;
     right: 0;
-    background-image: url(http://cdn.geekbuluo.com/kaimen.png);
+    background-image: url(https://cdn.geekbuluo.com/kaimen.png);
     background-size: 650px 740px;
     background-repeat: no-repeat;
     background-position: 50% 30%;
@@ -374,7 +376,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background-image: url(http://cdn.geekbuluo.com/25e6e2982285693c4b91b015c6adb573-min.png);
+      background-image: url(https://cdn.geekbuluo.com/25e6e2982285693c4b91b015c6adb573-min.png);
       background-size: 100% 100%;
       padding-left: 10px;
       &-text {
@@ -384,27 +386,14 @@
           font-weight: bold;
           margin: 0 5px;
         }
-        .icon-yuanbao {
-          font-size: 48px!important;
-        }
-      }
-    }
-    .icon-yuanbao {
-      font-size: 40px;
-    }
-    .modal-close {
-      margin-top: 150px;
-      .icon-guanbi {
-        font-size: 50px;
-        color: rgb(221, 172, 12);
       }
     }
   }
 
-  .at-icon-close {
-    color: rgba(165, 164, 164, 0.541);
-    font-size: 50px;
-    margin-top: 80px;
+  .modal-close {
+    margin-top: 100px;
+    color: rgb(223, 222, 222);
+    font-size: 28px;
   }
 
   .at-modal__container {

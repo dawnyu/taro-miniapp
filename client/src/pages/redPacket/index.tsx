@@ -1,7 +1,8 @@
 import Taro, { useRouter, useDidShow, useState, useContext } from '@tarojs/taro'
 import store from '@/store/index'
 import { observer } from '@tarojs/mobx'
-import { View, Text, Image, Button } from '@tarojs/components'
+import Dialog from '@/components/Dialog'
+import { View, Text, Image, Button, OpenData } from '@tarojs/components'
 import storage from '@/storage'
 import './index.scss'
 
@@ -10,6 +11,9 @@ function RedPacket() {
   const router = useRouter()
   const [details, setDetails] = useState()
   const [buttonText, setButtonText] = useState('')
+  const [visible, setVisible] = useState()
+  const [dialogOptions, setDialogOptions] = useState()
+
   useDidShow(() => {
     const goods = storage.get('goods')
     const good = goods.find(item => item.id === +router.params.id)
@@ -22,9 +26,10 @@ function RedPacket() {
   const conversion = async () => {
     try {
       await trade({ redPacketId: details.id, type: details.type * 1 })
-      Taro.showToast({
+      setVisible(true)
+      setDialogOptions({
+        type: 3,
         title: '兑换成功',
-        icon: 'none'
       })
     } catch (e) {
       Taro.showToast({
@@ -34,11 +39,18 @@ function RedPacket() {
       })
     }
   }
+  const closeDialog = () => {
+    setVisible(false)
+    Taro.navigateTo({
+      url: '/pages/my/withdraw/index'
+    })
+  }
   return (
     <View className='container'>
       <View className='red-packet-container'>
         <View className='red-packet-image'>
-          <Image src={details.image} />
+          <Image src={details.image}
+            mode='aspectFit'/>
           {
             (details.type === 3 || details.type === 4 || details.type === 6) &&
             <View className='float'>
@@ -46,11 +58,19 @@ function RedPacket() {
               <View className='value'>{details.value}元</View>
             </View>
           }
+          {
+            (details.type === 5) &&
+            <View className='float'>
+              <View className='type'>话费充值</View>
+              <View className='value'>{details.value}元</View>
+            </View>
+          }
         </View>
         <View className='red-packet-title'><Text>{details.title}</Text><Text>剩余{details.inventory}个</Text></View>
-        {/* <View className='red-packet-price'>
-          <View>{details.price}{config.unit} {details.withdraw > 0 ? <Text>消耗{details.withdraw}答题卡</Text> : null} </View>
-        </View> */}
+        <OpenData
+          type='groupName'
+          open-gid=''
+        />
       </View>
       <View className='good-detail'>
         <View className='header-line'>兑换详情</View>
@@ -63,6 +83,11 @@ function RedPacket() {
         {!userInfo.newuser && details.type * 1 === 3 && <Button className='disable-btn'>新用户才能兑换</Button>}
         {!(!userInfo.newuser && details.type * 1 === 3) && <Button onClick={() => conversion()}>{buttonText}</Button>}}
       </View>
+      <Dialog
+        visible={visible}
+        options={dialogOptions}
+        close={closeDialog}>
+      </Dialog>
     </View>
   )
 }

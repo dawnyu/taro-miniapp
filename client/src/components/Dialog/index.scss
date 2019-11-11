@@ -1,0 +1,96 @@
+
+.container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  background: rgba(0, 0, 0, 0.329);
+}
+
+  .content {
+    position: absolute;
+    z-index: 1004;
+    height: 658px;
+    margin-top: 15vh;
+    width: 100%;
+    background-image: url(https://cdn.geekbuluo.com/a66f5a36a528466c1c8eb8c36c9141457239dd291981-Lsz1JU.png);
+    background-size: 720px 598px;
+    background-position-x: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+
+    .title {
+      color: rgb(221, 172, 12);
+      margin-top: 5%;
+      text-align: center;
+      font-size: 42px;
+    }
+
+    .body {
+      color: #333;
+      margin: 0px 20px 0px 40px;
+      font-size: 28px;
+      height: 260px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .image {
+        height: 120px;
+      }
+      .label {
+        color: red;
+        text-align: center;
+
+        view:nth-child(1) {
+          font-size: 42px;
+        }
+
+        &-value {
+          color: rgb(248, 191, 2);
+          margin: 0 20px;
+          font-weight: bold;
+          font-size: 80px;
+        }
+      }
+      .item {
+        margin: 30px 0;
+
+        text {
+          width: 40px;
+          height: 40px;
+          text-align: center;
+          color: #fff;
+          margin-right: 10px;
+          display: inline-block;
+          background-color: #ffc003;
+          border-radius: 50%;
+        }
+      }
+    }
+    .answersheet {
+      text-align: center;
+      font-size: 28px;
+      color: #999;
+    }
+    .attention {
+      margin-top: 20px;
+      text-align: center;
+      .qrcode {
+        width: 220px;
+        height: 220px;
+      }
+    }
+  }
+
+  .close {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    color: rgb(223, 222, 222);
+    font-size: 28px;
+  }

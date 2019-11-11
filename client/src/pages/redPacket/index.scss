@@ -1,12 +1,10 @@
-@import "~taro-ui/dist/style/components/icon.scss";
 
 .container {
   width: 100vw;
   height: 100vh;
   overflow: auto;
   background: rgb(236, 236, 236);
-  // background: linear-gradient(#1D2045 30%, #1D2045, #692003);
-
+  -webkit-overflow-scrolling: touch;
   .header-line {
     font-size: 28px;
     padding-left: 20px;
@@ -37,17 +35,14 @@
       text-align: center;
       .float {
         position: absolute;
+        top: 160px;
         .type,
         .value {
           text-align: center;
           color: #F8D253;
           font-size: 28px;
         }
-        .type {
-          margin-top: 30px;
-        }
         .value {
-          margin-top: 10px;
           font-size: 36px;
         }
       }

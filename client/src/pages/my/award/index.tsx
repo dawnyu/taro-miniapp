@@ -16,7 +16,7 @@ function Index() {
       return {
         title: '来跟我一起答题呀>.<',
         path: `/pages/index/index?superior=${userInfo.openid}`,
-        imageUrl: 'http://cdn.geekbuluo.com/20191101012651-min.jpg'
+        imageUrl: 'https://cdn.geekbuluo.com/20191101012651-min.jpg'
       }
     }
   })
@@ -53,7 +53,7 @@ function Index() {
         <View>
           {config.unit || '积分'}：<Text className='balance'>{userInfo.balance}</Text></View>
       </View>
-      {config.check === 1 &&
+      {config.check1 === 1 &&
         <Button
           className='share'
           openType='share'>推荐好友得{config.unit}和兑换卡</Button>

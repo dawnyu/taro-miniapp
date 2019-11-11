@@ -1,6 +1,7 @@
 @import '../../assets/kuhei/kuhei.wxss';
 
 .container {
+  -webkit-overflow-scrolling: touch;
   .title {
     font-family: kuhei;
     font-size: 110px;
@@ -23,6 +24,7 @@
     margin-top: 60px;
     box-shadow: inset 0px 20px 15px -10px #EC6A58;
     width: 93%;
+    -webkit-overflow-scrolling: touch;
     .user-item,
     .table-title {
       height: 80px;
@@ -73,19 +75,19 @@
       left:36px;
       top: -7px;
       position: absolute;
-      background-image: url(http://cdn.geekbuluo.com/num2.png);
+      background-image: url(https://cdn.geekbuluo.com/num2.png);
       background-repeat: no-repeat;
       background-size: 48px 60px;
     }
   }
   .num2 {
     &::before {
-      background-image: url(http://cdn.geekbuluo.com/num3.png);
+      background-image: url(https://cdn.geekbuluo.com/num3.png);
     }
   }
   .num3 {
     &::before {
-      background-image: url(http://cdn.geekbuluo.com/num1.png);
+      background-image: url(https://cdn.geekbuluo.com/num1.png);
     }
   }
   width: 92vw;

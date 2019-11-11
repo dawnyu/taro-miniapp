@@ -1,17 +1,15 @@
 import Taro, { useContext, useState, useDidShow, useShareAppMessage } from '@tarojs/taro'
-import { View, Text, Image } from '@tarojs/components'
+import { View, Text, Image, Button } from '@tarojs/components'
 import { observer } from '@tarojs/mobx'
-import { AtModal } from 'taro-ui'
+import Dialog from '@/components/Dialog'
 import store from '@/store/index'
 import { getQs } from '@/service/cloud'
 import './index.scss'
 
 function Index() {
-  const { qtype, answer, userInfo, config} = useContext(store) as any
+  const { qtype, answer, userInfo} = useContext(store) as any
   const [visible, setVisible] = useState(false)
-  const [right, setRight] = useState(false)
-  const [award, setAward] = useState(0)
-  const [answersheet, setAnswersheet] = useState(userInfo.answersheet)
+  const [dialogOptions, setDialogOptions] = useState()
   const [topic, setTopic] = useState({
     id: '',
     type: 0,
@@ -21,20 +19,11 @@ function Index() {
   })
   useShareAppMessage(() => {
     return {
-      title: '好友发红包啦，快来答题分红包吧！',
+      title: '我觉得这道题你肯定会，帮帮我吧：）',
       path: `/pages/index/index?superior=${userInfo.openid}`,
-      imageUrl: 'http://cdn.geekbuluo.com/20191101012651-min.jpg'
+      // imageUrl: 'https://cdn.geekbuluo.com/20191101012651-min.jpg'
     }
   })
-
-  const rightOption = {
-    image: 'http://cdn.geekbuluo.com/daduile.png',
-    title: '恭喜您答对了',
-  }
-  const failOption = {
-    image: 'http://cdn.geekbuluo.com/jusang-min.png',
-    title: '很遗憾答错了',
-  }
 
   useDidShow(() => {
     nextQs()
@@ -68,16 +57,20 @@ function Index() {
     if (userInfo.answersheet >= 0) {
       random = Math.round(Math.random() * 3) + 1
     }
-    setAward(random)
     setVisible(true)
-    setRight(val)
     await answer({
       random,
       qid: topic.id,
       type: qtype,
       right: val,
     })
-    setAnswersheet(userInfo.answersheet)
+    setDialogOptions({
+      type: val ? 1 : 2,
+      title: val ? '恭喜您答对了' : '很遗憾答错了',
+      award: random,
+      answersheet: userInfo.answersheet
+
+    })
     nextQs() // 切换下一题
   }
 
@@ -102,49 +95,19 @@ function Index() {
             </Text>
           )}
         </View>}
-      <AtModal
-        isOpened={visible}
-        closeOnClickOverlay
-      >
-        {!right &&
-          <View className='atmodal-content'>
-            <Image src={failOption.image} />
-            <View className='atmodal-content-label'>
-              <View>{failOption.title}</View>
-              <View>
-              </View>
-              <View
-                onClick={() => setVisible(false)}
-                className='modal-close'
-              >
-                <View className='iconfont icon-guanbi'></View>
-              </View>
-            </View>
-          </View>}
-        {right &&
-          <View className='atmodal-content'>
-            <Image src={rightOption.image} />
-            <View className='atmodal-content-label'>
-              <View>{rightOption.title}</View>
-              {
-                answersheet <= 0 ?
-                <View>
-                  <Text>答题卡已用完，本次答题无奖励</Text>
-                </View>
-                : 
-                <View>获得
-                <Text className='atmodal-content-label-value'>{award}</Text>{config.unit}
-                </View>
-              }
-              <View
-                onClick={() => setVisible(false)}
-                className='modal-close'
-              >
-                <View className='iconfont icon-guanbi'></View>
-              </View>
-            </View>
-          </View>}
-      </AtModal>
+        <View className='btn-group'>
+          <Button
+            openType='share'
+            >考考好友</Button>
+          <View
+          onClick={nextQs}
+          >下一题</View>
+        </View>
+      <Dialog
+        visible={visible}
+        options={dialogOptions}
+        close={() => setVisible(false)}>
+      </Dialog>
     </View>
   )
 }
