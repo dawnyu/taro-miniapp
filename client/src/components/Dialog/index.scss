@@ -12,11 +12,11 @@
   .content {
     position: absolute;
     z-index: 1004;
-    height: 658px;
+    height: 690px;
     margin-top: 15vh;
     width: 100%;
     background-image: url(https://cdn.geekbuluo.com/a66f5a36a528466c1c8eb8c36c9141457239dd291981-Lsz1JU.png);
-    background-size: 720px 598px;
+    background-size: 730px 598px;
     background-position-x: center;
     background-repeat: no-repeat;
     overflow: hidden;
@@ -83,6 +83,12 @@
         height: 220px;
       }
     }
+  }
+  .banner-ad {
+    width: 82.5%;
+    margin: 0 auto;
+    margin-top: 40px;
+    padding-left: 12px;
   }
 
   .close {

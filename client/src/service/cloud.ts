@@ -179,4 +179,11 @@ export const getConfig = (): Promise<any> =>
     data: null,
   })
 
-
+/**
+* 获取商品详情
+*/
+export const getGood = (data): Promise<any> =>
+  request.post({
+    action: 'getGood',
+    data,
+  })

@@ -1,5 +1,5 @@
 import Taro, { useState, useDidShow } from '@tarojs/taro'
-import { View, Text } from '@tarojs/components'
+import { View, Text  } from '@tarojs/components'
 import { getWithdraw } from '@/service/cloud'
 import { TradeEnum } from '@/enum'
 import './index.scss'
@@ -25,6 +25,8 @@ function Index() {
         className='top-tip'
         onClick={check}
       ><Text>审核规则</Text></View>
+       <View className='banner-ad'>
+       </View>
       <View className='header'>
         <Text>商品名称</Text>
         <Text>兑换时间</Text>
@@ -41,7 +43,7 @@ function Index() {
             </View>
             <View className='center'>{item.tradeTime}</View>
             <View className='right'>
-                <Text className={item.check === 0 ? 'check' : 'over'}>{['审核中', '已到账'][item.check]}</Text>
+                <Text className={item.check1 === 0 ? 'check' : 'over'}>{['审核中', '已到账'][item.check]}</Text>
             </View>
           </View>)
         }

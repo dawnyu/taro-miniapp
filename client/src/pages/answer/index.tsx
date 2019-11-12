@@ -1,5 +1,5 @@
 import Taro, { useContext, useState, useDidShow, useShareAppMessage } from '@tarojs/taro'
-import { View, Text, Image, Button } from '@tarojs/components'
+import { View, Text, Image, Button, Ad } from '@tarojs/components'
 import { observer } from '@tarojs/mobx'
 import Dialog from '@/components/Dialog'
 import store from '@/store/index'
@@ -21,7 +21,6 @@ function Index() {
     return {
       title: '我觉得这道题你肯定会，帮帮我吧：）',
       path: `/pages/index/index?superior=${userInfo.openid}`,
-      // imageUrl: 'https://cdn.geekbuluo.com/20191101012651-min.jpg'
     }
   })
 
@@ -76,33 +75,41 @@ function Index() {
 
   return (
     <View className='container'>
-      <View className='topic'>
-        {qtype === 0 && 
-        <View className='idiom-title'>
-          {topic.title.map(item => <Text key={item}>{item === '?' ? '__': item}</Text>)}
-        </View>}
-      </View>
-      {qtype === 0 &&
-        <View
-          className='idiom-option'
-        >
-          {topic.options.map((item) => 
-            <Text
-              onClick={() => answerHanle(item === topic.answer)}
-              key={item}
-            >
-            {item}
-            </Text>
-          )}
-        </View>}
+      <View className='body'>
+        <View className='topic'>
+          {qtype === 0 &&
+            <View className='idiom-title'>
+              {topic.title.map(item => <Text key={item}>{item === '?' ? '__' : item}</Text>)}
+            </View>}
+        </View>
+        {qtype === 0 &&
+          <View
+            className='idiom-option'
+          >
+            {topic.options.map((item) =>
+              <Text
+                onClick={() => answerHanle(item === topic.answer)}
+                key={item}
+              >
+                {item}
+              </Text>
+            )}
+          </View>}
         <View className='btn-group'>
           <Button
             openType='share'
-            >考考好友</Button>
+          >考考好友</Button>
           <View
-          onClick={nextQs}
+            onClick={nextQs}
           >下一题</View>
         </View>
+      </View>
+      <View className='banner-ad'>
+        <Ad
+          unitId="adunit-effb4b2965cc8895"
+          unit-id="adunit-effb4b2965cc8895"
+          ad-intervals={60}></Ad>
+      </View>
       <Dialog
         visible={visible}
         options={dialogOptions}

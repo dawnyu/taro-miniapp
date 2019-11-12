@@ -63,7 +63,9 @@ class _App extends Component {
     Taro.setStorageSync('isAuth', authSetting['scope.userInfo'])
   }
 
-  componentDidShow () {}
+  componentDidShow () {
+
+  }
 
   componentDidHide () {}
 

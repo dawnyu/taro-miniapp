@@ -2,8 +2,9 @@ import Taro, { useRouter, useDidShow, useState, useContext } from '@tarojs/taro'
 import store from '@/store/index'
 import { observer } from '@tarojs/mobx'
 import Dialog from '@/components/Dialog'
-import { View, Text, Image, Button, OpenData } from '@tarojs/components'
-import storage from '@/storage'
+import { View, Text, Image, Button, OpenData, Ad } from '@tarojs/components'
+import { getGood } from '@/service/cloud'
+
 import './index.scss'
 
 function RedPacket() {
@@ -14,9 +15,8 @@ function RedPacket() {
   const [visible, setVisible] = useState()
   const [dialogOptions, setDialogOptions] = useState()
 
-  useDidShow(() => {
-    const goods = storage.get('goods')
-    const good = goods.find(item => item.id === +router.params.id)
+  useDidShow(async() => {
+    const {data: good} = await getGood({ id: router.params.id })
     setDetails({
       ...good,
       goodDetails: good.goodDetails && good.goodDetails.split('<br>')
@@ -71,6 +71,12 @@ function RedPacket() {
           type='groupName'
           open-gid=''
         />
+      </View>
+      <View className='banner-ad'>
+        <Ad
+          unitId="adunit-6e83efa7722c7ed9"
+          unit-id="adunit-6e83efa7722c7ed9"
+          ad-intervals={60}></Ad>
       </View>
       <View className='good-detail'>
         <View className='header-line'>兑换详情</View>

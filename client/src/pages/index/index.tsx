@@ -1,6 +1,6 @@
 import Taro, { useContext, useDidShow,
   useState, useEffect, useShareAppMessage } from '@tarojs/taro'
-import { View, Text, Image, Button, OpenData } from '@tarojs/components'
+import { View, Text, Image, Button, OpenData, Ad } from '@tarojs/components'
 import { AtModal } from 'taro-ui'
 import { observer } from '@tarojs/mobx'
 import store from '@/store/index'
@@ -202,6 +202,12 @@ function Index() {
               <Text className='friend-text'>攒兑换卡</Text>
             </View>
          }
+        </View>
+        <View className='banner-ad'>
+          <Ad
+            unitId="adunit-e77dadb2eafec124"
+            unit-id="adunit-e77dadb2eafec124"
+            ad-intervals={60}></Ad>
         </View>
         {config.check1 === 1 &&  <View className='header-line'>0元免费换</View>}
         {config.check1 === 1 &&  <View className='red-packet-convert'>

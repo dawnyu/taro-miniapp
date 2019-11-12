@@ -1,7 +1,7 @@
 import Taro, { useContext } from '@tarojs/taro'
 import store from '@/store/index'
 import { observer } from '@tarojs/mobx'
-import { View, Text, Image } from '@tarojs/components'
+import { View, Text, Image, Ad } from '@tarojs/components'
 import './index.scss'
 
 // options: {type: 1=答题答对题 2=答题答错题}
@@ -56,7 +56,12 @@ function Dialog(props: any)  {
             (options.type === 1 || options.type === 2) && 
             <View className='answersheet'>剩余答题卡 x {options.answersheet}</View>
           }
-        
+        <View className='banner-ad'>
+          <Ad
+            unitId="adunit-effb4b2965cc8895"
+            unit-id="adunit-effb4b2965cc8895"
+            ad-intervals={60}></Ad>
+        </View>
           <View
             onClick={close}
             className='close'>点击关闭</View>

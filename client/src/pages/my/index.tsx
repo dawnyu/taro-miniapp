@@ -1,5 +1,5 @@
 import Taro, { useContext, useDidShow, useState } from '@tarojs/taro'
-import { View, OpenData, Image, Text } from '@tarojs/components'
+import { View, OpenData, Image, Text, Ad } from '@tarojs/components'
 import { observer } from '@tarojs/mobx'
 import store from '@/store/index'
 import { QuestionEnum } from '@/enum'
@@ -84,6 +84,12 @@ function Index() {
           <Image className='image' src='https://cdn.geekbuluo.com/qrcode.png' />
           <Text>我的海报</Text>
         </View> */}
+      </View>
+      <View className='banner-ad'>
+        <Ad
+          unitId="adunit-835fed49a77040b4"
+          unit-id="adunit-835fed49a77040b4"
+          ad-intervals={60}></Ad>
       </View>
     </View>
   )

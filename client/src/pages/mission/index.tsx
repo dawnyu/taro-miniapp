@@ -4,10 +4,9 @@ import Taro, {
   useState,
   useShareAppMessage
 } from '@tarojs/taro'
-import { View, Image, Text, Button } from '@tarojs/components'
+import { View, Image, Text, Button, Ad } from '@tarojs/components'
 import MyModal from '@/components/Modal'
 import { AtModal } from 'taro-ui'
-// import Calendar from '@/components/Calendar'
 import { observer } from '@tarojs/mobx'
 import store from '@/store/index'
 import { getUserinfo } from '@/utils'
@@ -129,6 +128,12 @@ async function Index() {
             <View className='text'>{'···  '}<Text className='em'>{part}</Text>人已参与</View>
           </View>
         </View>
+      </View>
+      <View className='banner-ad'>
+        <Ad
+          unitId="adunit-b023d9053cccbda2"
+          unit-id="adunit-b023d9053cccbda2"
+          ad-intervals={60}></Ad>
       </View>
       <View className='bottom'>
         <Button

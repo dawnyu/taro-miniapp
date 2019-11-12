@@ -119,18 +119,10 @@ class Index {
   }
 
   async getGoods() {
-    const localGoods = storage.get('goods')
-    if (localGoods) {
-      this.goods = localGoods
-    } else {
-      const { data } = await getGoods()
-      runInAction(() => {
-        this.goods = data || []
-      })
-      if (data && data.length > 0) {
-        storage.set('goods', data, 60 * 24)
-      }
-    }
+    const { data } = await getGoods()
+    runInAction(() => {
+      this.goods = data || []
+    })
   }
 }
 

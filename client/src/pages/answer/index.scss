@@ -1,15 +1,16 @@
 @import "~taro-ui/dist/style/components/modal.scss";
 
 .container {
-  width: 92vw;
-  height: 100vh;
-  padding: 0 4vw;
   overflow: auto;
   background-image: url(https://cdn.geekbuluo.com/qiandao/bg.png);
   background-size: 750px auto;
   background-position-y: -98px;
   background-repeat: no-repeat;
   -webkit-overflow-scrolling: touch;
+  .body {
+     width: 92vw;
+     padding: 0 4vw;
+  }
    .topic {
      width: 80vw;
      margin: 50px auto;
@@ -40,7 +41,6 @@
     }
   }
   .btn-group {
-    height: 200px;
     display: flex;
     margin-top: 50px;
     justify-content: space-around;
@@ -53,9 +53,14 @@
       color: #fff;
       font-weight: bolder;
       font-size: 36px;
+      border-color: transparent;
       animation: 'share-ani'1s linear infinite;
       background-size: 100% 100%;
       background-color: transparent;
+      &::after {
+        content: "";
+        border: none;
+      }
     }
     button {
       background-image: url(https://cdn.geekbuluo.com/button/button1.png);
@@ -86,3 +91,6 @@
       }
     }
 }
+  .banner-ad {
+    margin-top: 6px;
+  }

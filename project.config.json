@@ -56,6 +56,20 @@
 					"pathName": "pages/index/index",
 					"query": "superior=oEKOL5ZVNCKkSEWAgtQyhP6MuUPc",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/index/index",
+					"pathName": "pages/index/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/index/index",
+					"pathName": "pages/index/index",
+					"query": "",
+					"scene": null
 				}
 			]
 		}

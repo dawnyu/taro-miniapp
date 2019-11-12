@@ -1,5 +1,5 @@
 import Taro, { useDidShow, useState, useContext, useShareAppMessage } from '@tarojs/taro'
-import { View, Text, Image, Button } from '@tarojs/components'
+import { View, Text, Image, Button, Ad } from '@tarojs/components'
 import { observer } from '@tarojs/mobx'
 import store from '@/store/index'
 import { getFriends } from '@/service/cloud'
@@ -34,16 +34,25 @@ function Index() {
   })
   return (
     <View className='container'>
+      {config.check1 === 1 &&
       <Image
         mode='widthFix'
         className='friend-banner'
-        src={friend}/>
-        <View className='friend-tip'>永久享好友收益的10%+1兑换卡</View>
+        src={friend}/>}
+      {
+        config.check1 === 1 && <View className='friend-tip'>永久享好友收益的10%+1兑换卡</View>
+      }
       {
         <Button
           className='share'
           openType='share'>{config.check1 === 1 ? `推荐好友得${config.unit}和兑换卡` : '添加好友'}</Button>
       }
+      <View className='banner-ad'>
+        <Ad
+          unitId="adunit-e6e41877385adafb"
+          unit-id="adunit-e6e41877385adafb"
+          ad-intervals={60}></Ad>
+      </View>
       <View className='content'>
         <View className='header-line'>
           <Text>好友昵称</Text>

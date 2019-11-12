@@ -20,19 +20,26 @@ function Index() {
 
   return (
     <View className='container'>
-      <View className='body'>
-        <View className='header-line'><Text>1</Text>添加微信审核群</View>
-        <View>
-          <Image
-            mode='aspectFit'
-            onClick={previewImage}
-            src={config.flock} />
-          <View className='content-line'>点击二维码预览，长按加入审核群</View>
+     {
+        config.check1 === 1 && <View className='body'>
+          <View className='header-line'><Text>1</Text>添加微信审核群</View>
+          <View>
+            <Image
+              mode='aspectFit'
+              onClick={previewImage}
+              src={config.flock} />
+            <View className='content-line'>点击二维码预览，长按加入审核群</View>
+          </View>
+          <View className='header-line'><Text>2</Text>
+            答题币兑换红包后 @客服筱筱 审核
         </View>
-        <View className='header-line'><Text>2</Text>
-        答题币兑换红包后 @客服筱筱 审核
         </View>
-      </View>
+     }
+     {
+        config.check1 === 0 && <View>
+          请联系客服咨询
+        </View>
+     }
     </View>
   )
 }
