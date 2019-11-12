@@ -9,6 +9,7 @@ import {
   answer,
   getUser,
   getConfig,
+  addAnswerSheet,
 } from '../service/cloud'
 
 class Index {
@@ -79,19 +80,27 @@ class Index {
     }
   }
 
+  async addAnswerSheet(payload) {
+    const { status, data } = await addAnswerSheet(payload)
+    if (status === 0) {
+      runInAction(() => {
+        this.userInfo = data
+      })
+    } else {
+      throw new Error('更新失败')
+    }
+  }
+
   /**
    * 答题操作
    * @param payload 
    */
   async answer(payload) {
-    Taro.showLoading()
     const { status } = await answer(payload)
     if (status === 0) {
       await this.getUser()
-      Taro.hideLoading()
     } else {
-      Taro.hideLoading()
-      throw new Error('更新失败')
+      throw new Error('操作失败')
     }
   }
   
@@ -132,6 +141,7 @@ decorate(Index, {
   getUser: action.bound,
   update: action.bound,
   login: action.bound,
+  addAnswerSheet: action.bound,
   qtype: observable,
   getConfig: action.bound,
   setQType: action.bound,

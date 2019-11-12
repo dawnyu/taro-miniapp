@@ -15,6 +15,7 @@ import qiandao from '@/assets/images/qiandao.png'
 import { systemTime, openRedEnvelope } from '@/service/cloud'
 import './index.scss'
 
+let videoAd: any
 function Index() {
   const {
     userInfo,
@@ -25,6 +26,7 @@ function Index() {
     trade,
     login,
     getConfig,
+    addAnswerSheet,
     config,
   } = useContext(store) as any
   useShareAppMessage(() => {
@@ -62,7 +64,40 @@ function Index() {
       }
     }
     openRedEnvelopeHandle(false)
+    if (wx.createRewardedVideoAd) {
+      videoAd = wx.createRewardedVideoAd({
+        adUnitId: 'adunit-6ea9b38b4d7240a5'
+      })
+      videoAd.onLoad(() => { })
+      videoAd.onError((err) => { })
+      videoAd.onClose(async(res) => {
+        console.log('播放完成', res.isEnded)
+        if (res && res.isEnded) {
+          await addAnswerSheet()
+          Taro.showToast({
+            title: '获取3张答题卡'
+          })
+          
+        } else {
+          // 播放中途退出，不下发游戏奖励
+        }
+       })
+    }
   })
+
+  const toShowVideo = () => {
+    console.log(33, videoAd)
+    if (videoAd) {
+      videoAd.show().catch(() => {
+        // 失败重试
+        videoAd.load()
+          .then(() => videoAd.show())
+          .catch(err => {
+            console.log('激励视频 广告显示失败')
+          })
+      })
+    }
+  }
 
   useEffect(() => {
     function full(val) {
@@ -176,9 +211,9 @@ function Index() {
             config.check1 === 1 && <View className='floaticon'>
               <Image
                 className='sign'
-                onClick={() => Taro.navigateTo({ url: '/pages/mission/index' })}
-                src='https://cdn.geekbuluo.com/qiandao1-min.png' />
-
+                onClick={toShowVideo}
+                src='https://cdn.geekbuluo.com/A218.png' />
+                <Text className='sign-text'>观看视频</Text>
               <Image
                 className={countDown > 0 ? 'open-red' : 'open-red open-red-animate'}
                 onClick={() => openRedEnvelopeHandle(countDown === 0)}

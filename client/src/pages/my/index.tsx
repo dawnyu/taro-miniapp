@@ -6,6 +6,7 @@ import { QuestionEnum } from '@/enum'
 import { getSign } from '@/service/cloud'
 import './index.scss'
 
+let interstitialAd:any
 function Index() {
   const { qtype, userInfo, config } = useContext(store) as any
   const [sign, setSign] = useState()
@@ -13,7 +14,18 @@ function Index() {
     getSign().then(res => {
       setSign({ ...res.data })
     })
+    if (wx.createInterstitialAd) {
+      interstitialAd = wx.createInterstitialAd({
+        adUnitId: 'adunit-74b1032c62344261'
+      })
+    }
+    if (interstitialAd) {
+      interstitialAd.show().catch((err) => {
+        console.error(err)
+      })
+    }
   })
+
   return (
     <View className='container'>
       <View className='header'>

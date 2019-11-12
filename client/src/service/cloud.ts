@@ -187,3 +187,13 @@ export const getGood = (data): Promise<any> =>
     action: 'getGood',
     data,
   })
+
+/**
+* 增加答题卡
+*/
+export const addAnswerSheet = (data): Promise<any> =>
+  request.post({
+    action: 'addAnswerSheet',
+    data,
+  })
+
