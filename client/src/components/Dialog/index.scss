@@ -12,7 +12,7 @@
   .content {
     position: absolute;
     z-index: 1004;
-    height: 690px;
+    // height: 690px;
     margin-top: 15vh;
     width: 100%;
     background-image: url(https://cdn.geekbuluo.com/a66f5a36a528466c1c8eb8c36c9141457239dd291981-Lsz1JU.png);
@@ -92,11 +92,8 @@
   }
 
   .close {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    margin-top: 28px;
     text-align: center;
-    color: rgb(223, 222, 222);
+    color: rgb(247, 244, 244);
     font-size: 28px;
   }

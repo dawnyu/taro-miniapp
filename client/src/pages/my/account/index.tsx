@@ -68,13 +68,6 @@ function Index() {
 
   return (
     <View className='container'>
-      {/* {config.check === 0 &&
-        <Button
-          className='btn-center'
-          onClick={setClipboardData}
-          type='primary'
-        >添加客服</Button>
-      } */}
         <Form onSubmit={formSubmit} >
           <View className='item'>
             <View className='label'>

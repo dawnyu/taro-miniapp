@@ -26,6 +26,10 @@ function Index() {
     }
   ]
   const selected = (type = 0): any => {
+    Taro.setStorage({
+      key: 'qtype',
+      data: type,
+    })
     setQType(type)
     Taro.navigateBack({ delta: 1 })
   }

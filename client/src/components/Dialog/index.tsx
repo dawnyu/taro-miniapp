@@ -48,7 +48,7 @@ function Dialog(props: any)  {
                 className='qrcode'
                 onClick={previewImage}
                 src={config.qrcode}/>
-                <View>点击二维码加入审核群</View>
+                <View>点击二维码添加客服审核</View>
             </View>
           }
           </View>

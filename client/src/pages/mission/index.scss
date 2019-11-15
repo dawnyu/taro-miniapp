@@ -228,31 +228,31 @@
     position: relative;
     z-index: 1004;
     height: 800px;
+    width: 610px;
     text-align: center;
     background: transparent;
-
     &-label {
       color: rgb(253, 195, 5);
       text-align: center;
-      width: 500px;
-      height: 450px;
+      width: 610px;
+      height: 440px;
       display: flex;
       position: relative;
       align-items: center;
       justify-content: center;
       background-image: url(https://cdn.geekbuluo.com/qiandao/modal.png);
-      background-size: 100% auto;
+      background-size: 610px auto;
       background-repeat: no-repeat;
       padding-left: 10px;
       &-title {
         font-size: 32px;
         position: absolute;
         color: #fff;
-        top: 140px;
+        top: 172px;
       }
       &-text {
         font-size: 32px;
-        margin-top: 65px;
+        margin-top: 222px;
 
         text {
           font-size: 45px;
@@ -263,7 +263,7 @@
     }
 
     .modal-close {
-      margin-top: 100px;
+      margin-top: 10px;
       color: rgb(202, 202, 202);
       font-size: 28px;
     }
@@ -272,6 +272,7 @@
 
   .at-modal__container {
     background-color: transparent;
+    width: 610px;
   }
 
   .at-modal__overlay {

@@ -6,24 +6,13 @@ import { QuestionEnum } from '@/enum'
 import { getSign } from '@/service/cloud'
 import './index.scss'
 
-let interstitialAd:any
 function Index() {
-  const { qtype, userInfo, config } = useContext(store) as any
+  const { qtype, userInfo, check } = useContext(store) as any
   const [sign, setSign] = useState()
   useDidShow(() => {
     getSign().then(res => {
       setSign({ ...res.data })
     })
-    if (wx.createInterstitialAd) {
-      interstitialAd = wx.createInterstitialAd({
-        adUnitId: 'adunit-74b1032c62344261'
-      })
-    }
-    if (interstitialAd) {
-      interstitialAd.show().catch((err) => {
-        console.error(err)
-      })
-    }
   })
 
   return (
@@ -43,13 +32,13 @@ function Index() {
         <View className='banner'>
           <View className='item'>
             <Text>{userInfo.balance || 0}</Text>
-            <Text>{config.unit}</Text>
+            <Text>答题币</Text>
           </View>
           <View className='item'>
             <Text>{userInfo.answersheet || 0}</Text>
             <Text>答题卡</Text>
           </View>
-          {config.check1 === 1 && 
+          {check && 
           <View className='item'>
             <Text>{userInfo.withdrawTime || 0}</Text>
             <Text>兑换卡</Text>
@@ -86,12 +75,12 @@ function Index() {
             />
           <Text>账号设置</Text>
         </View>
-        <View
+        {/* <View
           className='item'
           onClick={() => Taro.navigateTo({ url: '/pages/my/suggest/index' })}>
           <Image className='image' src='https://cdn.geekbuluo.com/yijianjianyi.png' />
           <Text>意见反馈</Text>
-        </View>
+        </View> */}
         {/* <View className='item'>
           <Image className='image' src='https://cdn.geekbuluo.com/qrcode.png' />
           <Text>我的海报</Text>

@@ -12,7 +12,6 @@ import store from '@/store/index'
 import { getUserinfo } from '@/utils'
 import { getSign, sign, getUserAvatar } from '@/service/cloud'
 import './index.scss'
-let interstitialAd:any
 async function Index() {
   const { userInfo, config } = useContext(store) as any
   const [current, setCurrent] = useState(0)
@@ -51,19 +50,6 @@ async function Index() {
     setPart(part)
     // 缓存参与人数
     Taro.setStorage({ key: 'part', data: part > 10000 ? 8021 : part})
-    if (wx.createInterstitialAd) {
-      interstitialAd = wx.createInterstitialAd({
-        adUnitId: 'adunit-74b1032c62344261'
-      })
-    }
-    interstitialAd.onError((err) => {
-      console.log(err)
-     })
-    if (interstitialAd) {
-      interstitialAd.show().catch((err) => {
-        console.error(err)
-      })
-    }
   })
 
   const signHandle = async (userinfo) => {
@@ -174,6 +160,12 @@ async function Index() {
               <View className='atmodal-content-label-text'>
                 {modal.text}
               </View>
+            </View>
+            <View>
+              <Ad
+                unitId="adunit-effb4b2965cc8895"
+                unit-id="adunit-effb4b2965cc8895"
+                ad-intervals={60}></Ad>
             </View>
             <View
               onClick={() => setModal({ show: false, text: '', title: '' })}

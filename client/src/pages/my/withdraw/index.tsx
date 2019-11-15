@@ -43,7 +43,7 @@ function Index() {
             </View>
             <View className='center'>{item.tradeTime}</View>
             <View className='right'>
-                <Text className={item.check1 === 0 ? 'check' : 'over'}>{['审核中', '已到账'][item.check]}</Text>
+                <Text className={item.check === 0 ? 'check' : 'over'}>{['审核中', '已到账'][item.check]}</Text>
             </View>
           </View>)
         }

@@ -7,7 +7,7 @@ import friend from '@/assets/images/banner-min.png'
 import './index.scss'
 
 function Index() {
-  const { userInfo, config } = useContext(store) as any
+  const { userInfo, check } = useContext(store) as any
   const [list, setList] = useState()
   useShareAppMessage(res => {
     {
@@ -34,18 +34,13 @@ function Index() {
   })
   return (
     <View className='container'>
-      {config.check1 === 1 &&
+      {check &&
       <Image
         mode='widthFix'
         className='friend-banner'
         src={friend}/>}
       {
-        config.check1 === 1 && <View className='friend-tip'>永久享好友收益的10%+1兑换卡</View>
-      }
-      {
-        <Button
-          className='share'
-          openType='share'>{config.check1 === 1 ? `推荐好友得${config.unit}和兑换卡` : '添加好友'}</Button>
+        check && <View className='friend-tip'>永久享好友收益的10%+1兑换卡</View>
       }
       <View className='banner-ad'>
         <Ad
@@ -53,6 +48,11 @@ function Index() {
           unit-id="adunit-e6e41877385adafb"
           ad-intervals={60}></Ad>
       </View>
+      {
+        <Button
+          className='share'
+          openType='share'>{check ? `推荐好友得答题币和兑换卡` : '添加好友'}</Button>
+      }
       <View className='content'>
         <View className='header-line'>
           <Text>好友昵称</Text>

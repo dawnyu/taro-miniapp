@@ -42,7 +42,7 @@ class _App extends Component {
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#1D2045',
-      navigationBarTitleText: '全民答题',
+      navigationBarTitleText: '答题兑好礼',
       navigationBarTextStyle: 'white',
     },
     cloud: true
@@ -64,7 +64,26 @@ class _App extends Component {
   }
 
   componentDidShow () {
+    const updateManager = Taro.getUpdateManager()
+    updateManager.onCheckForUpdate(function (res) {
+      console.log(res.hasUpdate)
+    })
+    updateManager.onUpdateReady(function () {
+      Taro.showModal({
+        title: '更新提示',
+        content: '新题库已更新，是否重启应用？',
+        success: function (res) {
+          if (res.confirm) {
+            // 新的版本已经下载好，调用 applyUpdate 应用新版本并重启
+            updateManager.applyUpdate()
+          }
+        }
+      })
+    })
 
+    updateManager.onUpdateFailed(function () {
+      // 新版本下载失败
+    })
   }
 
   componentDidHide () {}

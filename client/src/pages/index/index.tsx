@@ -5,9 +5,10 @@ import { AtModal } from 'taro-ui'
 import { observer } from '@tarojs/mobx'
 import store from '@/store/index'
 import Good from '@/components/Good'
-import { QuestionEnum, TradeEnum } from '@/enum'
+import { QuestionEnum } from '@/enum'
 import { getUserinfo } from '@/utils'
 import moment from 'moment'
+import storage from '@/utils/storage'
 import hongbao1 from '@/assets/images/hongbao1.png'
 import hongbao2 from '@/assets/images/hongbao2.png'
 import feidie from '@/assets/images/feidie-min.png'
@@ -23,11 +24,11 @@ function Index() {
     qtype,
     goods,
     getGoods,
-    trade,
     login,
     getConfig,
     addAnswerSheet,
     config,
+    check,
   } = useContext(store) as any
   useShareAppMessage(() => {
     return {
@@ -38,11 +39,14 @@ function Index() {
   })
 
   const [showOpenRedEnvelopeModal, setShowOpenRedEnvelopeModal] = useState(false)
+  const [showOpenSheetModal, setShowOpenSheetModal] = useState(false)
+  const [showVideoAd, setShowVideoAd] = useState(false)
+  const [sheet, setSheet] = useState()
   const [firstScreen, setFirstScreen] = useState(false)
   const [award, setAward] = useState(0)
   const [countDown, setCountDown] = useState(0)
   const [countDownText, setCountDownText] = useState('')
-  const COUNTDOWN =2 * 60 * 60
+  const COUNTDOWN = 10 * 60
 
   useDidShow(async () => {
     getGoods()
@@ -64,37 +68,37 @@ function Index() {
       }
     }
     openRedEnvelopeHandle(false)
-    if (wx.createRewardedVideoAd) {
+    const showVideoAd = storage.get('videoAd')
+    if (wx.createRewardedVideoAd && !videoAd && !showVideoAd) {
       videoAd = wx.createRewardedVideoAd({
         adUnitId: 'adunit-6ea9b38b4d7240a5'
       })
       videoAd.onLoad(() => { })
-      videoAd.onError((err) => { })
+      videoAd.onError(() => { })
       videoAd.onClose(async(res) => {
-        console.log('播放完成', res.isEnded)
         if (res && res.isEnded) {
-          await addAnswerSheet()
-          Taro.showToast({
-            title: '获取3张答题卡'
-          })
-          
+          await addAnswerSheet({ num: 1 })
+          setSheet(1)
+          storage.set('videoAd', '', 60 * 6)
+          setShowVideoAd(false)
         } else {
-          // 播放中途退出，不下发游戏奖励
+          Taro.showToast({
+            title: '视频没有看完没有获取到答题卡哦:)',
+            icon: 'none'
+          })
         }
        })
+       setShowVideoAd(true)
     }
   })
 
   const toShowVideo = () => {
-    console.log(33, videoAd)
     if (videoAd) {
       videoAd.show().catch(() => {
         // 失败重试
         videoAd.load()
           .then(() => videoAd.show())
-          .catch(err => {
-            console.log('激励视频 广告显示失败')
-          })
+          .catch(() => {})
       })
     }
   }
@@ -107,13 +111,13 @@ function Index() {
       countDownHandle()
     }
     function countDownHandle() {
-      const h = Math.floor(countDown / 60 / 60)
+      // const h = Math.floor(countDown / 60 / 60)
       const m = Math.floor(countDown / 60) % 60
       const s = countDown % 60
       if (countDown <= 1) {
         setCountDownText('')
       } else {
-        setCountDownText(`${full(h)}:${full(m)}:${full(s)}`)
+        setCountDownText(`${full(m)}:${full(s)}`)
       }
     }
     let timer = setTimeout(() => {
@@ -136,10 +140,13 @@ function Index() {
         key: 'countDownTime',
         data: current
       })
-      const redPack = Math.floor(1 + Math.random() * 5)
-      setAward(+redPack)
-      setShowOpenRedEnvelopeModal(true)
-      trade({ id: userInfo._id, type: TradeEnum.定时红包, value: redPack })
+      // const redPack = Math.floor(1 + Math.random() * 5)
+      // setAward(+redPack)
+      // setShowOpenRedEnvelopeModal(true)
+      setShowOpenSheetModal(true)
+      setSheet(1)
+      await addAnswerSheet({num: 1})
+      // trade({ id: userInfo._id, type: TradeEnum.定时红包, value: redPack })
     } else if (lastTime && current - lastTime < COUNTDOWN * 1000) {
       setCountDown(COUNTDOWN - Math.floor((current - lastTime) / 1000))
     }
@@ -173,7 +180,13 @@ function Index() {
       <View className='header'>
         <View className='user-balance'>
           <View className='userAvatarUrl'><OpenData type='userAvatarUrl'/></View>
-          <Text className='user-balance-value'>{userInfo.balance}</Text>{config.unit}
+          <Text className='user-balance-value'>{userInfo.balance}答题币</Text>
+        </View>
+        <View>
+          <Button
+            openType='contact'
+            className='contact'
+            >投诉建议</Button>
         </View>
       </View>
       <View className='content'>
@@ -208,12 +221,17 @@ function Index() {
           </View>
          
          {
-            config.check1 === 1 && <View className='floaticon'>
-              <Image
-                className='sign'
-                onClick={toShowVideo}
-                src='https://cdn.geekbuluo.com/A218.png' />
-                <Text className='sign-text'>观看视频</Text>
+            check && <View className='floaticon'>
+              {
+                showVideoAd && <View>
+                  <Image
+                    className='sign'
+                    onClick={toShowVideo}
+                    src='https://cdn.geekbuluo.com/A218.png' />
+                  <Text className='sign-text'>观看视频</Text>
+                </View>
+              }
+             
               <Image
                 className={countDown > 0 ? 'open-red' : 'open-red open-red-animate'}
                 onClick={() => openRedEnvelopeHandle(countDown === 0)}
@@ -238,14 +256,16 @@ function Index() {
             </View>
          }
         </View>
-        <View className='banner-ad'>
-          <Ad
-            unitId="adunit-e77dadb2eafec124"
-            unit-id="adunit-e77dadb2eafec124"
-            ad-intervals={60}></Ad>
-        </View>
-        {config.check1 === 1 &&  <View className='header-line'>0元免费换</View>}
-        {config.check1 === 1 &&  <View className='red-packet-convert'>
+        {
+          <View className='banner-ad'>
+            <Ad
+              unitId="adunit-e77dadb2eafec124"
+              unit-id="adunit-e77dadb2eafec124"
+              ad-intervals={60}></Ad>
+          </View>
+        }
+        {check &&  <View className='header-line'>0元免费换</View>}
+        {check &&  <View className='red-packet-convert'>
             {
               goods.map(item =>
               <Good key={item.id} data={item} />)
@@ -316,6 +336,25 @@ function Index() {
           </View>}
       </AtModal>
      }
+      {/**暂时没有封装modal，凑合用吧 */}
+      {
+        <AtModal
+          isOpened={showOpenSheetModal}
+          closeOnClickOverlay
+        >
+          {
+            <View className='atmodal-content'>
+              <View className='atmodal-content-label'>
+                <View className='atmodal-content-label-text'>
+                  恭喜您获得<Text>{sheet}</Text>答题卡
+                </View>
+              </View>
+              <View
+                onClick={() => setShowOpenSheetModal(false)}
+                className='modal-close'>点击关闭</View>
+            </View>}
+        </AtModal>
+      }
     </View>
   )
 }

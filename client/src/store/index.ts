@@ -25,7 +25,8 @@ class Index {
   }
   qtype = 0 // 题库类型
   goods = []
-  config = {}
+  config:any = {}
+  check = false
 
   async getUser() {
     try {
@@ -117,6 +118,7 @@ class Index {
         storage.set('config', data, 1)
       }
     }
+    this.check = this.config.check === 1
     return this.config
   }
   /**
@@ -138,6 +140,7 @@ class Index {
 decorate(Index, {
   userInfo: observable,
   config: observable,
+  check: observable,
   getUser: action.bound,
   update: action.bound,
   login: action.bound,

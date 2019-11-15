@@ -10,9 +10,6 @@
     width: 100vw;
     height: 20vh;
   }
-  .banner-ad {
-    margin: 10px 0;
-  }
   .friend-tip {
     position: absolute;
     left: 30px;
@@ -96,10 +93,12 @@
         bottom: 0;
         background: linear-gradient(to bottom, rgb(250, 52, 3), #f7b603);
       }
+      text {
+        color: #333;
+      }
     }
 
     .body {
-      height: 82vh;
       border-radius: 10px;
       overflow: auto;
       -webkit-overflow-scrolling: touch;
