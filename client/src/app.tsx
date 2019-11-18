@@ -42,7 +42,7 @@ class _App extends Component {
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#1D2045',
-      navigationBarTitleText: '答题兑好礼',
+      navigationBarTitleText: '全民答题',
       navigationBarTextStyle: 'white',
     },
     cloud: true

@@ -1,6 +1,6 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View, Text, Picker } from '@tarojs/components'
-import './index.css'
+import './index.scss'
 import region from './region'
 
 export default class TaroRegionPicker extends Component {

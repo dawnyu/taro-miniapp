@@ -7,7 +7,7 @@ import { getQs } from '@/service/cloud'
 import './index.scss'
 
 function Index() {
-  const { answer, userInfo } = useContext(store) as any
+  const { answer, userInfo, qtype: initQtype } = useContext(store) as any
   useShareAppMessage(() => {
     return {
       title: '我觉得这道题你肯定会，帮帮我吧：）',
@@ -18,13 +18,19 @@ function Index() {
   const [dialogOptions, setDialogOptions] = useState()
   const [topic, setTopic] = useState()
   const [carTopic, setCarTopic] = useState()
-  const qtype = Taro.getStorageSync('qtype')
+  const [qtype] = useState(initQtype)
 
-  useDidShow(() => {
-    nextQs()
+  useDidShow(async () => {
+    Taro.showLoading()
+    try {
+      await nextQs()
+      Taro.hideLoading()
+    } catch (error) {
+      Taro.hideLoading()
+    }
   })
 
-  const nextQs = () => {
+  const nextQs = async() => {
     const carTopics = Taro.getStorageSync('carTopics')
     if (qtype === 2 && carTopics && carTopics.length > 1) {
       
@@ -35,19 +41,18 @@ function Index() {
       })
       return
     }
-    getQs({ type: qtype }).then(({ data }) => {
-      if (qtype === 0) {
-        setTopic({
-          ...data || []
-        })
-      } else if (qtype === 2) {
-        setCarTopic(data[0])
-        Taro.setStorage({
-          key: 'carTopics',
-          data: data.slice(1)
-        })
-      }
-    })
+    const { data } = await getQs({ type: qtype })
+    if (qtype === 0) {
+      setTopic({
+        ...data || []
+      })
+    } else if (qtype === 2) {
+      setCarTopic(data[0])
+      Taro.setStorage({
+        key: 'carTopics',
+        data: data.slice(1)
+      })
+    }
   }
 
   const answerHanle = async(val, qid) => {
@@ -122,11 +127,11 @@ function Index() {
               carTopic && carTopic.classify === 0 && 
               <View className='options'>
                 <View
-                  onClick={() => answerHanle(0 === carTopic.right, carTopic.id)}
+                  onClick={() => answerHanle(1 === carTopic.right, carTopic.id)}
                   className='option-btn'>正确</View>
                 <View
                   className='option-btn'
-                  onClick={() => answerHanle(1 === carTopic.right, carTopic.id)}>错误</View>
+                  onClick={() => answerHanle(0 === carTopic.right, carTopic.id)}>错误</View>
               </View>
             }
             {carTopic && carTopic.classify === 1 &&
@@ -168,7 +173,7 @@ function Index() {
 }
 
 Index.config = {
-  navigationBarTitleText: '答题',
+  navigationBarTitleText: '答题赚小钱',
   navigationBarBackgroundColor: '#feab01'
 }
 

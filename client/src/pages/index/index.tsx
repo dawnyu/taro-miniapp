@@ -360,7 +360,7 @@ function Index() {
 }
 Index.config = {
   disableScroll: true,
-  navigationBarBackgroundColor: '#feab01'
+  navigationBarBackgroundColor: '#feab01',
 }
 
 export default observer(Index)
