@@ -1,6 +1,6 @@
 import Taro, { useContext, useDidShow,
   useState, useEffect, useShareAppMessage } from '@tarojs/taro'
-import { View, Text, Image, Button, OpenData, Ad } from '@tarojs/components'
+import { View, Text, Image, Button, OpenData, Ad, Form } from '@tarojs/components'
 import { AtModal } from 'taro-ui'
 import { observer } from '@tarojs/mobx'
 import store from '@/store/index'
@@ -13,7 +13,7 @@ import hongbao1 from '@/assets/images/hongbao1.png'
 import hongbao2 from '@/assets/images/hongbao2.png'
 import feidie from '@/assets/images/feidie-min.png'
 import qiandao from '@/assets/images/qiandao.png'
-import { systemTime, openRedEnvelope } from '@/service/cloud'
+import { systemTime, openRedEnvelope, typeinFormId } from '@/service/cloud'
 import './index.scss'
 
 let videoAd: any
@@ -175,6 +175,13 @@ function Index() {
     })
   }
 
+  const formSubmit = (e) => {
+    console.log(e)
+    const { formId } = e.detail
+    typeinFormId({ formId })
+    Taro.navigateTo({ url: '/pages/answer/index' })
+  }
+
   return (
     <View className='container'>
       <View className='header'>
@@ -205,10 +212,14 @@ function Index() {
             src={hongbao2}
           />
           <View className='red-packet-btn'>
-            <Image
-              className='answer-_btn'
-              onClick={() => Taro.navigateTo({ url: '/pages/answer/index' })}
-              src='https://cdn.geekbuluo.com/button-min.png' />
+            <Form report-submit={true} onSubmit={formSubmit}>
+              <Button
+                className='answer-_btn'
+                formType="submit"></Button>
+              {/* <Image
+                className='answer-_btn'
+                src='https://cdn.geekbuluo.com/button-min.png' /> */}
+            </Form>
             <View className='topic-info'>
               <Text className='topic-title'>{QuestionEnum[qtype]}</Text>
               <View
@@ -218,6 +229,7 @@ function Index() {
                 切换<Text className='iconfont icon-arrow-right' />
               </View>
             </View>
+            
           </View>
          
          {
@@ -228,7 +240,7 @@ function Index() {
                     className='sign'
                     onClick={toShowVideo}
                     src='https://cdn.geekbuluo.com/A218.png' />
-                  <Text className='sign-text'>观看视频</Text>
+                  <Text className='sign-text'>攒答题卡</Text>
                 </View>
               }
              
@@ -264,7 +276,7 @@ function Index() {
               ad-intervals={60}></Ad>
           </View>
         }
-        {check &&  <View className='header-line'>0元免费换</View>}
+        {/* {check &&  <View className='header-line'>0元免费换</View>} */}
         {check &&  <View className='red-packet-convert'>
             {
               goods.map(item =>

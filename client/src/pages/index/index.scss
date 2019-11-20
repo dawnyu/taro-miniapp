@@ -218,7 +218,16 @@
         width: 360px;
         height: 100px;
         border-radius: 50px;
+        border: none;
+        background-image: url(https://cdn.geekbuluo.com/button-min.png);
+        background-color: transparent;
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
         animation: 'nswer-_btn-ani' 1s linear infinite;
+        &::after {
+          content: "";
+          border: none;
+        }
       }
       @keyframes nswer-_btn-ani {
         0% {
@@ -261,13 +270,14 @@
         display: flex;
         font-size: 26px;
         margin-left: 12px;
-        padding: 0px 6px;
+        padding: 0px 15px;
         align-items: center;
         background: #F8D253;
         border-radius: 25px;
       }
       .icon-arrow-right {
         font-size: 36px;
+        width: 20px;
       }
     }
     .red-packet-convert {

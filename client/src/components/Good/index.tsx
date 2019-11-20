@@ -20,21 +20,24 @@ function RedPacket({ data }) {
         </View>}
       {data.type === 5 && 
         <View className='red-packet-image'>
-          <View className='red-packet-type'>话费充值卡</View>
+        <View className='red-packet-type'>{data.value}元话费</View>
         </View>}
       {data.type === 13 && 
       <Image
         className='kind-image'
         mode='aspectFit'
         src={data.image}/>}
-      <View className='red-packet-title'>
-        {data.title}
-      </View>
-      <View className='red-packet-price'>
+        {
+        data.type !== 5 && 
+        <View className='red-packet-title'>
+          {data.title}
+        </View>
+        }
+      {/* <View className='red-packet-price'>
         <Text>库存 {data.inventory}件</Text>
         <Text> {data.price}答题币</Text>
-      </View>
-      <View className='red-packet-button'>0元兑换</View>
+      </View> */}
+      <View className='red-packet-button'>{data.price}答题币</View>
     </View>
   )
 }

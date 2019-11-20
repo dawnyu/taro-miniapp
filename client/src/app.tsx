@@ -1,5 +1,5 @@
 import Taro, { Component, Config } from '@tarojs/taro'
-import './utils/ald-stat'
+// import './utils/ald-stat'
 import '@tarojs/async-await'
 import Index from './pages/index'
 import './assets/iconfont/iconfont.scss'
@@ -23,6 +23,7 @@ class _App extends Component {
    */
   config: Config = {
     pages: [
+      'pages/my/index',
       'pages/index/index',
       'pages/questionBank/index',
       'pages/answer/index',
@@ -31,7 +32,6 @@ class _App extends Component {
       'pages/mission/index',
       'pages/friends/index',
       'pages/my/check/index',
-      'pages/my/index',
       'pages/my/withdraw/index',
       'pages/my/suggest/index',
       'pages/my/award/index',

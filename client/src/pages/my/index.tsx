@@ -2,12 +2,11 @@ import Taro, { useContext, useDidShow, useState } from '@tarojs/taro'
 import { View, OpenData, Image, Text, Ad } from '@tarojs/components'
 import { observer } from '@tarojs/mobx'
 import store from '@/store/index'
-import { QuestionEnum } from '@/enum'
 import { getSign } from '@/service/cloud'
 import './index.scss'
 
 function Index() {
-  const { qtype, userInfo, check } = useContext(store) as any
+  const { userInfo, check } = useContext(store) as any
   const [sign, setSign] = useState()
   useDidShow(() => {
     getSign().then(res => {
@@ -18,17 +17,14 @@ function Index() {
   return (
     <View className='container'>
       <View className='header'>
-        <Image
-          className='crown'
-          src='https://cdn.geekbuluo.com/huangguan-min.png'
-        />
-        <View className='user-avatar'>
-          <OpenData type='userAvatarUrl' />
+        <View className='user'>
+          <View className='user-avatar'>
+            <OpenData type='userAvatarUrl' />
+          </View>
+          <View className='user-nickname'>
+            <OpenData type='userNickName' />
+          </View>
         </View>
-        <View className='user-nickname'>
-          <OpenData type='userNickName' />
-        </View>
-        <View className='user-qtype'>正在使用：[{QuestionEnum[qtype]}]</View>
         <View className='banner'>
           <View className='item'>
             <Text>{userInfo.balance || 0}</Text>
@@ -38,18 +34,13 @@ function Index() {
             <Text>{userInfo.answersheet || 0}</Text>
             <Text>答题卡</Text>
           </View>
-          {check && 
           <View className='item'>
             <Text>{userInfo.withdrawTime || 0}</Text>
             <Text>兑换卡</Text>
-          </View>}
+          </View>
           <View className='item'>
             <Text>{sign.sum || 0}</Text>
             <Text>连续签到</Text>
-          </View>
-          <View className='item'>
-            <Text>{sign.total || 0}</Text>
-            <Text>累计签到</Text>
           </View>
         </View>
       </View>
@@ -75,16 +66,6 @@ function Index() {
             />
           <Text>账号设置</Text>
         </View>
-        {/* <View
-          className='item'
-          onClick={() => Taro.navigateTo({ url: '/pages/my/suggest/index' })}>
-          <Image className='image' src='https://cdn.geekbuluo.com/yijianjianyi.png' />
-          <Text>意见反馈</Text>
-        </View> */}
-        {/* <View className='item'>
-          <Image className='image' src='https://cdn.geekbuluo.com/qrcode.png' />
-          <Text>我的海报</Text>
-        </View> */}
       </View>
       <View className='banner-ad'>
         <Ad
@@ -98,7 +79,7 @@ function Index() {
 
 Index.config = {
   navigationBarTitleText: '我的',
-  navigationBarBackgroundColor: '#feab01'
+  navigationBarBackgroundColor: '#ff5748'
 }
 
 export default observer(Index)

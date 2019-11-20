@@ -60,7 +60,6 @@ function Index() {
     if (userInfo.answersheet >= 0) {
       random = Math.round(Math.random() * 3) + 1
     }
-    setVisible(true)
     await answer({
       random,
       qid,
@@ -73,6 +72,7 @@ function Index() {
       award: random,
       answersheet: userInfo.answersheet
     })
+    setVisible(true)
     nextQs() // 切换下一题
   }
 

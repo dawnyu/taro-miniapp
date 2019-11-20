@@ -197,3 +197,12 @@ export const addAnswerSheet = (data): Promise<any> =>
     data,
   })
 
+/**
+ * 收集formid
+ * @param data
+ */
+export const typeinFormId = (data): Promise<any> =>
+  request.post({
+    action: 'typeinFormId',
+    data,
+  })
