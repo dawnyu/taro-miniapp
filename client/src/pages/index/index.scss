@@ -1,9 +1,9 @@
 @import "~taro-ui/dist/style/components/modal.scss";
+@import '../../assets/kuhei/kuhei.wxss';
 
 .container {
   height: 100vh;
   overflow: auto;
-  background: url(https://cdn.geekbuluo.com/qiandao/bg.png);
   background-size: 750px auto;
   background-position-y: -98px;
   background-repeat: no-repeat;
@@ -14,16 +14,16 @@
     justify-content: space-between;
     margin-top: 20px;
     .user-balance {
-      color: rgb(248, 6, 6);
       line-height: 50px;
       height: 50px;
-      width: 200px;
+      width: 175px;
       display: flex;
       border-top-right-radius: 30px;
       border-bottom-right-radius: 30px;
       text-align: center;
       font-size: 24px;
-      background: white;
+      background-color: #8767e6;
+      color: white;
       .userAvatarUrl {
         width: 40px;
         height: 40px;
@@ -34,224 +34,266 @@
         overflow: hidden;
       }
     }
-    .contact {
+    .switch {
       font-size: 24px;
       height: 50px;
-      color: #999;
+      display: flex;
+      align-items: center;
+      color: white;
+      padding: 0px 20px;
+      background-color: #8767e6;
       border: none;
-      line-height: 50px;
       border-radius: 25px 0 0 25px;
-      &::after {
-        content: "";
-        border: none;
-      }
     }
   }
   
   .content {
     width: 100vw;
-    // padding: 0 3vw;
-    margin-bottom: 135px;
-    margin-top: 30px;
+    .top-bg {
+      width: 400px;
+      height: 400px;
+      opacity: .6;
+      animation: 'rotate-ani' 15s linear infinite;
+    }
+
+    @keyframes rotate-ani {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(-360deg);
+      }
+    }
     .red-packet {
       position: relative;
       z-index: 10;
       width: 92vw;
       margin: 0 auto;
+      text-align: center;
       height: 560px;
+      .residue {
+        color: #1D2045;
+        position: absolute;
+        width: 100%;
+        height: 400px;
+        top: 0;
+
+        .coin-label {
+          font-size: 45px;
+          // font-style: oblique;
+          color: #8767e6;
+          margin-top: 5px;
+          font-family: kuhei;
+        }
+
+        .coin {
+          margin-top: 148px;
+          font-size: 80px;
+          font-family: Georgia;
+          color: green;
+        }
+      }
+
+      .answersheet {
+        color: #333;
+        font-size: 28px;
+      }
+
+      .red-packet-btn {
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+        z-index: 14;
+        text-align: center;
+
+        .answer-_btn {
+          width: 360px;
+          height: 100px;
+          border-radius: 50px;
+          border: none;
+          background-image: url(https://cdn.geekbuluo.com/button-min.png);
+          background-color: transparent;
+          background-repeat: no-repeat;
+          background-size: 100% 100%;
+          animation: 'nswer-_btn-ani'1s linear infinite;
+
+          &::after {
+            content: "";
+            border: none;
+          }
+        }
+
+        @keyframes nswer-_btn-ani {
+          0% {
+            transform: rotate(3deg);
+            transform: scale(1);
+          }
+
+          25% {
+            transform: rotate(0deg);
+            transform: scale(.95);
+          }
+
+          50% {
+            transform: rotate(-3deg);
+            transform: scale(1);
+          }
+
+          75% {
+            transform: rotate(0deg);
+            transform: scale(1.05);
+          }
+
+          100% {
+            transform: rotate(0deg);
+            transform: scale(1);
+          }
+        }
+      }
     }
     .banner-ad {
       margin: 10px 0;
     }
-    .friend {
-      width: 76px;
-      height: 76px;
-      animation: 'red-p-ani'2s linear infinite;
-    }
 
-    .friend-text {
-      position: absolute;
-      left: 50px;
-      top: 115px;
-      font-size: 22px;
-      color: rgb(248, 73, 4);
-    }
-    .share {
-       position: absolute;
-       left: 30px;
-       top: 40px;
-       width: 120px;
-       background: transparent;
-       border: none;
-       height: 120px;
-       &::after {
-         content: "";
-         border: none;
-       }
-    }
     .floaticon {
-      position: relative;
-      z-index: 20;
-      .sign {
-         width: 78px;
-         height: 56px;
-         position: absolute;
-         right: 50px;
-         top: 40px;
-         animation: 'red-p-ani'2s linear infinite;
+      .qipao {
+        width: 100px;
+        height: 100px;
+        background-image: url(https://cdn.geekbuluo.com/qipao.png);
+        background-size: 100% 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
-      .sign-text {
-         position: absolute;
-         right: 50px;
-         top: 100px;
-         font-size: 22px;
-         color: rgb(248, 73, 4);
+      
+      .sign {
+         width: 50px;
+         height: 50px;
+         animation: 'red-p-ani'2s linear infinite;
+         &-qipao {
+           position: absolute;
+           right: 50px;
+           top: 40px;
+           animation: 'qipao-ani'3s 0.5s linear infinite;
+         }
+         &-text {
+           position: absolute;
+           right: 50px;
+           top: 140px;
+           font-size: 22px;
+           color: #333;
+         }
       }
       .rank {
-        width: 66px;
-        height: 66px;
-        position: absolute;
-        left: 70px;
-        top: 165px;
-        animation: 'red-p-ani'2s linear infinite;
+        width: 50px;
+        height: 50px;
+        animation: 'red-p-ani'3s linear infinite;
+        &-qipao {
+           position: absolute;
+           left: 60px;
+           top: 220px;
+           animation: 'qipao-ani'3s 0s linear infinite;
+         }
+        &-text {
+          position: absolute;
+          left: 70px;
+          top: 325px;
+          font-size: 22px;
+          color: #333;
+        }
       }
 
-      .rank-text {
-        position: absolute;
-        left: 70px;
-        top: 230px;
-        font-size: 22px;
-        color: rgb(248, 73, 4);
-      }
-      .open-red {
-         width: 55px;
-         height: 66px;
-         position: absolute;
-         right: 55px;
-         top: 160px;
-       }
-
-       .open-red-animate {
-         animation: 'red-p-ani'2s linear infinite;
-       }
-
-       .open-red-text,
-       .red-packet-countdown {
-         position: absolute;
-         right: 55px;
-         top: 230px;
-         font-size: 22px;
-         color: rgb(248, 73, 4);
-       }
-
-       .red-packet-countdown {
-         right: 55px;
-       }
-       }
-
-       @keyframes red-p-ani {
-         0% {
-           transform: rotate(0deg) scale(1);
-         }
-
-         25% {
-           transform: rotate(10deg) scale(1.1);
-         }
-
-         50% {
-           transform: rotate(0deg) scale(1);
-         }
-
-         75% {
-           transform: rotate(-10deg) scale(1.1);
-         }
-
-         100% {
-           transform: rotate(0deg) scale(1);
-         }
-    }
-    .red-packet-bg,
-    .red-packet-body,
-    .red-packet-front,
-    .red-packet-btn {
-      position: absolute;
-      width: 100%;
-      bottom: 0;
-    }
-    .red-packet-bg {
-      z-index: 11;
-      height: 380px;
-     
-    }
-    .red-packet-body {
-      z-index: 12;
-      width: 92%;
-      left: 4%;
-      border-radius: 10px;
-      top: 10px;
-      height: 360px;
-      background-color: rgb(252, 238, 231);
-      text-align: center;
-      background-image: url(https://cdn.geekbuluo.com/yiqihai-min.png);
-      background-size: 300px 170px;
-      background-repeat: no-repeat;
-      background-position: 170px 100px;
-     .residue {
-       margin: 20px auto;
-       color: #1D2045;
-       text {
-         font-size: 38px;
-         margin: 0 5px;
-         color:red
-       }
-     }
-    }
-    .red-packet-front {
-      z-index: 13;
-      height: 364px;
-    }
-    .red-packet-btn {
-      z-index: 14;
-      bottom: 20px;
-      text-align: center;
-      .answer-_btn {
-        width: 360px;
-        height: 100px;
-        border-radius: 50px;
+      .share {
+        width: 120px;
+        background: transparent;
         border: none;
-        background-image: url(https://cdn.geekbuluo.com/button-min.png);
-        background-color: transparent;
-        background-repeat: no-repeat;
-        background-size: 100% 100%;
-        animation: 'nswer-_btn-ani' 1s linear infinite;
+        height: 120px;
+        line-height: 150px;
+        padding: 0;
+        &-qipao {
+          position: absolute;
+          left: 30px;
+          top: 40px;
+          animation: 'qipao-ani'3s 0s linear infinite;
+        }
+        .friend {
+          width: 55px;
+          height: 55px;
+          animation: 'red-p-ani'2s linear infinite;
+        }
         &::after {
           content: "";
           border: none;
         }
+        &-text {
+          position: absolute;
+          left: 38px;
+          top: 143px;
+          font-size: 22px;
+          color: #333;
+        }
       }
-      @keyframes nswer-_btn-ani {
+
+      .open-red {
+         width: 40px;
+         height: 55px;
+         animation: 'red-p-ani'2s linear infinite;
+         &-qipao {
+           position: absolute;
+           right: 60px;
+           top: 210px;
+           animation: 'qipao-ani'3s 0s linear infinite;
+         }
+         &-text {
+           position: absolute;
+           right: 78px;
+           top: 315px;
+           font-size: 22px;
+           color: #333;
+         }
+      }
+
+
+      @keyframes red-p-ani {
         0% {
-          transform: rotate(3deg);
+          transform: rotate(0deg) scale(1);
         }
-        15% {
-          transform: rotate(0deg);
+
+        25% {
+          transform: rotate(10deg) scale(1.1);
         }
-        30% {
-          transform: rotate(-3deg);
-        }
-        45% {
-          transform: rotate(0deg);
-        }
-        60% {
-           transform: rotate(3deg);
+
+        50% {
+          transform: rotate(0deg) scale(1);
         }
 
         75% {
-          transform: rotate(0deg) scale(1.05);
+          transform: rotate(-10deg) scale(1.1);
         }
 
         100% {
           transform: rotate(0deg) scale(1);
+        }
+      }
+      @keyframes qipao-ani {
+        0% {
+          transform: translateY(0px);
+        }
+
+        25% {
+          transform: translateY(-10px);
+        }
+
+        50% {
+          transform: translate(0px);
+        }
+
+        75% {
+          transform: translateY(10px);
+        }
+
+        100% {
+          transform: translateY(0px);
         }
       }
     }
@@ -263,22 +305,6 @@
         color: #F8D253;
         font-size: 28px;
       }
-
-      .topic-switch {
-        height: 38px;
-        line-height: 38px;
-        display: flex;
-        font-size: 26px;
-        margin-left: 12px;
-        padding: 0px 15px;
-        align-items: center;
-        background: #F8D253;
-        border-radius: 25px;
-      }
-      .icon-arrow-right {
-        font-size: 36px;
-        width: 20px;
-      }
     }
     .red-packet-convert {
       display: flex;
@@ -288,62 +314,7 @@
       background: #fff;
     }
   }
-  .header-line {
-    font-size: 28px;
-    // color: #fff;
-    padding-left: 10px;
-    font-weight: bold;
-    color: #333;
-    position: relative;
-    margin: 20px 0;
-    &::before {
-      content: "";
-      margin-right: 2px;
-      width: 4px;
-      position: absolute;
-      left: -10px;
-      top: 0;
-      bottom: 0;
-      background: linear-gradient(to bottom, rgb(250, 52, 3), #f7b603);
-    }
-  }
-  .nav {
-    display: flex;
-    width: 750px;
-    bottom: 0;
-    // color: #fff;
-    left: 0;
-    position: fixed;
-    // background-color: #241F44;
-    background-color: #fff;
-    border-radius: 6px 6px 0 0;
-    box-shadow: 0px -1px 10px -4px #ccc;
-    z-index: 9;
-    &-item {
-      width: 240px;
-      height: 130px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      font-size: 28px;
-      &-hover {
-        font-size: 26px;
-        image {
-          width: 60px;
-          height: 60px;
-        }
-      }
-      view {
-        display: inline;
-      }
-      image {
-        width: 70px;
-        height: 70px;
-      }
-    }
-  }
+
   .first-screen {
     position: fixed;
     left: 0;
@@ -421,7 +392,10 @@
       }
     }
   }
-
+  .icon-arrow-right {
+    font-size: 36px;
+    width: 20px;
+  }
   .modal-close {
     margin-top: 100px;
     color: rgb(223, 222, 222);
@@ -436,5 +410,3 @@
     background-color: rgba(0, 0, 0, 0.76);
   }
 }
-
-

@@ -1,0 +1,149 @@
+@import "~taro-ui/dist/style/components/modal.scss";
+
+.container {
+  width: 90vw;
+  height: 100vh;
+  padding: 0 5vw;
+  overflow: auto;
+  background-image: url(https://cdn.geekbuluo.com/qiandao/bg.png);
+  background-size: 750px auto;
+  background-position-y: -98px;
+  background-repeat: no-repeat;
+  -webkit-overflow-scrolling: touch;
+  .header {
+    text-align: center;
+    .cash {
+      margin: 100px auto 0;
+      color: #fff;
+      font-size: 36px;
+      text {
+        font-size: 65px;
+      }
+      &-label {
+        font-size: 26px;
+        color: #fff;
+      }
+    }
+  }
+  .box {
+    width: 100%;
+    margin-top: 3vh;
+    min-height: 500px;
+    border-radius: 20px 20px 0 0;
+    background: #fff;
+    overflow: hidden;
+    .b-title {
+      padding: 10px 20px;
+    }
+    .picker {
+      text-align: center;
+      width: 300px;
+      overflow: hidden;
+      margin: 0 auto;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgb(241, 239, 239);
+      .icon-arrow-down {
+        font-size: 38px;
+        padding-left: 10px;
+        color: #999;
+      }
+    }
+  }
+  .tip {
+    text-align: center;
+    font-size: 22px;
+    color: red;
+  }
+  .friend {
+    background: linear-gradient(to right, rgb(250, 91, 91), #f81c15)!important;
+    animation: 'red-p-ani'1s linear infinite;
+  }
+  @keyframes red-p-ani {
+    0% {
+      transform: scale(1);
+    }
+
+    25% {
+      transform: scale(0.95);
+    }
+
+    50% {
+      transform: scale(1);
+    }
+
+    75% {
+      transform: scale(1.05);
+    }
+
+    100% {
+      transform: scale(1);
+    }
+  }
+  .submit-btn {
+    width: 50vw;
+    margin: 30px auto 5px;
+    background: #ffc003;
+    color: #fff;
+    font-size: 28px;
+    border-radius: 50px;
+    border: 1px solid transparent;
+    &::after {
+      content: "";
+      border: none;
+    }
+  }
+
+  .atmodal-content {
+    position: relative;
+    z-index: 1004;
+    height: 800px;
+    width: 610px;
+    text-align: center;
+    background: transparent;
+    &-label {
+      color: rgb(253, 195, 5);
+      text-align: center;
+      width: 610px;
+      height: 440px;
+      display: flex;
+      position: relative;
+      align-items: center;
+      justify-content: center;
+      background-image: url(https://cdn.geekbuluo.com/qiandao/modal.png);
+      background-size: 610px auto;
+      background-repeat: no-repeat;
+      padding-left: 10px;
+      &-title {
+        font-size: 32px;
+        position: absolute;
+        color: #fff;
+        top: 172px;
+      }
+      &-text {
+        font-size: 32px;
+        margin-top: 222px;
+
+        text {
+          font-size: 45px;
+          font-weight: bold;
+          margin: 0 5px;
+        }
+      }
+    }
+
+    .modal-close {
+      margin-top: 10px;
+      color: rgb(202, 202, 202);
+      font-size: 28px;
+    }
+  }
+}
+
+  .at-modal__container {
+    background-color: transparent;
+    width: 610px;
+  }
+
+  .at-modal__overlay {
+    background-color: rgba(0, 0, 0, 0.76);
+  }

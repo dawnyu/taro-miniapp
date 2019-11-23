@@ -2,7 +2,6 @@ import Taro, {
   useContext,
   useDidShow,
   useState,
-  useShareAppMessage
 } from '@tarojs/taro'
 import { View, Image, Text, Button, Ad } from '@tarojs/components'
 import MyModal from '@/components/Modal'
@@ -23,14 +22,6 @@ async function Index() {
     show: false,
     title: '',
     text: ''
-  })
-
-  useShareAppMessage(() => {
-    return {
-      title: '这个题好难啊，你能帮帮我吗？',
-      path: `/pages/index/index?superior=${userInfo.openid}`,
-      imageUrl: 'https://cdn.geekbuluo.com/share_image%20%281%29.jpg'
-    }
   })
 
   const setTotalHandle = (total) => {

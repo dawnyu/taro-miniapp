@@ -23,7 +23,6 @@ class _App extends Component {
    */
   config: Config = {
     pages: [
-      'pages/my/index',
       'pages/index/index',
       'pages/questionBank/index',
       'pages/answer/index',
@@ -31,11 +30,12 @@ class _App extends Component {
       'pages/rank/index',
       'pages/mission/index',
       'pages/friends/index',
+      'pages/my/index',
       'pages/my/check/index',
+      'pages/my/drawcash/index',
       'pages/my/withdraw/index',
       'pages/my/suggest/index',
       'pages/my/award/index',
-      'pages/my/account/index',
     ],
     permission: {
     },
@@ -45,7 +45,33 @@ class _App extends Component {
       navigationBarTitleText: '全民答题',
       navigationBarTextStyle: 'white',
     },
-    cloud: true
+    cloud: true,
+    tabBar: {
+      selectedColor: '#ff5748',
+      list: [
+        {
+          pagePath: 'pages/index/index',
+          text: '答题',
+          iconPath: './assets/images/jinbi1.png',
+          selectedIconPath: './assets/images/jinbi1.png'
+        }, {
+          pagePath: 'pages/mission/index',
+          text: '签到',
+          iconPath: './assets/images/qiandao.png',
+          selectedIconPath: './assets/images/qiandao.png'
+        }, {
+          pagePath: 'pages/friends/index',
+          text: '好友',
+          iconPath: './assets/images/friend.png',
+          selectedIconPath: './assets/images/friend.png'
+        }, {
+          pagePath: 'pages/my/index',
+          text: '我的',
+          iconPath: './assets/images/feidie-min.png',
+          selectedIconPath: './assets/images/feidie-min.png'
+        }
+      ]
+    }
   }
 
   async componentDidMount() {

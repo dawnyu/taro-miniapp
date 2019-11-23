@@ -6,7 +6,7 @@ import TaroRegionPicker from '@/components/region-picker'
 import './index.scss'
 
 function Index() {
-  const { userInfo, update, config } = useContext(store) as any
+  const { userInfo, update } = useContext(store) as any
   const [address, setAddress] = useState(userInfo.address && userInfo.address.split('--')[1])
   const [city, setCity] = useState(userInfo.address && userInfo.address.split('--')[0])
   const onGetRegion = (val) => {
@@ -14,15 +14,7 @@ function Index() {
     setAddress('')
   }
   const formSubmit = async(e) => {
-    const { phone, acount, address } = e.detail.value
-    if (acount === '') {
-      Taro.showToast({
-        title: `微信号不能为空`,
-        icon: 'none',
-        duration: 2000
-      })
-      return
-    }
+    const { phone, address } = e.detail.value
 
     Taro.showLoading({
       title: '提交中'
@@ -30,7 +22,6 @@ function Index() {
     try {
     await update({
       id: userInfo.id,
-      wechat: acount,
       phone,
       address: `${city}--${address}`
     })
@@ -52,38 +43,10 @@ function Index() {
       }).then(() => Taro.navigateBack({ delta: 1 }))
     }
   }
-  const setClipboardData = () => {
-    Taro.showModal({
-      title: '温馨提示',
-      content: '微信号复制成功，请添加客服微信，审核您的兑换订单',
-      confirmText: '我知道了',
-      confirmColor: 'red',
-    })
-    Taro.setClipboardData({
-      data: 'dawning_yu',
-    }).then(() => {
-      Taro.hideToast()
-    })
-  }
 
   return (
     <View className='container'>
         <Form onSubmit={formSubmit} >
-          <View className='item'>
-            <View className='label'>
-              微信号
-        </View>
-            <View className='right'>
-              <Input
-                type='text'
-                name='acount'
-                disabled={userInfo.wechat}
-                value={userInfo.wechat}
-                placeholderClass='placeholderClass'
-                placeholder='请填写正确的微信号'
-                maxLength={100} />
-            </View>
-          </View>
           <View className='item'>
             <View className='label'>
               手机号码
@@ -125,11 +88,8 @@ function Index() {
           </View>
           <View className='header-line'>重要说明</View>
           <View className='tip'>
-            <View>1、用户{config.unit}兑换虚拟礼品须先设置微信号。</View>
-            <View>2、微信号必须已实名。</View>
-            <View>3、兑换话费须填写手机号码。</View>
-            <View>4、兑换实物好礼须填写收货地址。</View>
-            <View>5、微信号设置后不能修改，如需修改联系客服。</View>
+            <View>1、兑换话费必须填写手机号码。</View>
+            <View>2、兑换实物好礼必须填写收货地址。</View>
           </View>
           <Button
             className='btn'
@@ -142,7 +102,7 @@ function Index() {
 }
 
 Index.config = {
-  navigationBarTitleText: '账号设置',
+  navigationBarTitleText: '基本设置',
   navigationBarBackgroundColor: '#feab01'
 }
 

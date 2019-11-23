@@ -42,17 +42,17 @@ function Index() {
       {
         check && <View className='friend-tip'>永久享好友收益的10%+1兑换卡</View>
       }
-      {/* <View className='banner-ad'>
+      <View className='banner-ad'>
         <Ad
           unitId="adunit-e6e41877385adafb"
           unit-id="adunit-e6e41877385adafb"
           ad-intervals={60}></Ad>
-      </View> */}
-      {
+      </View>
+      {/* {
         <Button
           className='share'
           openType='share'>{check ? `添加好友得答题币和兑换卡` : '添加好友'}</Button>
-      }
+      } */}
       <View className='content'>
         <View className='header-line'>
           <Text>好友昵称</Text>

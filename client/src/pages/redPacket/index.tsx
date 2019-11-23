@@ -1,20 +1,19 @@
 import Taro, { useRouter, useDidShow, useState, useContext } from '@tarojs/taro'
 import store from '@/store/index'
 import { observer } from '@tarojs/mobx'
-import Dialog from '@/components/Dialog'
-import { View, Text, Image, Button, OpenData, Ad } from '@tarojs/components'
+import { View, Text, Image, Button, OpenData, Ad, Input } from '@tarojs/components'
 import { getGood } from '@/service/cloud'
 
 import './index.scss'
 
 function RedPacket() {
-  const { userInfo, trade, config } = useContext(store) as any
+  const { userInfo, trade, config, update } = useContext(store) as any
   const router = useRouter()
   const [details, setDetails] = useState()
   const [buttonText, setButtonText] = useState('')
   const [visible, setVisible] = useState()
-  const [dialogOptions, setDialogOptions] = useState()
-
+  const [phone, setPhone] = useState()
+  
   useDidShow(async() => {
     const {data: good} = await getGood({ id: router.params.id })
     setDetails({
@@ -24,13 +23,15 @@ function RedPacket() {
     setButtonText(`${good.price}${config.unit}${good.withdraw > 0 ? `+${good.withdraw}兑换卡` : ''}`)
   })
   const conversion = async () => {
+    if (!userInfo.phone && !phone) {
+      return setVisible(true)
+    }
     try {
       await trade({ redPacketId: details.id, type: details.type * 1 })
-      setVisible(true)
-      setDialogOptions({
-        type: 3,
+      Taro.showToast({
         title: '兑换成功',
       })
+      
     } catch (e) {
       Taro.showToast({
         title: e.message,
@@ -39,11 +40,20 @@ function RedPacket() {
       })
     }
   }
-  const closeDialog = () => {
-    setVisible(false)
-    Taro.navigateTo({
-      url: '/pages/my/withdraw/index'
+  const submit = async () => {
+    if (!/^1[3456789]\d{9}$/.test(phone)) {
+      return Taro.showToast({
+        title: '手机号格式不正确',
+        icon: 'none',
+      })
+      setPhone('')
+    }
+    await update({
+      id: userInfo.id,
+      phone,
     })
+    setVisible(false)
+    conversion()
   }
   return (
     <View className='container'>
@@ -89,11 +99,28 @@ function RedPacket() {
         {!userInfo.newuser && details.type * 1 === 3 && <Button className='disable-btn'>新用户才能兑换</Button>}
         {!(!userInfo.newuser && details.type * 1 === 3) && <Button onClick={() => conversion()}>{buttonText}</Button>}}
       </View>
-      <Dialog
-        visible={visible}
-        options={dialogOptions}
-        close={closeDialog}>
-      </Dialog>
+      {visible && <View className='dialog'>
+        <View className='content'>
+          <View className='form'>
+            <Input
+              type='number'
+              onInput={e => setPhone(e.detail.value)}
+              placeholder='请输入需要充值的手机号码'
+              maxLength={11}
+            />
+            <View
+              className='btn'
+              onClick={submit}>提交</View>
+          </View>
+          <View className='banner-ad'>
+            <Ad
+              unitId="adunit-effb4b2965cc8895"
+              unit-id="adunit-effb4b2965cc8895"
+              ad-intervals={60}></Ad>
+          </View>
+        </View>
+      </View>
+      }
     </View>
   )
 }

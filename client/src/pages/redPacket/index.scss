@@ -107,3 +107,37 @@
     }
   }
 }
+
+.dialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  background: rgba(0, 0, 0, 0.329);
+.content {
+  width: 90%;
+  overflow: hidden;
+  background-color: #fff;
+  margin: 30vh auto;
+  border-radius: 10px;
+  .form {
+    display: flex;
+    height: 80px;
+    align-items: center;
+    justify-content: space-around;
+    input {
+      width: 400px;
+    }
+    .btn {
+      font-size: 26px;
+      text-align: center;
+      border-radius: 10px;
+      padding: 4px 15px;
+      color: #fff;
+      background: #ff5748;
+    }
+  }
+}
+}

@@ -51,6 +51,12 @@ function Dialog(props: any)  {
                 <View>点击二维码添加客服审核</View>
             </View>
           }
+          {
+            options.type === 4 &&
+            <View className='text'>
+              <View>{options.text}</View>
+            </View>
+          }
           </View>
           {
             (options.type === 1 || options.type === 2) && 

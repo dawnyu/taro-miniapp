@@ -1,6 +1,6 @@
 import Taro from '@tarojs/taro'
-// const url = 'https://api.geekbuluo.com/gk/dtApi'
-const url = 'http://localhost:3005/gk/dtApi'
+const url = 'https://api.geekbuluo.com/gk/dtApi'
+// const url = 'http://localhost:3005/gk/dtApi'
 class Request {
   header = {
     'content-type': 'application/json'

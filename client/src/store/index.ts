@@ -10,6 +10,8 @@ import {
   getUser,
   getConfig,
   addAnswerSheet,
+  transform,
+  drawcash,
 } from '../service/cloud'
 
 class Index {
@@ -71,9 +73,31 @@ class Index {
   }
   
   async update(payload) {
-    const { status } = await update(payload)
+    const { status, message } = await update(payload)
     if (status === 0) {
       runInAction(async() => {
+        await this.getUser()
+      })
+    } else {
+      throw new Error(message)
+    }
+  }
+
+  async drawcash(payload) {
+    const { status, message } = await drawcash(payload)
+    if (status === 0) {
+      runInAction(async () => {
+        await this.getUser()
+      })
+    } else {
+      throw new Error(message)
+    }
+  }
+
+  async transform(payload) {
+    const { status } = await transform(payload)
+    if (status === 0) {
+      runInAction(async () => {
         await this.getUser()
       })
     } else {
@@ -143,6 +167,7 @@ decorate(Index, {
   check: observable,
   getUser: action.bound,
   update: action.bound,
+  transform: action.bound,
   login: action.bound,
   addAnswerSheet: action.bound,
   qtype: observable,

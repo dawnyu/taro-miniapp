@@ -5,6 +5,7 @@
   left: 0;
   right: 0;
   bottom: 0;
+  z-index: 99;
   margin: auto;
   background: rgba(0, 0, 0, 0.329);
 }
@@ -82,6 +83,10 @@
         width: 220px;
         height: 220px;
       }
+    }
+    .text {
+      color: #ff5748;
+      font-size: 32px;
     }
   }
   .banner-ad {

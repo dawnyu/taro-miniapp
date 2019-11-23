@@ -206,3 +206,24 @@ export const typeinFormId = (data): Promise<any> =>
     action: 'typeinFormId',
     data,
   })
+
+/**
+ * 转换答题币
+ * @param data
+ */
+export const transform = (data): Promise<any> =>
+  request.post({
+    action: 'transform',
+    data,
+  })
+
+/**
+ * 提现
+ * @param data
+ */
+export const drawcash = (data): Promise<any> =>
+  request.post({
+    action: 'drawcash',
+    data,
+  })
+

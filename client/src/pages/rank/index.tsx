@@ -52,7 +52,7 @@ function Index() {
 
 Index.config = {
   navigationBarTitleText: '排行榜',
-  navigationBarBackgroundColor: '#feab01'
+  navigationBarBackgroundColor: '#ff5748'
 }
 
 export default Index
