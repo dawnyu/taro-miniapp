@@ -13,5 +13,7 @@ export enum TradeEnum {
   '看视频收入' = 10,
   '邀请好友奖励' = 11,
   '好友收入提成' = 12,
+  '提现' = 13,
+  '答题币转现金' = 14
 }
 export default TradeEnum

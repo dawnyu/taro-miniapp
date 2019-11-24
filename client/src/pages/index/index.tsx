@@ -1,13 +1,11 @@
 import Taro, { useContext, useDidShow,
   useState, useEffect, useShareAppMessage } from '@tarojs/taro'
 import { View, Text, Image, Button, OpenData, Ad, Form } from '@tarojs/components'
-import { AtModal } from 'taro-ui'
 import { observer } from '@tarojs/mobx'
 import store from '@/store/index'
 import Good from '@/components/Good'
 import { QuestionEnum } from '@/enum'
 import { getUserinfo } from '@/utils'
-import moment from 'moment'
 import storage from '@/utils/storage'
 import Dialog from '@/components/Dialog'
 import topbg from '@/assets/images/topbg2.png'
@@ -25,7 +23,6 @@ function Index() {
     login,
     getConfig,
     addAnswerSheet,
-    config,
     check,
   } = useContext(store) as any
   useShareAppMessage(() => {
@@ -36,12 +33,8 @@ function Index() {
     }
   })
 
-  const [showOpenRedEnvelopeModal, setShowOpenRedEnvelopeModal] = useState(false)
-  const [showOpenSheetModal, setShowOpenSheetModal] = useState(false)
   const [showVideoAd, setShowVideoAd] = useState(false)
-  const [sheet, setSheet] = useState()
   const [firstScreen, setFirstScreen] = useState(false)
-  const [award, setAward] = useState(0)
   const [countDown, setCountDown] = useState(0)
   const [balance, setBalance] = useState(0)
   const [countDownText, setCountDownText] = useState('')
@@ -53,24 +46,17 @@ function Index() {
 
   useDidShow(async () => {
     getGoods()
-    const config = await getConfig()
     const user = await getUser()
-    const isAuth = Taro.getStorageSync('isAuth')
+    await getConfig()
+    const firsthb = storage.get('firsthb')
     if (!user.data) {
-      //如果用户不存在
-      login({ superior: Taro.getStorageSync('superior') }) //创建临时用户，只有openid
+      login({ superior: Taro.getStorageSync('superior') })
     }
-    const isNewUser = config.open === 0 && !isAuth && !user.userid
-    if (isNewUser) {
-      const firsthb = await Taro.getStorageSync('firsthb')
-      if (firsthb && !moment(firsthb).isSame(new Date(), 'day')) {
-        setFirstScreen(true)
-        Taro.setStorage({ key: 'firsthb', data: '' })
-      } else if (!firsthb) {
-        setFirstScreen(true)
-      }
+    if (!firsthb) {
+      setFirstScreen(true)
+      storage.set('firsthb',true, 24 * 60)
     }
-    setBalance(100) // 开启动效
+    setBalance(100)
     openRedEnvelopeHandle(false)
     if (wx.createRewardedVideoAd && !videoAd) {
       videoAd = wx.createRewardedVideoAd({
@@ -83,8 +69,6 @@ function Index() {
       videoAd.onClose(async(res) => {
         if (res && res.isEnded) {
           await addAnswerSheet({ num: 1 })
-          // setSheet(1)
-          setShowVideoAd(false)
           setDialogOptions({
             type: 4,
             title: '答题卡',
@@ -105,7 +89,6 @@ function Index() {
   const toShowVideo = () => {
     if (videoAd) {
       videoAd.show().catch(() => {
-        // 失败重试
         videoAd.load()
           .then(() => videoAd.show())
           .catch(() => {
@@ -171,19 +154,19 @@ function Index() {
       setCountDown(COUNTDOWN - Math.floor((current - lastTime) / 1000))
     }
   }
-  const closeFirstScreen = () => {
-    setFirstScreen(false)
-    Taro.setStorageSync('firsthb', moment().format('YYYY-MM-DD HH:mm:ss'))
-  }
 
   //关闭红包授权
   const closeOpenHandle = (userinfo) => {
     getUserinfo(userinfo, async () => {
       const { data, message, status } = await openRedEnvelope()
       if (status === 0) {
-        setAward(data)
         setFirstScreen(false)
-        setShowOpenRedEnvelopeModal(true)
+        setVisible(true)
+        setDialogOptions({
+          type: 4,
+          title: '答题币',
+          text: `恭喜您获得${data}答题币`,
+        })
         getUser()
       } else {
         Taro.showToast({
@@ -191,7 +174,6 @@ function Index() {
           icon: 'none'
         })
       }
-
     })
   }
 
@@ -239,131 +221,88 @@ function Index() {
             <Form report-submit={true} onSubmit={formSubmit}>
               <Button
                 className='answer-_btn'
-                formType="submit"></Button>
+                formType="submit"/>
             </Form>
           </View>
          {
-            true && <View className='floaticon'>
-              {
-                <View>
-                  <View className='qipao sign-qipao'>
-                    <Image
-                      className='sign'
-                      onClick={toShowVideo}
-                      mode='aspectFit'
-                      src='https://cdn.geekbuluo.com/video.png' />
-                  </View>
-                  <Text className='sign-text'>攒答题卡</Text>
-                </View>
-              }
-             
-              <View className='qipao open-red-qipao'>
+          true &&
+          <View className='floaticon'>
+            <View>
+              <View className='qipao sign-qipao'>
                 <Image
-                  className='open-red'
+                  className='sign'
+                  onClick={toShowVideo}
                   mode='aspectFit'
-                  onClick={() => openRedEnvelopeHandle(countDown === 0)}
-                  src='https://cdn.geekbuluo.com/smallhongbao-min.png' />
+                  src='https://cdn.geekbuluo.com/video.png'/>
               </View>
-              <View className='open-red-text'> {countDownText || '开红包'} </View>
-              <View className='qipao rank-qipao'>
-                <Image
-                  className='rank'
-                  mode='aspectFit'
-                  onClick={() => Taro.navigateTo({ url: '/pages/rank/index' })}
-                  src='https://cdn.geekbuluo.com/paihangbang-min.png' />
-              </View>
-              <Text className='rank-text'>排行榜</Text>
-
-              <View className='qipao share-qipao'>
-                <Button
-                  className='share'
-                  openType='share'>
-                  <Image
-                    className='friend'
-                    mode='aspectFit'
-                    src='https://cdn.geekbuluo.com/coin-min.png'/>
-                </Button>
-              </View>
-              <Text className='share-text'>攒兑换卡</Text>
+              <Text className='sign-text'>攒答题卡</Text>
             </View>
+            <View className='qipao open-red-qipao'>
+              <Image
+                className='open-red'
+                mode='aspectFit'
+                onClick={() => openRedEnvelopeHandle(countDown === 0)}
+                src='https://cdn.geekbuluo.com/smallhongbao-min.png' />
+            </View>
+            <View className='open-red-text'> {countDownText || '开红包'}</View>
+            <View className='qipao rank-qipao'>
+              <Image
+                className='rank'
+                mode='aspectFit'
+                onClick={() => Taro.navigateTo({ url: '/pages/rank/index' })}
+                src='https://cdn.geekbuluo.com/paihangbang-min.png' />
+            </View>
+            <Text className='rank-text'>排行榜</Text>
+            <View className='qipao share-qipao'>
+              <Button
+                className='share'
+                openType='share'>
+                <Image
+                  className='friend'
+                  mode='aspectFit'
+                  src='https://cdn.geekbuluo.com/coin-min.png'/>
+              </Button>
+            </View>
+            <Text className='share-text'>攒兑换卡</Text>
+          </View>
          }
         </View>
-        {
-          <View className='banner-ad'>
-            <Ad
-              unitId="adunit-e77dadb2eafec124"
-              unit-id="adunit-e77dadb2eafec124"
-              ad-intervals={60}></Ad>
-          </View>
-        }
-        {check &&  <View className='header-line'>免费兑换</View>}
-        {check &&  <View className='red-packet-convert'>
-            {
-              goods.map((item, index) =>
-                <Good key={index} data={item} />)
-            }
-          </View>
+        <View className='banner-ad'>
+          <Ad
+            unitId="adunit-e77dadb2eafec124"
+            unit-id="adunit-e77dadb2eafec124"
+            ad-intervals={60}></Ad>
+        </View>
+        {check && <View className='header-line'>免费兑换</View>}
+        {check && <View className='red-packet-convert'>
+          {
+            goods.map((item, index) =>
+              <Good key={index} data={item} />)
+          }
+        </View>
         }
         
       </View>
      {
-        firstScreen && 
+      firstScreen && 
+      <View className='first-screen'>
+        <Text className='text'>幸运奖励</Text>
+        {/* <Text className='text1'>最高获得20答题币</Text> */}
+        <Button
+          openType='getUserInfo'
+          onGetUserInfo={closeOpenHandle}
+          type='primary'
+          lang='zh_CN'/>
         <View
-          className='first-screen'
-        >
-          <Text className='text'>幸运奖励</Text>
-          <Text className='text1'>最高获得20{config.unit}</Text>
-          <Button
-            openType='getUserInfo'
-            onGetUserInfo={closeOpenHandle}
-            type='primary'
-            lang='zh_CN'
-          />
-          <View
-            className='close-first-screen'
-            onClick={() => closeFirstScreen()}>点击关闭</View>
-        </View>
+          className='close-first-screen'
+            onClick={() => setFirstScreen(false)}>点击关闭</View>
+      </View>
      }
-     {
-      <AtModal
-        isOpened={showOpenRedEnvelopeModal}
-        closeOnClickOverlay
-      >
-        {
-          <View className='atmodal-content'>
-            <View className='atmodal-content-label'>
-              <View className='atmodal-content-label-text'>
-                  恭喜您获得<Text>{award}</Text>{config.unit}
-              </View>
-            </View>
-            <View
-              onClick={() => setShowOpenRedEnvelopeModal(false)}
-              className='modal-close'>点击关闭</View>
-          </View>}
-      </AtModal>
-     }
-      {/**暂时没有封装modal，凑合用吧 */}
       <Dialog
         visible={visible}
         options={dialogOptions}
         close={closeModal}>
       </Dialog>
-      {/* <AtModal
-        isOpened={showOpenSheetModal}
-        closeOnClickOverlay
-      >
-        {
-          <View className='atmodal-content'>
-            <View className='atmodal-content-label'>
-              <View className='atmodal-content-label-text'>
-                恭喜您获得<Text>{sheet}</Text>答题卡
-              </View>
-            </View>
-            <View
-              onClick={() => setShowOpenSheetModal(false)}
-              className='modal-close'>点击关闭</View>
-          </View>}
-      </AtModal> */}
     </View>
   )
 }

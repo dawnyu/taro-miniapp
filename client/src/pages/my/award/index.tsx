@@ -1,5 +1,5 @@
-import Taro, { useState, useContext, useDidShow, useShareAppMessage } from '@tarojs/taro'
-import { View, Text, Button } from '@tarojs/components'
+import Taro, { useState, useContext, useDidShow } from '@tarojs/taro'
+import { View, Text, Ad } from '@tarojs/components'
 import moment from 'moment'
 import { geTexchangeList } from '@/service/cloud'
 import { TradeEnum } from '@/enum'
@@ -7,19 +7,8 @@ import store from '@/store/index'
 import './index.scss'
 
 function Index() {
-  const { userInfo, check } = useContext(store) as any
+  const { userInfo } = useContext(store) as any
   const [records, setRecords] = useState()
-  useShareAppMessage(res => {
-    {
-      if (res.from === 'button') {
-      }
-      return {
-        title: '来跟我一起答题呀>.<',
-        path: `/pages/index/index?superior=${userInfo.openid}`,
-        imageUrl: 'https://cdn.geekbuluo.com/20191101012651-min.jpg'
-      }
-    }
-  })
   useDidShow(async() => {
     try {
       Taro.showLoading()
@@ -49,15 +38,12 @@ function Index() {
 
   return (
     <View className='container'>
-      <View className='header'>
-        <View>
-          答题币：<Text className='balance'>{userInfo.balance}</Text></View>
+      <View className='banner-ad'>
+        <Ad
+          unitId="adunit-e77dadb2eafec124"
+          unit-id="adunit-e77dadb2eafec124"
+          ad-intervals={60}></Ad>
       </View>
-      {check &&
-        <Button
-          className='share'
-          openType='share'>推荐好友得答题币和兑换卡</Button>
-     }
       <View className='body'>
         {
           records && records.map(item =>
@@ -80,7 +66,7 @@ function Index() {
           )
         }
         {
-          records && records.length > 1 && <View className='bottom'>——我是有底线的——</View>
+          records && records.length > 1 && <View className='bottom'>——只展示最近30天记录——</View>
         }
 
         {

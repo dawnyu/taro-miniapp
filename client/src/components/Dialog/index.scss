@@ -89,6 +89,24 @@
       font-size: 32px;
     }
   }
+  .show-video {
+    height: 60px;
+    line-height: 60px;
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ff5748;
+    background-color: #f8beb95b;
+    border-radius: 30px;
+    font-size: 26px;
+
+    .video {
+      margin-right: 10px;
+      height: 40px;
+      width: 40px;
+    }
+  }
   .banner-ad {
     width: 82.5%;
     margin: 0 auto;

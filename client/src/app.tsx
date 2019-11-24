@@ -31,7 +31,7 @@ class _App extends Component {
       'pages/mission/index',
       'pages/friends/index',
       'pages/my/index',
-      'pages/my/check/index',
+      // 'pages/my/check/index',
       'pages/my/drawcash/index',
       'pages/my/withdraw/index',
       'pages/my/suggest/index',

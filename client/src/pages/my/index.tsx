@@ -6,6 +6,7 @@ import './index.scss'
 
 
 let myVideoAd:any = null
+let interstitialAd: any = null
 function Index() {
   const { userInfo, check, transform } = useContext(store) as any
   const [transtModal, setTranstModal] = useState(false)
@@ -43,6 +44,24 @@ function Index() {
         }
       })
     }
+
+    // 插屏
+    if (wx.createInterstitialAd && !interstitialAd) {
+      interstitialAd = wx.createInterstitialAd({
+        adUnitId: 'adunit-74b1032c62344261'
+      })
+      interstitialAd.onLoad(() => { })
+      interstitialAd.onError((err) => { })
+      interstitialAd.onClose(() => { })
+    }
+
+    setTimeout(() => {
+      if (interstitialAd) {
+        interstitialAd.show().catch((err) => {
+          console.error(err)
+        })
+      }
+    }, 300)
   })
 
   const toShowVideo = () => {
@@ -70,13 +89,13 @@ function Index() {
             <OpenData type='userNickName' />
           </View>
         </View>
-        <View className='transt'>
+        {check && <View className='transt'>
           <View className='left'>
             <View>
               <View
                 className='tip-pop'
                 onClick={() => Taro.navigateTo({ url: '/pages/my/award/index' })}
-                >收支详情</View>
+              >收支详情</View>
               {userInfo.balance || 0}
             </View>
             <View>
@@ -97,13 +116,14 @@ function Index() {
             <View>
               <View
                 className='tip-pop'
-                onClick={() => Taro.navigateTo({url: '/pages/my/drawcash/index'})}
-                >立即提现</View>
+                onClick={() => Taro.navigateTo({ url: '/pages/my/drawcash/index' })}
+              >立即提现</View>
               {userInfo.cash || '0.00'}
             </View>
             <View>可提现收益</View>
           </View>
         </View>
+        }
         
         <View className='banner'>
           <View>剩余答题卡：{userInfo.answersheet || 0}</View>
@@ -140,8 +160,8 @@ function Index() {
         </View>
         <View className='item'>
           <View className='left'>
-            <View className='title'>提现记录</View>
-            <View className='explain'>提现和兑换记录审核情况查看</View>
+            <View className='title'>兑换记录</View>
+            <View className='explain'>兑换记录审核情况查看</View>
           </View>
           <Button
             className='btn'

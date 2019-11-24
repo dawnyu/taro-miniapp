@@ -79,10 +79,39 @@
       transform: scale(1);
     }
   }
+  .readme {
+    &-title {
+      font-size: 28px;
+      color: #333;
+    }
+    color: #999;
+    font-size: 24px;
+    view {
+      margin: 10px 0;
+    }
+
+  }
+  .kefu {
+    font-size: 24px;
+    height: 50px;
+    line-height: 50px;
+    position: absolute;
+    left: 0;
+    padding: 0px 20px;
+    background-color: white;
+    border: none;
+    border-radius: 0 25px 25px 0;
+    &::after {
+      content: "";
+      border: none;
+    }
+  }
   .submit-btn {
     width: 50vw;
     margin: 30px auto 5px;
     background: #ffc003;
+    height: 75px;
+    line-height: 75px;
     color: #fff;
     font-size: 28px;
     border-radius: 50px;
@@ -120,8 +149,10 @@
         top: 172px;
       }
       &-text {
-        font-size: 32px;
+        font-size: 30px;
         margin-top: 222px;
+        padding: 0 20px;
+
 
         text {
           font-size: 45px;

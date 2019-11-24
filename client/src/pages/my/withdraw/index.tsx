@@ -1,5 +1,5 @@
 import Taro, { useState, useDidShow } from '@tarojs/taro'
-import { View, Text  } from '@tarojs/components'
+import { View, Text, Ad  } from '@tarojs/components'
 import { getWithdraw } from '@/service/cloud'
 import { TradeEnum } from '@/enum'
 import './index.scss'
@@ -21,11 +21,17 @@ function Index() {
   
    return (
     <View className='container'>
-      <View
+      {/* <View
         className='top-tip'
         onClick={check}
-      ><Text>审核规则</Text></View>
+      ><Text>审核规则</Text></View> */}
+       {/* <View className='banner-ad'>
+       </View> */}
        <View className='banner-ad'>
+         <Ad
+           unitId="adunit-e77dadb2eafec124"
+           unit-id="adunit-e77dadb2eafec124"
+           ad-intervals={60}></Ad>
        </View>
       <View className='header'>
         <Text>商品名称</Text>

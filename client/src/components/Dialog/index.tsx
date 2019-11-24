@@ -1,4 +1,4 @@
-import Taro, { useContext } from '@tarojs/taro'
+import Taro, { useContext, useDidShow } from '@tarojs/taro'
 import store from '@/store/index'
 import { observer } from '@tarojs/mobx'
 import { View, Text, Image, Ad } from '@tarojs/components'
@@ -9,12 +9,13 @@ function Dialog(props: any)  {
   const { visible, close, options } = props
   const { config } = useContext(store) as any
 
-  const previewImage = () => {
-    Taro.previewImage({
-      current: config.flock,
-      urls: [config.flock]
-    })
-  }
+  // const previewImage = () => {
+  //   Taro.previewImage({
+  //     current: config.flock,
+  //     urls: [config.flock]
+  //   })
+  // }
+
   return (
     visible && 
     <View className='container'>
@@ -37,11 +38,23 @@ function Dialog(props: any)  {
                     <View>本次答题无奖励</View>
                   </View>
                   :
-                  <View>奖励<Text className='label-value'>{options.award}</Text>答题币
-                  </View>
+                  <View>
+                    奖励<Text className='label-value'>{options.award}</Text>答题币
+                    {
+                    options.showVideo && <View
+                      className='show-video'
+                      onClick={options && options.toShowVideo}>
+                      <Image
+                        className='video'
+                        mode='aspectFit'
+                        src='https://cdn.geekbuluo.com/video.png' />
+                      看视频奖励翻倍
+                    </View>
+                    }
+                </View>
               }
             </View>}
-          {
+          {/* {
             options.type === 3 &&
             <View className='attention'>
               <Image mode='aspectFill'
@@ -50,7 +63,7 @@ function Dialog(props: any)  {
                 src={config.qrcode}/>
                 <View>点击二维码添加客服审核</View>
             </View>
-          }
+          } */}
           {
             options.type === 4 &&
             <View className='text'>

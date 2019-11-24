@@ -29,6 +29,7 @@ class Index {
   goods = []
   config:any = {}
   check = false
+  videoAd: any = {}
 
   async getUser() {
     try {
@@ -142,7 +143,7 @@ class Index {
         storage.set('config', data, 1)
       }
     }
-    this.check = this.config.check === 1
+    this.check = this.config.check1 === 1
     return this.config
   }
   /**
@@ -159,12 +160,18 @@ class Index {
       this.goods = data || []
     })
   }
+  
+  setVideoAd(key, value) {
+    this.videoAd[key] = value
+  }
+
 }
 
 decorate(Index, {
   userInfo: observable,
   config: observable,
   check: observable,
+  videoAd: observable,
   getUser: action.bound,
   update: action.bound,
   transform: action.bound,
@@ -173,6 +180,7 @@ decorate(Index, {
   qtype: observable,
   getConfig: action.bound,
   setQType: action.bound,
+  setVideoAd: action.bound,
   goods: observable,
   getGoods: action.bound,
   trade: action.bound,

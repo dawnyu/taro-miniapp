@@ -7,7 +7,7 @@ import { getQs } from '@/service/cloud'
 import './index.scss'
 
 function Index() {
-  const { answer, userInfo, qtype: initQtype } = useContext(store) as any
+  const { answer, userInfo, qtype: initQtype, videoAd, setVideoAd } = useContext(store) as any
   useShareAppMessage(() => {
     return {
       title: '我觉得这道题你肯定会，帮帮我吧：）',
@@ -19,6 +19,7 @@ function Index() {
   const [topic, setTopic] = useState()
   const [carTopic, setCarTopic] = useState()
   const [qtype] = useState(initQtype)
+  const [showVideo, setShowVideo] = useState(true)
 
   useDidShow(async () => {
     Taro.showLoading()
@@ -28,7 +29,42 @@ function Index() {
     } catch (error) {
       Taro.hideLoading()
     }
+    if (wx.createRewardedVideoAd && !videoAd.answer) {
+      let videoAd2 = wx.createRewardedVideoAd({
+        adUnitId: 'adunit-915012dfd68e5b00',
+      })
+      videoAd2.onLoad(() => {
+        console.log('videoAd load success')
+        setShowVideo(true)
+      })
+      videoAd2.onError(() => {
+        setShowVideo(false)
+      })
+      videoAd2.onClose(async (res) => {
+        if (res && res.isEnded) {
+          Taro.showToast({
+            title: `额外获取的答题币1已到账:)`,
+            icon: 'none'
+          })
+          closeModal()
+        } else {
+          Taro.showToast({
+            title: '看完视频点击关闭按钮才能获得奖励哦:)',
+            icon: 'none'
+          })
+        }
+      })
+      setVideoAd('answer', videoAd2)
+    }
   })
+  const toShowVideo = () => {
+    videoAd.answer.show().catch(() => {
+      videoAd.answer.load()
+        .then(() => videoAd.answer.show())
+        .catch(() => {
+        })
+    })
+  }
 
   const nextQs = async() => {
     const carTopics = Taro.getStorageSync('carTopics')
@@ -70,7 +106,9 @@ function Index() {
       type: val ? 1 : 2,
       title: val ? '恭喜您答对了' : '很遗憾答错了',
       award: random,
-      answersheet: userInfo.answersheet
+      answersheet: userInfo.answersheet,
+      toShowVideo,
+      showVideo,
     })
     setVisible(true)
     nextQs() // 切换下一题
