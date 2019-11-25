@@ -34,7 +34,7 @@ function Index() {
           setTranstModal(false)
           Taro.showToast({
             title: '转换成功，赶紧去提现吧:)',
-            icon: 'none'
+            icon: 'none' 
           })
         } else {
           Taro.showToast({
