@@ -195,10 +195,11 @@ function Index() {
   return (
     <View className='container'>
       <View className='header'>
-        <View className='user-balance'>
-          <View className='userAvatarUrl'><OpenData type='userAvatarUrl'/></View>
+        {check ?
+          <View className='user-balance'>
+            <View className='userAvatarUrl'><OpenData type='userAvatarUrl' /></View>
           <Text className='user-balance-value'>￥{userInfo.cash || '0.00'}元</Text>
-        </View>
+        </View> : <View></View>}
         <View>
           <View
             className='switch'
@@ -224,8 +225,6 @@ function Index() {
                 formType="submit"/>
             </Form>
           </View>
-         {
-          true &&
           <View className='floaticon'>
             <View>
               <View className='qipao sign-qipao'>
@@ -263,9 +262,9 @@ function Index() {
                   src='https://cdn.geekbuluo.com/coin-min.png'/>
               </Button>
             </View>
-            <Text className='share-text'>攒兑换卡</Text>
+            {check ? <Text className='share-text'>攒兑换卡</Text> :
+              <Text className='share-text'>考考好友</Text>}
           </View>
-         }
         </View>
         <View className='banner-ad'>
           <Ad
